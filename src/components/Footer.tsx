@@ -1,85 +1,140 @@
 "use client";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { contact, nav, projects } from "@/lib/data";
+import { contact } from "@/lib/data";
+import { openContact } from "@/lib/events";
+
+const company = [
+  { label: "Brand Story", href: "#story" },
+  { label: "Our Approach", href: "#approach" },
+  { label: "Services", href: "#services" },
+];
+const explore = [
+  { label: "Projects", href: "#works" },
+  { label: "Drawings", href: "#drawings" },
+  { label: "Back to top", href: "#top" },
+];
+
+const Icon = {
+  instagram: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <rect x="3" y="3" width="18" height="18" rx="5" />
+      <circle cx="12" cy="12" r="4" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  ),
+  youtube: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+      <path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1z" />
+    </svg>
+  ),
+  web: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <circle cx="12" cy="12" r="9" />
+      <path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18" />
+    </svg>
+  ),
+  mail: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6">
+      <rect x="3" y="5" width="18" height="14" rx="2" />
+      <path d="M3 7l9 6 9-6" />
+    </svg>
+  ),
+};
 
 export default function Footer() {
   const root = useRef<HTMLElement>(null);
-  const wrap = useRef<HTMLDivElement>(null);
 
   useGSAP(
     () => {
       gsap.fromTo(
         ".ft__big span",
-        { yPercent: 100 },
+        { yPercent: 110 },
         {
           yPercent: 0,
-          ease: "none",
-          stagger: 0.05,
-          scrollTrigger: { trigger: wrap.current, start: "top 70%", end: "bottom bottom", scrub: true },
+          ease: "power2.out",
+          stagger: 0.04,
+          scrollTrigger: { trigger: ".ft__big", start: "top bottom", end: "bottom 98%", scrub: true },
         }
-      );
-      gsap.fromTo(
-        ".ft__mark",
-        { rotateY: -90, opacity: 0 },
-        { rotateY: 0, opacity: 1, ease: "none", scrollTrigger: { trigger: wrap.current, start: "top 80%", end: "center bottom", scrub: true } }
       );
     },
     { scope: root }
   );
 
   return (
-    // The page lifts away to uncover a footer fixed beneath it
-    <div ref={wrap} className="ft-wrap">
-      <footer ref={root} className="ft">
-        <div className="ft__top">
-          <div className="ft__brand">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/images/logo-full.png" alt="Royal Rising" className="ft__mark" width={130} height={138} />
-            <p>Architecture | Interior | Construction</p>
+    <footer ref={root} className="ft">
+      <div className="ft__grid">
+        <div className="ft__col">
+          <h4>Start a project</h4>
+          <button className="ft__write" onClick={openContact}>
+            <span>Tell us about your site</span>
+            <i aria-hidden>→</i>
+          </button>
+        </div>
+        <div className="ft__brand">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/images/logo-full.png" alt="Royal Rising" width={120} height={127} />
+          <p>Architecture | Interior | Construction</p>
+        </div>
+        <div className="ft__links">
+          <div>
+            <h4>Company</h4>
+            {company.map((l) => (
+              <a key={l.href} href={l.href}>
+                {l.label}
+              </a>
+            ))}
           </div>
-          <div className="ft__cols">
-            <div>
-              <h4>Projects</h4>
-              {projects.map((p) => (
-                <a key={p.id} href={`#${p.id}`}>
-                  {p.name}
-                </a>
-              ))}
-            </div>
-            <div>
-              <h4>Explore</h4>
-              {nav.map((n) => (
-                <a key={n.href} href={n.href}>
-                  {n.label}
-                </a>
-              ))}
-            </div>
-            <div>
-              <h4>Connect</h4>
-              <a href={`mailto:${contact.email}`}>{contact.email}</a>
-              <a href={contact.websiteUrl} target="_blank" rel="noreferrer">
-                {contact.website}
+          <div>
+            <h4>Explore</h4>
+            {explore.map((l) => (
+              <a key={l.href} href={l.href}>
+                {l.label}
               </a>
-              <a href={contact.instagram} target="_blank" rel="noreferrer">
-                Instagram
-              </a>
-              <a href={contact.youtube} target="_blank" rel="noreferrer">
-                YouTube
-              </a>
-            </div>
+            ))}
           </div>
         </div>
-        <div className="ft__big" aria-hidden>
-          {"ROYAL RISING".split("").map((c, i) => (
-            <span key={i}>{c === " " ? " " : c}</span>
-          ))}
+      </div>
+
+      <div className="ft__grid ft__grid--info">
+        <div className="ft__col">
+          <h4>Studio</h4>
+          <p>Royal Rising</p>
+          <p>Architecture · Interior · Construction</p>
         </div>
-        <div className="ft__bottom">
-          <span>© {new Date().getFullYear()} Royal Rising</span>
-          <a href="#top">Back to top ↑</a>
+        <div className="ft__col ft__col--c">
+          <h4>Client enquiries</h4>
+          <a href={`mailto:${contact.email}`}>{contact.email}</a>
+          <h4>Website</h4>
+          <a href={contact.websiteUrl} target="_blank" rel="noreferrer">
+            {contact.website}
+          </a>
         </div>
-      </footer>
-    </div>
+        <div className="ft__social">
+          <a href={contact.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
+            {Icon.instagram}
+          </a>
+          <a href={contact.youtube} target="_blank" rel="noreferrer" aria-label="YouTube">
+            {Icon.youtube}
+          </a>
+          <a href={contact.websiteUrl} target="_blank" rel="noreferrer" aria-label="Website">
+            {Icon.web}
+          </a>
+          <a href={`mailto:${contact.email}`} aria-label="Email">
+            {Icon.mail}
+          </a>
+        </div>
+      </div>
+
+      <div className="ft__big" aria-hidden>
+        {"ROYAL RISING".split("").map((c, i) => (
+          <span key={i}>{c === " " ? " " : c}</span>
+        ))}
+      </div>
+      <div className="ft__bottom">
+        <span>© {new Date().getFullYear()} Royal Rising. All rights reserved.</span>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </footer>
   );
 }

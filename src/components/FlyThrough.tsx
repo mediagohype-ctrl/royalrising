@@ -65,13 +65,13 @@ export default function FlyThrough() {
         ))}
       </div>
       <div className="fly__intro">
-        <p className="eyebrow">Keep scrolling</p>
+        <p className="label fly__label">Keep scrolling</p>
         <p className="fly__big">
           Step <em>inside.</em>
         </p>
       </div>
       <div className="fly__outro">
-        <p className="eyebrow">Five projects · One studio</p>
+        <p className="label fly__label">Five projects · One studio</p>
         <p className="fly__big">
           Worlds drawn <em>in light.</em>
         </p>

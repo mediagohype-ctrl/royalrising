@@ -1,10 +1,5 @@
 import Image from "next/image";
-import { img, archive, type ImgKey } from "@/lib/data";
-
-const altFor = (k: ImgKey) => {
-  const a = archive.find((x) => x.key === k);
-  return a ? `${a.project}: ${a.title}` : "Royal Rising";
-};
+import { img, alts, type ImgKey } from "@/lib/data";
 
 type Props = {
   k: ImgKey;
@@ -20,7 +15,7 @@ export default function Img({ k, sizes = "100vw", priority, className, alt, qual
   return (
     <Image
       src={img(k).src}
-      alt={alt ?? altFor(k)}
+      alt={alt ?? alts[k] ?? "Royal Rising"}
       fill
       sizes={sizes}
       priority={priority}

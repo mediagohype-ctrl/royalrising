@@ -3,28 +3,25 @@ import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { onReady } from "@/lib/ready";
 import { lockScroll, unlockScroll } from "@/lib/scroll";
-import { nav, projects, contact } from "@/lib/data";
-import Img from "./ui/Img";
-import Magnetic from "./ui/Magnetic";
+import { openContact } from "@/lib/events";
+import { navLeft, navRight, contact } from "@/lib/data";
 
 export default function Nav() {
   const header = useRef<HTMLElement>(null);
-  const bar = useRef<HTMLDivElement>(null);
   const [open, setOpen] = useState(false);
-  const [preview, setPreview] = useState(0);
 
   useGSAP(() => {
     gsap.set(header.current, { yPercent: -100, opacity: 0 });
-    const off = onReady(() => gsap.to(header.current, { yPercent: 0, opacity: 1, duration: 1.2, ease: "expo.out", delay: 0.6 }));
-
+    const off = onReady(() => gsap.to(header.current, { yPercent: 0, opacity: 1, duration: 1.2, ease: "expo.out", delay: 0.3 }));
     ScrollTrigger.create({
       start: 0,
       end: "max",
       onUpdate: (self) => {
         const y = self.scroll();
-        header.current?.classList.toggle("is-solid", y > 60);
-        header.current?.classList.toggle("is-hidden", self.direction === 1 && y > 400);
-        if (bar.current) bar.current.style.transform = `scaleX(${self.progress})`;
+        const h = header.current!;
+        // transparent over the hero, white once past it
+        h.classList.toggle("is-solid", y > window.innerHeight * 0.85);
+        h.classList.toggle("is-hidden", self.direction === 1 && y > window.innerHeight);
       },
     });
     return off;
@@ -43,76 +40,54 @@ export default function Nav() {
   }, [open]);
 
   const close = () => setOpen(false);
+  const talk = () => {
+    close();
+    openContact();
+  };
 
   return (
     <>
-      <div className="progress" aria-hidden>
-        <div ref={bar} />
-      </div>
       <header ref={header} className={`nav${open ? " is-open" : ""}`}>
-        <a href="#top" className="nav__brand" aria-label="Royal Rising, back to top" onClick={close}>
+        <nav className="nav__side" aria-label="Primary">
+          {navLeft.map((n) => (
+            <a key={n.href} href={n.href}>
+              {n.label}
+            </a>
+          ))}
+        </nav>
+        <a href="#top" className="nav__logo" aria-label="Royal Rising, back to top" onClick={close}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/logo-mark.png" alt="" width={30} height={38} />
           <span>Royal Rising</span>
         </a>
-        <nav className="nav__links" aria-label="Primary">
-          {nav.map((n) => (
+        <div className="nav__side nav__side--r">
+          {navRight.map((n) => (
             <a key={n.href} href={n.href}>
-              <span data-text={n.label}>{n.label}</span>
+              {n.label}
             </a>
           ))}
-        </nav>
-        <div className="nav__right">
-          <Magnetic>
-            <a href="#contact" className="btn btn--ghost nav__cta">
-              Start a project
-            </a>
-          </Magnetic>
-          <button className="nav__burger" aria-expanded={open} aria-controls="menu" onClick={() => setOpen((o) => !o)}>
-            <span className="nav__burger-label">{open ? "Close" : "Menu"}</span>
-            <span className="nav__burger-lines" aria-hidden>
-              <i />
-              <i />
-            </span>
+          <button className="pill" onClick={talk}>
+            Let&apos;s Talk
           </button>
         </div>
+        <button className="nav__burger" aria-expanded={open} aria-controls="menu" aria-label="Menu" onClick={() => setOpen((o) => !o)}>
+          <i />
+          <i />
+        </button>
       </header>
 
       <div id="menu" className={`menu${open ? " is-open" : ""}`} aria-hidden={!open}>
-        <div className="menu__preview" aria-hidden>
-          {projects.map((p, i) => (
-            <div key={p.id} className={`menu__preview-img${preview === i ? " is-active" : ""}`}>
-              <Img k={p.cover} sizes="40vw" />
-            </div>
-          ))}
-        </div>
-        <div className="menu__body">
-          <p className="eyebrow">Projects</p>
-          <ul className="menu__projects">
-            {projects.map((p, i) => (
-              <li key={p.id} style={{ ["--i" as string]: i }}>
-                <a href={`#${p.id}`} onClick={close} onPointerEnter={() => setPreview(i)} onFocus={() => setPreview(i)} tabIndex={open ? 0 : -1}>
-                  <span className="menu__no">{p.index}</span>
-                  <span className="menu__name">
-                    {p.name} <em>{p.accent}</em>
-                  </span>
-                </a>
-              </li>
-            ))}
-          </ul>
-          <div className="menu__foot">
-            <div className="menu__links">
-              {nav.map((n) => (
-                <a key={n.href} href={n.href} onClick={close} tabIndex={open ? 0 : -1}>
-                  {n.label}
-                </a>
-              ))}
-            </div>
-            <a href={`mailto:${contact.email}`} className="menu__mail" tabIndex={open ? 0 : -1}>
-              {contact.email}
-            </a>
-          </div>
-        </div>
+        {[...navLeft, ...navRight].map((n, i) => (
+          <a key={n.href} href={n.href} onClick={close} tabIndex={open ? 0 : -1} style={{ ["--i" as string]: i }}>
+            {n.label}
+          </a>
+        ))}
+        <button className="pill" onClick={talk} tabIndex={open ? 0 : -1}>
+          Let&apos;s Talk
+        </button>
+        <a className="menu__mail" href={`mailto:${contact.email}`} tabIndex={open ? 0 : -1}>
+          {contact.email}
+        </a>
       </div>
     </>
   );
