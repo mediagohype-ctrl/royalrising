@@ -64,8 +64,38 @@ export default function ScrollFX() {
       },
     });
 
+    // Selected Works cards tilt toward the cursor
+    const cleanups: (() => void)[] = [];
+    if (window.matchMedia("(pointer: fine)").matches) {
+      gsap.utils.toArray<HTMLElement>(".rail__card").forEach((card) => {
+        gsap.set(card, { transformPerspective: 1100 });
+        const rx = gsap.quickTo(card, "rotateX", { duration: 0.7, ease: "power3" });
+        const ry = gsap.quickTo(card, "rotateY", { duration: 0.7, ease: "power3" });
+        const move = (e: PointerEvent) => {
+          const b = card.getBoundingClientRect();
+          const nx = (e.clientX - b.left) / b.width - 0.5;
+          const ny = (e.clientY - b.top) / b.height - 0.5;
+          ry(nx * 9);
+          rx(ny * -7);
+          card.style.setProperty("--gx", `${(nx + 0.5) * 100}%`);
+          card.style.setProperty("--gy", `${(ny + 0.5) * 100}%`);
+        };
+        const leave = () => {
+          rx(0);
+          ry(0);
+        };
+        card.addEventListener("pointermove", move);
+        card.addEventListener("pointerleave", leave);
+        cleanups.push(() => {
+          card.removeEventListener("pointermove", move);
+          card.removeEventListener("pointerleave", leave);
+        });
+      });
+    }
+
     ScrollTrigger.sort();
     ScrollTrigger.refresh();
+    return () => cleanups.forEach((c) => c());
   });
 
   return null;

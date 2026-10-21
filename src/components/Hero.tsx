@@ -117,10 +117,10 @@ export default function Hero() {
           <div className="hero__intro">
             <div className="hero__scrub">
               <div className="hero__layer">
-                <Img k="fh-day" priority quality={90} alt="Futuristic Home and Mandir by Royal Rising at golden hour" />
+                <Img k="fh-day" priority quality={90} sizes="120vw" alt="Futuristic Home and Mandir by Royal Rising at golden hour" />
               </div>
               <div className="hero__layer hero__night">
-                <Img k="fh-night" priority quality={90} alt="The same home lit up after dark" />
+                <Img k="fh-night" priority quality={90} sizes="120vw" alt="The same home lit up after dark" />
               </div>
             </div>
           </div>

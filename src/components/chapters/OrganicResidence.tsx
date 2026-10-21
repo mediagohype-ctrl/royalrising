@@ -71,10 +71,10 @@ export default function OrganicResidence() {
         </div>
         <div className="tower__frame">
           <div className="tower__img">
-            <Img k="or-day" sizes="(max-width: 900px) 100vw, 50vw" quality={90} />
+            <Img k="or-day" sizes="(max-width: 900px) 110vw, 55vw" quality={90} />
           </div>
           <div className="tower__img tower__night">
-            <Img k="or-night" sizes="(max-width: 900px) 100vw, 50vw" quality={90} />
+            <Img k="or-night" sizes="(max-width: 900px) 110vw, 55vw" quality={90} />
           </div>
           <div className="tower__scan" aria-hidden>
             <span>{floors[floor].name}</span>

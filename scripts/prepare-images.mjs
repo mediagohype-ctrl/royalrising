@@ -58,16 +58,25 @@ const jobs = [
 
 // The sources are WhatsApp-compressed (~1320px wide). Supersample 2× with Lanczos and a light
 // sharpen so large screens never fall back to the browser's soft bilinear upscale.
+// When an AI-upscaled (4×, Real-ESRGAN) copy exists in assets-hq/, it is used instead:
+// crops are scaled to match and the result is capped at 4K width.
+const HQ = "assets-hq";
+const MAX_W = 3840;
+const hq = (stamp) => path.join(HQ, `WhatsApp Image 2026-10-21 at ${stamp}.png`);
+
 for (const [stamp, name, crop] of jobs) {
-  let img = sharp(a(stamp));
-  if (crop) img = img.extract(crop);
-  const { width } = crop ?? (await sharp(a(stamp)).metadata());
-  await img
-    .resize({ width: width * 2, kernel: "lanczos3" })
-    .sharpen({ sigma: 0.6, m1: 0.4, m2: 1.2 })
-    .jpeg({ quality: 92, mozjpeg: true, chromaSubsampling: "4:4:4" })
-    .toFile(path.join(OUT, `${name}.jpg`));
-  console.log("✓", name);
+  const useHq = fs.existsSync(hq(stamp));
+  const src = useHq ? hq(stamp) : a(stamp);
+  const k = useHq ? 4 : 1;
+  let img = sharp(src);
+  if (crop) img = img.extract({ left: crop.left * k, top: crop.top * k, width: crop.width * k, height: crop.height * k });
+  const width = crop ? crop.width * k : (await sharp(src).metadata()).width;
+
+  img = useHq
+    ? img.resize({ width: Math.min(width, MAX_W), kernel: "lanczos3" })
+    : img.resize({ width: width * 2, kernel: "lanczos3" }).sharpen({ sigma: 0.6, m1: 0.4, m2: 1.2 });
+  await img.jpeg({ quality: 90, mozjpeg: true, chromaSubsampling: "4:4:4" }).toFile(path.join(OUT, `${name}.jpg`));
+  console.log(useHq ? "✓ HQ" : "✓   ", name);
 }
 
 // Gold monogram: key the navy night sky out by "goldness" (red well above blue).

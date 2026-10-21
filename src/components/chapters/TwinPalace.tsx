@@ -64,10 +64,10 @@ export default function TwinPalace() {
         </span>
         <div className="expand__frame">
           <div className="expand__img">
-            <Img k="tp-front-day" sizes="100vw" quality={90} />
+            <Img k="tp-front-day" sizes="125vw" quality={90} />
           </div>
           <div className="expand__img expand__night">
-            <Img k="tp-front-night" sizes="100vw" quality={90} />
+            <Img k="tp-front-night" sizes="125vw" quality={90} />
           </div>
           <div className="expand__caption">
             <span className="expand__state">Golden hour</span>

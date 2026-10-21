@@ -37,7 +37,7 @@ export default function Contact() {
 
   return (
     <section id="contact" ref={root} className="ct">
-      <ParallaxImage k="tp-aerial-night" speed={14} className="ct__bg" sizes="100vw" reveal={false} />
+      <ParallaxImage k="tp-aerial-night" speed={14} className="ct__bg" sizes="115vw" reveal={false} />
       <div className="ct__shade" />
       <div className="ct__inner">
         <p className="eyebrow">(05) Start a project</p>

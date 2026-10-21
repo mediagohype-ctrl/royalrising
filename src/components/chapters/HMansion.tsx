@@ -48,7 +48,7 @@ export default function HMansion() {
   return (
     <section id="h-mansion" ref={root} className="chapter">
       <div className="hmh">
-        <ParallaxImage k="hm-night-waterfall" speed={16} className="hmh__bg" sizes="100vw" zoom reveal={false} />
+        <ParallaxImage k="hm-night-waterfall" speed={16} className="hmh__bg" sizes="130vw" zoom reveal={false} />
         <div className="hmh__shade" />
         <div className="hmh__content">
           <span className="eyebrow hmh__fade">

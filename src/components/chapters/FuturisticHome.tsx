@@ -107,7 +107,7 @@ export default function FuturisticHome() {
 
       <div className="views">
         <div className="views__frame">
-          <Img k="fh-views" sizes="100vw" quality={90} />
+          <Img k="fh-views" sizes="112vw" quality={90} />
         </div>
         <p className="views__caption">
           Eye-level front · Side · Aerial oblique · Rear garden: <em>one form, four faces.</em>
