@@ -1,4 +1,5 @@
 "use client";
+// @refresh reset
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { onReady } from "@/lib/ready";
@@ -18,10 +19,11 @@ export default function Hero() {
   useEffect(() => onReady(() => setStarted(true)), []);
 
   useEffect(() => {
-    if (!started) return;
-    const t = setTimeout(() => setActive((a) => (a + 1) % heroSlides.length), active === 0 ? videoDuration : DURATION);
+    // Video advances through onEnded, so loading and pauses never cut it short.
+    if (!started || active === 0) return;
+    const t = setTimeout(() => setActive((a) => (a + 1) % heroSlides.length), DURATION);
     return () => clearTimeout(t);
-  }, [active, started, videoDuration]);
+  }, [active, started]);
 
   useEffect(() => {
     const player = video.current;
@@ -84,6 +86,9 @@ export default function Hero() {
                 playsInline
                 preload="auto"
                 aria-hidden="true"
+                onEnded={() => {
+                  if (started) setActive((current) => current === 0 ? 1 : current);
+                }}
                 onLoadedMetadata={(event) => {
                   const duration = event.currentTarget.duration;
                   if (Number.isFinite(duration) && duration > 0) setVideoDuration(duration * 1000);
