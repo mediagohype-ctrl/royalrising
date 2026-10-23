@@ -1,5 +1,5 @@
 "use client";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { ImgKey } from "@/lib/data";
 import { alts } from "@/lib/data";
 import { lockScroll, unlockScroll } from "@/lib/scroll";
@@ -7,14 +7,30 @@ import Img from "./ui/Img";
 
 export default function Lightbox() {
   const [state, setState] = useState<{ keys: ImgKey[]; index: number } | null>(null);
+  const [closing, setClosing] = useState(false);
+  const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    const show = (e: Event) => setState((e as CustomEvent).detail);
+    const show = (e: Event) => {
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+      setClosing(false);
+      setState((e as CustomEvent).detail);
+    };
     window.addEventListener("rr:lightbox", show);
-    return () => window.removeEventListener("rr:lightbox", show);
+    return () => {
+      window.removeEventListener("rr:lightbox", show);
+      if (closeTimer.current) clearTimeout(closeTimer.current);
+    };
   }, []);
 
-  const close = useCallback(() => setState(null), []);
+  const close = useCallback(() => {
+    setClosing(true);
+    if (closeTimer.current) clearTimeout(closeTimer.current);
+    closeTimer.current = setTimeout(() => {
+      setState(null);
+      setClosing(false);
+    }, window.matchMedia("(prefers-reduced-motion: reduce)").matches ? 0 : 400);
+  }, []);
   const step = useCallback(
     (d: number) => setState((s) => (s ? { ...s, index: (s.index + d + s.keys.length) % s.keys.length } : s)),
     []
@@ -40,8 +56,8 @@ export default function Lightbox() {
   const k = state.keys[state.index];
 
   return (
-    <div className="lb" role="dialog" aria-modal="true" aria-label={alts[k] ?? "Image"} onClick={close}>
-      <div className="lb__img" onClick={(e) => e.stopPropagation()}>
+    <div className={`lb${closing ? " is-closing" : ""}`} role="dialog" aria-modal="true" aria-label={alts[k] ?? "Image"} onClick={close}>
+      <div key={k} className="lb__img" onClick={(e) => e.stopPropagation()}>
         <Img k={k} key={k} className="contain" sizes="92vw" />
       </div>
       <div className="lb__bar" onClick={(e) => e.stopPropagation()}>
