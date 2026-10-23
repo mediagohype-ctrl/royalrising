@@ -1,0 +1,55 @@
+{
+  "tool": "built-in imagegen",
+  "assets": [
+    {
+      "key": "fh-day",
+      "path": "C:\\Users\\kshit\\.codex\\generated_images\\01a167c1-8fc3-7062-bc6d-732da2a488cf\\exec-3187552f-6495-4043-92b9-69a357691e7f.png",
+      "prompt": "Edit/outpaint the supplied architectural image into a wide 16:9 landscape image for a full-width website panel. Preserve the ENTIRE original composition, all buildings, landscaping, perspective, lighting and architectural details. Fit the original inside the new canvas without cropping or stretching any original content; generate only seamless realistic extensions around the edges (sky, gardens, ground as appropriate). No blurred sidebars, no mirrored edges, no borders, no text overlays. The resulting image must be one continuous sharp scene, edge to edge. Keep all original subjects visible, with modest breathing room around them."
+    },
+    {
+      "key": "tp-front-day",
+      "path": "C:\\Users\\kshit\\.codex\\generated_images\\01a167c1-8fc3-7062-bc6d-732da2a488cf\\exec-7c6ce0c0-9caf-4e78-b35a-d4fd6bf6008e.png",
+      "prompt": "Edit/outpaint the supplied architectural image into a wide 16:9 landscape image for a full-width website panel. Preserve the ENTIRE original composition, all buildings, landscaping, perspective, lighting and architectural details. Fit the original inside the new canvas without cropping or stretching any original content; generate only seamless realistic extensions around the edges (sky, gardens, ground as appropriate). No blurred sidebars, no mirrored edges, no borders, no text overlays. The resulting image must be one continuous sharp scene, edge to edge. Keep all original subjects visible, with modest breathing room around them."
+    },
+    {
+      "key": "v145-day",
+      "path": "C:\\Users\\kshit\\.codex\\generated_images\\01a167c1-8fc3-7062-bc6d-732da2a488cf\\exec-9385cff7-24b0-40c1-9d83-0d02a315431c.png",
+      "prompt": "Edit/outpaint the supplied architectural image into a wide 16:9 landscape image for a full-width website panel. Preserve the ENTIRE original composition, all buildings, landscaping, perspective, lighting and architectural details. Fit the original inside the new canvas without cropping or stretching any original content; generate only seamless realistic extensions around the edges (sky, gardens, ground as appropriate). No blurred sidebars, no mirrored edges, no borders, no text overlays. The resulting image must be one continuous sharp scene, edge to edge. Keep all original subjects visible, with modest breathing room around them."
+    },
+    {
+      "key": "hm-aerial-day",
+      "path": "C:\\Users\\kshit\\.codex\\generated_images\\01a167c1-8fc3-7062-bc6d-732da2a488cf\\exec-7ebcd3f2-8e35-4eae-a0c2-96c1ee010c14.png",
+      "prompt": "Edit/outpaint the supplied architectural image into a wide 16:9 landscape image for a full-width website panel. Preserve the ENTIRE original composition, all buildings, landscaping, perspective, lighting and architectural details. Fit the original inside the new canvas without cropping or stretching any original content; generate only seamless realistic extensions around the edges (sky, gardens, ground as appropriate). No blurred sidebars, no mirrored edges, no borders, no text overlays. The resulting image must be one continuous sharp scene, edge to edge. Keep all original subjects visible, with modest breathing room around them."
+    },
+    {
+      "key": "hm-night-waterfall",
+      "path": "C:\\Users\\kshit\\.codex\\generated_images\\01a167c1-8fc3-7062-bc6d-732da2a488cf\\exec-ad0dc69c-ebbf-4ca6-ab8f-3bac38433667.png",
+      "prompt": "Edit/outpaint the supplied architectural image into a wide 16:9 landscape image for a full-width website panel. Preserve the ENTIRE original composition, all buildings, landscaping, perspective, lighting and architectural details. Fit the original inside the new canvas without cropping or stretching any original content; generate only seamless realistic extensions around the edges (sky, gardens, ground as appropriate). No blurred sidebars, no mirrored edges, no borders, no text overlays. The resulting image must be one continuous sharp scene, edge to edge. Keep all original subjects visible, with modest breathing room around them."
+    },
+    {
+      "key": "v145-night",
+      "path": "C:\\Users\\kshit\\.codex\\generated_images\\01a167c1-8fc3-7062-bc6d-732da2a488cf\\exec-dda04c83-f9c7-46d5-ade4-3fc6d77192c4.png",
+      "prompt": "Edit/outpaint the supplied architectural image into a wide 16:9 landscape image for a full-width website panel. Preserve the ENTIRE original composition, all buildings, landscaping, perspective, lighting and architectural details. Fit the original inside the new canvas without cropping or stretching any original content; generate only seamless realistic extensions around the edges (sky, gardens, ground as appropriate). No blurred sidebars, no mirrored edges, no borders, no text overlays. The resulting image must be one continuous sharp scene, edge to edge. Keep all original subjects visible, with modest breathing room around them."
+    },
+    {
+      "key": "tp-aerial-day",
+      "path": "C:\\Users\\kshit\\.codex\\generated_images\\01a167c1-8fc3-7062-bc6d-732da2a488cf\\exec-a4b53a06-cefa-4089-9579-36e2f5026db8.png",
+      "prompt": "Edit/outpaint the supplied architectural image into a wide 16:9 landscape image for a full-width website panel. Preserve the ENTIRE original composition, all buildings, landscaping, perspective, lighting and architectural details. Fit the original inside the new canvas without cropping or stretching any original content; generate only seamless realistic extensions around the edges (sky, gardens, ground as appropriate). No blurred sidebars, no mirrored edges, no borders, no text overlays. The resulting image must be one continuous sharp scene, edge to edge. Keep all original subjects visible, with modest breathing room around them."
+    },
+    {
+      "key": "or-day",
+      "path": "C:\\Users\\kshit\\.codex\\generated_images\\01a167c1-8fc3-7062-bc6d-732da2a488cf\\exec-f4430a77-b87e-4239-b3da-fd687d83f6c7.png",
+      "prompt": "Edit/outpaint the supplied architectural image into a wide 16:9 landscape image for a full-width website panel. Preserve the ENTIRE original composition, all buildings, landscaping, perspective, lighting and architectural details. Fit the original inside the new canvas without cropping or stretching any original content; generate only seamless realistic extensions around the edges (sky, gardens, ground as appropriate). No blurred sidebars, no mirrored edges, no borders, no text overlays. The resulting image must be one continuous sharp scene, edge to edge. Keep all original subjects visible, with modest breathing room around them."
+    },
+    {
+      "key": "story-interior",
+      "path": "C:\\Users\\kshit\\.codex\\generated_images\\01a167c1-8fc3-7062-bc6d-732da2a488cf\\exec-e32ea85e-71cd-46c7-9743-9217f684683e.png",
+      "prompt": "Edit/outpaint this interior photograph to a SQUARE 1:1 image for a half-width website panel. Preserve the entire original portrait photograph inside the square, its floor, ceiling, furniture, sculpture/art, materials and lighting, with no cropping or stretching. Extend ONLY the left and right edges with seamless plausible continuation of the existing room. No redesign, no added people, no text, no borders, no blur, no mirrored padding. One continuous photorealistic full-bleed interior photograph."
+    },
+    {
+      "key": "approach-interior",
+      "path": "C:\\Users\\kshit\\.codex\\generated_images\\01a167c1-8fc3-7062-bc6d-732da2a488cf\\exec-77635382-5c1d-4c37-bd98-7d9aee8a08bd.png",
+      "prompt": "Edit/outpaint this interior photograph to a SQUARE 1:1 image for a half-width website panel. Preserve the entire original portrait photograph inside the square, its floor, ceiling, furniture, sculpture/art, materials and lighting, with no cropping or stretching. Extend ONLY the left and right edges with seamless plausible continuation of the existing room. No redesign, no added people, no text, no borders, no blur, no mirrored padding. One continuous photorealistic full-bleed interior photograph."
+    }
+  ]
+}

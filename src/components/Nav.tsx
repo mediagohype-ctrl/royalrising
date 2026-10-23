@@ -1,7 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
-import { onReady } from "@/lib/ready";
+import { ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { lockScroll, unlockScroll } from "@/lib/scroll";
 import { openContact } from "@/lib/events";
 import { navLeft, navRight, contact } from "@/lib/data";
@@ -10,9 +9,20 @@ export default function Nav() {
   const header = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    const element = header.current;
+    if (!element) return;
+    const measure = () => document.documentElement.style.setProperty("--nav-height", `${element.offsetHeight}px`);
+    measure();
+    const observer = new ResizeObserver(measure);
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+      document.documentElement.style.removeProperty("--nav-height");
+    };
+  }, []);
+
   useGSAP(() => {
-    gsap.set(header.current, { yPercent: -100, opacity: 0 });
-    const off = onReady(() => gsap.to(header.current, { yPercent: 0, opacity: 1, duration: 1.2, ease: "expo.out", delay: 0.3 }));
     ScrollTrigger.create({
       start: 0,
       end: "max",
@@ -20,11 +30,18 @@ export default function Nav() {
         const y = self.scroll();
         const h = header.current!;
         // transparent over the hero, white once past it
-        h.classList.toggle("is-solid", y > window.innerHeight * 0.85);
-        h.classList.toggle("is-hidden", self.direction === 1 && y > window.innerHeight);
+        const hero = document.getElementById("top");
+        h.classList.toggle("is-solid", y > (hero?.offsetHeight ?? window.innerHeight) - h.offsetHeight);
+        const story = document.getElementById("story");
+        const storyBounds = story?.getBoundingClientRect();
+        const approach = document.getElementById("approach");
+        const overStory = !!storyBounds && storyBounds.top <= h.offsetHeight &&
+          storyBounds.bottom > h.offsetHeight &&
+          (!approach || approach.getBoundingClientRect().top > h.offsetHeight);
+        h.classList.toggle("is-story", overStory);
+        h.classList.toggle("is-hidden", self.direction === 1 && y > 24);
       },
     });
-    return off;
   });
 
   const mounted = useRef(false);
@@ -57,8 +74,9 @@ export default function Nav() {
         </nav>
         <a href="#top" className="nav__logo" aria-label="Royal Rising, back to top" onClick={close}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/logo-mark.png" alt="" width={30} height={38} />
-          <span>Royal Rising</span>
+          <img src="/images/logo-mark.png" alt="Royal Rising" width={44} height={56} />
+          <span className="nav__logo-title">Royal Rising</span>
+          <span className="nav__logo-sub">Architecture &bull; Interior &bull; Construction</span>
         </a>
         <div className="nav__side nav__side--r">
           {navRight.map((n) => (

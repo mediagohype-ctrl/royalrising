@@ -14,16 +14,28 @@ function Tile({ t, sizes }: { t: TileT; sizes: string }) {
   const ratio = width / height;
   useGSAP(
     () => {
+      const motion = gsap.matchMedia();
+      motion.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.fromTo(
         ref.current,
-        { clipPath: "inset(12% 0% 0% 0%)", opacity: 0.3 },
+        { opacity: 0.3, scale: 0.72, transformOrigin: "center center" },
         {
-          clipPath: "inset(0% 0% 0% 0%)",
           opacity: 1,
-          ease: "power2.out",
-          scrollTrigger: { trigger: ref.current, start: "top 98%", end: "top 55%", scrub: true },
+          scale: 1,
+          ease: "none",
+          // Measure the unscaled row so both frames grow together and
+          // refreshes never measure an already-transformed image.
+          scrollTrigger: {
+            trigger: ref.current!.parentElement,
+            start: "top bottom",
+            end: "top 15%",
+            scrub: 0.65,
+            invalidateOnRefresh: true,
+          },
         }
       );
+      });
+      return () => motion.revert();
     },
     { scope: ref }
   );

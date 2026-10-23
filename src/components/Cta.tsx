@@ -1,6 +1,6 @@
 "use client";
 import { useRef } from "react";
-import { gsap, useGSAP } from "@/lib/gsap";
+import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { img } from "@/lib/data";
 import { openContact } from "@/lib/events";
 import Img from "./ui/Img";
@@ -12,6 +12,34 @@ export default function Cta() {
 
   useGSAP(
     () => {
+      const motion = gsap.matchMedia();
+      motion.add("(prefers-reduced-motion: no-preference)", () => {
+        const section = root.current!;
+        const footer = document.querySelector("footer");
+        if (!footer) return;
+        gsap.fromTo(".cta__img", { y: 0 }, {
+          y: () => -Math.min(32, section.offsetHeight * 0.03),
+          ease: "none",
+          scrollTrigger: {
+            trigger: section,
+            start: "top bottom",
+            endTrigger: footer,
+            end: "top top",
+            scrub: 0.65,
+            invalidateOnRefresh: true,
+          },
+        });
+        ScrollTrigger.create({
+          trigger: section,
+          start: () => section.offsetHeight > window.innerHeight ? "bottom bottom" : "top top",
+          endTrigger: footer,
+          end: "top top",
+          pin: true,
+          pinSpacing: false,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+        });
+      });
       gsap.fromTo(
         ".cta__text",
         { y: 80 },
@@ -25,6 +53,7 @@ export default function Cta() {
         stagger: 0.12,
         scrollTrigger: { trigger: root.current, start: "top 55%", once: true },
       });
+      return () => motion.revert();
     },
     { scope: root }
   );

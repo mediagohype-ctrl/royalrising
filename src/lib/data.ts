@@ -1,7 +1,9 @@
 import meta from "./image-meta.json";
+import extensions from "./image-extensions.json";
 
 export type ImgKey = keyof typeof meta;
-export const img = (key: ImgKey) => meta[key];
+const displayImages = { ...meta, ...extensions };
+export const img = (key: ImgKey) => displayImages[key];
 
 export const contact = {
   email: "info@royalrising.in",
@@ -13,11 +15,12 @@ export const contact = {
 };
 
 export const navLeft = [
-  { label: "Brand Story", href: "#story" },
+  { label: "About Us", href: "#story" },
   { label: "Services", href: "#services" },
+  { label: "Projects", href: "#works" },
 ];
 export const navRight = [
-  { label: "Projects", href: "#works" },
+  { label: "Our Approach", href: "#approach" },
   { label: "Drawings", href: "#drawings" },
 ];
 

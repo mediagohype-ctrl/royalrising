@@ -163,5 +163,15 @@
     "src": "/images/v145-plan-line.jpg",
     "width": 2640,
     "height": 1962
+  },
+  "story-interior": {
+    "src": "/images/story-interior.webp",
+    "width": 1122,
+    "height": 1402
+  },
+  "approach-interior": {
+    "src": "/images/approach-interior.webp",
+    "width": 1122,
+    "height": 1402
   }
 }

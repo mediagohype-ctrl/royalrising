@@ -12,14 +12,47 @@ export default function Services() {
 
   useGSAP(
     () => {
-      gsap.from(".svc-intro > *", {
-        y: 40,
-        opacity: 0,
-        duration: 1.2,
-        ease: "expo.out",
-        stagger: 0.1,
-        scrollTrigger: { trigger: ".svc-intro", start: "top 80%", once: true },
-      });
+      // Title comes from the left, paragraph comes from the right
+      const isMobile = window.innerWidth <= 768;
+      const xDist = isMobile ? "12vw" : "18vw";
+
+      gsap.fromTo(
+        ".svc-intro .title",
+        {
+          x: `-${xDist}`,
+          opacity: 0,
+        },
+        {
+          x: "0vw",
+          opacity: 1,
+          duration: 1.3,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".svc-intro",
+            start: "top 82%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
+
+      gsap.fromTo(
+        ".svc-intro .para",
+        {
+          x: xDist,
+          opacity: 0,
+        },
+        {
+          x: "0vw",
+          opacity: 1,
+          duration: 1.3,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ".svc-intro",
+            start: "top 80%",
+            toggleActions: "play none none reverse",
+          },
+        }
+      );
 
       const tl = gsap.timeline({
         defaults: { ease: "none" },
@@ -36,14 +69,12 @@ export default function Services() {
           },
         },
       });
-      const card = window.innerWidth <= 560 ? "inset(18% 12% 6% 12%)" : "inset(16% 33% 4% 33%)";
-      tl.fromTo(".svc__view", { clipPath: card }, { clipPath: "inset(0% 0% 0% 0%)", duration: 1, ease: "power1.inOut" }, 0)
+      // Scale the complete frame instead of cutting away the photograph's edges.
+      const cardScale = window.innerWidth <= 560 ? 0.76 : 0.5;
+      tl.fromTo(".svc__view", { scale: cardScale }, { scale: 1, duration: 1, ease: "power1.inOut" }, 0)
         .fromTo(".svc__label p, .svc__count", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.7)
         .to(".svc__track", { xPercent: (-100 * (n - 1)) / n, duration: n - 1 }, 1)
         .to({}, { duration: 0.2 });
-      gsap.utils.toArray<HTMLElement>(".svc__img .full__bg").forEach((el, i) => {
-        tl.fromTo(el, { xPercent: i === 0 ? 0 : 14 }, { xPercent: -14, duration: 2 }, i);
-      });
     },
     { scope: root }
   );
@@ -53,8 +84,9 @@ export default function Services() {
       <div className="svc-intro">
         <h2 className="title">Services</h2>
         <p className="para">
-          Working across architecture, interiors, master planning and construction, the Royal Rising team conceives, draws and
-          builds every project under one roof, from the first site sketch to the last light fitting.
+          Working across disciplines of architecture, interiors, furniture, lighting, landscape, and construction, the
+          dedicated team at Royal Rising conceives, draws and executes synergistic, forward-thinking, and visually striking
+          projects under one roof.
         </p>
       </div>
       <div className="svc">

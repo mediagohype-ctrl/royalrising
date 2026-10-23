@@ -47,16 +47,30 @@ export default function Footer() {
 
   useGSAP(
     () => {
+      const motion = gsap.matchMedia();
+      motion.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.fromTo(
-        ".ft__big span",
+        ".ft__big span:not(.ft__space)",
         { yPercent: 110 },
         {
           yPercent: 0,
-          ease: "power2.out",
-          stagger: 0.04,
-          scrollTrigger: { trigger: ".ft__big", start: "top bottom", end: "bottom 98%", scrub: true },
+          ease: "power2.inOut",
+          duration: 1.3,
+          stagger: { each: 0.09, from: "center" },
+          scrollTrigger: {
+            trigger: ".ft__big",
+            // Wait until the entire lettering frame is visible.
+            start: "clamp(bottom 96%)",
+            end: "bottom top",
+            // Replay on entry from either direction; reset after leaving.
+            // A timed reveal stays fluid even when the user stops scrolling.
+            toggleActions: "restart reset restart reset",
+            invalidateOnRefresh: true,
+          },
         }
       );
+      });
+      return () => motion.revert();
     },
     { scope: root }
   );
@@ -64,7 +78,7 @@ export default function Footer() {
   return (
     <footer ref={root} className="ft">
       <div className="ft__grid">
-        <div className="ft__col">
+        <div className="ft__col ft__project">
           <h4>Start a project</h4>
           <button className="ft__write" onClick={openContact}>
             <span>Tell us about your site</span>
@@ -73,7 +87,8 @@ export default function Footer() {
         </div>
         <div className="ft__brand">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/logo-full.png" alt="Royal Rising" width={120} height={127} />
+          <img src="/images/logo-mark.png" alt="" width={120} height={127} />
+          <span className="ft__brand-name">Royal Rising</span>
           <p>Architecture | Interior | Construction</p>
         </div>
         <div className="ft__links">
@@ -84,6 +99,7 @@ export default function Footer() {
                 {l.label}
               </a>
             ))}
+            <button className="ft__contact" onClick={openContact}>Contact Us</button>
           </div>
           <div>
             <h4>Explore</h4>
@@ -128,7 +144,7 @@ export default function Footer() {
 
       <div className="ft__big" aria-hidden>
         {"ROYAL RISING".split("").map((c, i) => (
-          <span key={i}>{c === " " ? " " : c}</span>
+          <span key={i} className={c === " " ? "ft__space" : undefined}>{c === " " ? " " : c}</span>
         ))}
       </div>
       <div className="ft__bottom">

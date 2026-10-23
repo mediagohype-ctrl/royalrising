@@ -22,17 +22,19 @@ export default function Home() {
       <Cursor />
       <Nav />
       <main>
+        <div className="intro-sequence">
         <Hero />
-        <Split
-          id="story"
-          title="Brand Story"
-          quote="Every curve we draw is designed to rise with the light"
-          label="Know us better"
-          sub="Iconic Architecture . Interior Design . Construction"
-          text="Royal Rising is an architecture, interior and construction studio. We shape flowing curves, glass and travertine into homes, palaces and sacred spaces that feel as if they grew out of their landscape, and then we build them."
-          image="v145-day"
-          cta={{ label: "Read More", href: "#services" }}
-        />
+        <div className="story-stack">
+          <Split
+            id="story"
+            title="Brand Story"
+            quote="Every curve we draw is designed to rise with the light"
+            label="Know us better"
+            sub="Iconic Architecture . Interior Design . Construction"
+            text="Royal Rising is an architecture, interior and construction studio. We shape flowing curves, glass and travertine into homes, palaces and sacred spaces that feel as if they grew out of their landscape, and then we build them."
+            image="story-interior"
+            cta={{ label: "Read More", href: "#services" }}
+          />
         <Split
           id="approach"
           title="Our Approach"
@@ -40,10 +42,12 @@ export default function Home() {
           label="How we work"
           sub="Site & Story . Drawings . Visualisation . Construction"
           text="We read the land, the light and the way you want to live. Lines become measured plans, plans become photoreal views you can walk through, and our teams take every drawing to site until the place is finished."
-          image="or-night"
+          image="approach-interior"
           reverse
           cta={{ label: "View Projects", href: "#works" }}
         />
+        </div>
+        </div>
         <Services />
         <QuoteBand k="fh-night" text="Drawn with care, built to rise" />
         <FlyThrough />

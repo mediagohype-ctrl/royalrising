@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
-import { drawings, drawingsMore } from "@/lib/data";
+import { drawings, drawingsMore, img } from "@/lib/data";
 import { openLightbox } from "@/lib/events";
 import Img from "./ui/Img";
 
@@ -15,13 +15,25 @@ export default function Drawings() {
 
   useGSAP(
     () => {
-      gsap.from(".draw__title", {
-        y: 50,
-        opacity: 0,
-        duration: 1.3,
-        ease: "expo.out",
-        scrollTrigger: { trigger: ".draw__title", start: "top 85%", once: true },
+      const motion = gsap.matchMedia();
+      motion.add("(prefers-reduced-motion: no-preference)", () => {
+        gsap.fromTo(".draw__title",
+          { x: () => Math.min(window.innerWidth * 0.25, 360), opacity: 0 },
+          {
+            x: 0,
+            opacity: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: root.current!.querySelector(".draw__title"),
+              start: "top 92%",
+              end: "top 55%",
+              scrub: 0.65,
+              invalidateOnRefresh: true,
+            },
+          }
+        );
       });
+      return () => motion.revert();
     },
     { scope: root }
   );
@@ -60,7 +72,7 @@ export default function Drawings() {
             <span className="card__title">
               {d.title} <span aria-hidden>↗</span>
             </span>
-            <span className="card__img">
+            <span className="card__img" style={{ aspectRatio: `${img(d.k).width} / ${img(d.k).height}` }}>
               <Img k={d.k} className="contain" sizes="(max-width: 900px) 50vw, 25vw" />
             </span>
           </button>

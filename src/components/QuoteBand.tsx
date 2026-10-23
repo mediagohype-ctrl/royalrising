@@ -10,6 +10,24 @@ export default function QuoteBand({ k, text }: { k: ImgKey; text: string }) {
 
   useGSAP(
     () => {
+      const motion = gsap.matchMedia();
+      motion.add("(prefers-reduced-motion: no-preference)", () => {
+        // Grow the complete image frame without cropping or shifting the layout.
+        gsap.fromTo(".band__img, .band__shade",
+          { scale: 0.78, transformOrigin: "center center" },
+          {
+            scale: 1,
+            ease: "none",
+            scrollTrigger: {
+              trigger: root.current,
+              start: "top bottom",
+              end: "top top",
+              scrub: 0.65,
+              invalidateOnRefresh: true,
+            },
+          }
+        );
+      });
       gsap.fromTo(
         ".band__text",
         { yPercent: 60 },
@@ -23,6 +41,7 @@ export default function QuoteBand({ k, text }: { k: ImgKey; text: string }) {
         stagger: 0.06,
         scrollTrigger: { trigger: root.current, start: "top 70%", once: true },
       });
+      return () => motion.revert();
     },
     { scope: root }
   );

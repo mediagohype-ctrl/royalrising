@@ -1,0 +1,52 @@
+{
+  "fh-day": {
+    "src": "/images/fh-day-extended.webp",
+    "width": 1672,
+    "height": 941
+  },
+  "tp-front-day": {
+    "src": "/images/tp-front-day-extended.webp",
+    "width": 1672,
+    "height": 941
+  },
+  "v145-day": {
+    "src": "/images/v145-day-extended.webp",
+    "width": 1672,
+    "height": 941
+  },
+  "hm-aerial-day": {
+    "src": "/images/hm-aerial-day-extended.webp",
+    "width": 1672,
+    "height": 941
+  },
+  "hm-night-waterfall": {
+    "src": "/images/hm-night-waterfall-extended.webp",
+    "width": 1672,
+    "height": 941
+  },
+  "v145-night": {
+    "src": "/images/v145-night-extended.webp",
+    "width": 1672,
+    "height": 941
+  },
+  "tp-aerial-day": {
+    "src": "/images/tp-aerial-day-extended.webp",
+    "width": 1672,
+    "height": 940
+  },
+  "or-day": {
+    "src": "/images/or-day-extended.webp",
+    "width": 1672,
+    "height": 941
+  },
+  "story-interior": {
+    "src": "/images/story-interior-extended.webp",
+    "width": 1254,
+    "height": 1254
+  },
+  "approach-interior": {
+    "src": "/images/approach-interior-extended.webp",
+    "width": 1254,
+    "height": 1254
+  }
+}
