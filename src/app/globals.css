@@ -2067,6 +2067,9 @@ html.has-cursor [data-cursor] {
   .pill { min-height: 44px; }
   .story-stack .split__text { padding-block: 36px 40px; }
   .story-stack .split__text .pill { margin-top: 4px; }
+  #story .pill,
+  #approach .pill,
+  .phone-intro .pill { border-radius: 10px; }
   .works { padding-block: 48px 24px; }
   .works__title,
   .draw__title {
@@ -2136,4 +2139,57 @@ html.has-cursor [data-cursor] {
   }
   .cta__text .pill:focus-visible { outline-color: #fff; }
   .ft__social a { width: 44px; height: 44px; }
+  .ft {
+    padding: 32px var(--pad) max(20px, env(safe-area-inset-bottom));
+  }
+  .ft__grid { gap: 28px; }
+  .ft__project { padding-top: 0; }
+  .ft h4 {
+    margin-bottom: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+  }
+  .ft__write {
+    width: 100%;
+    min-height: 44px;
+    margin-top: 12px;
+    padding-bottom: 14px;
+    font-size: 15px;
+    color: #505050;
+  }
+  .ft__links {
+    width: 100%;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px;
+  }
+  .ft__links a,
+  .ft__contact {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    font-size: 14px;
+    line-height: 1.4;
+    color: #505050;
+  }
+  .ft__grid--info {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    gap: 24px;
+  }
+  .ft__col p { color: #505050; line-height: 1.65; }
+  .ft__col--c { width: 100%; }
+  .ft__col--c h4 { margin-bottom: 0; }
+  .ft__col--c a {
+    display: flex;
+    align-items: center;
+    min-height: 44px;
+    margin-bottom: 12px;
+    overflow-wrap: anywhere;
+  }
+  .ft__col--c a:last-child { margin-bottom: 0; }
+  .ft__social { gap: 12px; }
+  .ft__bottom { gap: 8px; line-height: 1.6; letter-spacing: 0.03em; }
+  .ft__bottom a { display: flex; align-items: center; min-height: 44px; }
 }

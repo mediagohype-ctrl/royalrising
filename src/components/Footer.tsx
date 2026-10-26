@@ -149,7 +149,6 @@ export default function Footer() {
       </div>
       <div className="ft__bottom">
         <span>© {new Date().getFullYear()} Royal Rising. All rights reserved.</span>
-        <a href="#top">Back to top ↑</a>
       </div>
     </footer>
   );
