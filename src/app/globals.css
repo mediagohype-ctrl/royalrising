@@ -1104,6 +1104,12 @@ html.has-cursor [data-cursor] {
   text-align: center;
   transition: transform 0.6s var(--ease), background 0.4s;
 }
+.more__btn svg {
+  display: block;
+  width: 0.75em;
+  height: 0.75em;
+  pointer-events: none;
+}
 .more__btn--accent {
   background: var(--accent);
 }

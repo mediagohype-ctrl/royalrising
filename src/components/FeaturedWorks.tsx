@@ -97,7 +97,9 @@ export default function FeaturedWorks() {
       {!more && (
         <div className="more">
           <button className="more__btn" onClick={() => setMore(true)} aria-label="View more projects">
-            <span aria-hidden>+</span>
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false">
+              <path d="M12 3v18M3 12h18" />
+            </svg>
           </button>
           <span className="more__label">View more projects</span>
         </div>
