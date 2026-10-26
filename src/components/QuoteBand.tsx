@@ -49,7 +49,7 @@ export default function QuoteBand({ k, text }: { k: ImgKey; text: string }) {
   return (
     <section ref={root} className="band" style={{ aspectRatio: `${img(k).width} / ${img(k).height}` }}>
       <div className="band__img">
-        <Img k={k} sizes="100vw" />
+        <Img k={k} sizes="100vw" priority />
       </div>
       <div className="band__shade" />
       <p className="band__text" aria-label={text}>

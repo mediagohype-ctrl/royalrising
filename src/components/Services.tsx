@@ -12,6 +12,9 @@ export default function Services() {
 
   useGSAP(
     () => {
+      const motion = gsap.matchMedia();
+      motion.add({ phone: "(max-width: 560px)", larger: "(min-width: 561px)" }, (context) => {
+      const phone = !!context.conditions?.phone;
       // Title comes from the left, paragraph comes from the right
       const isMobile = window.innerWidth <= 768;
       const xDist = isMobile ? "12vw" : "18vw";
@@ -58,10 +61,20 @@ export default function Services() {
         defaults: { ease: "none" },
         scrollTrigger: {
           trigger: ".svc",
-          start: "top top",
+          // Center the phone stage itself, even after viewport-height changes.
+          start: phone ? "center center" : "top top",
           end: () => `+=${window.innerHeight * (n + 0.6)}`,
           pin: true,
-          scrub: 1,
+          // Touch scrolling must finish the last slide before the pin releases.
+          // A delayed scrub can leave two partial slides visible during exit.
+          scrub: phone ? true : 1,
+          snap: phone ? {
+            snapTo: [0, ...Array.from({ length: n }, (_, i) => (i + 1) / (n + 0.2)), 1],
+            duration: { min: 0.15, max: 0.35 },
+            delay: 0.12,
+            directional: false,
+            inertia: false,
+          } : undefined,
           invalidateOnRefresh: true,
           onUpdate: (self) => {
             const t = self.progress * (n + 0.2) - 1;
@@ -70,11 +83,13 @@ export default function Services() {
         },
       });
       // Scale the complete frame instead of cutting away the photograph's edges.
-      const cardScale = window.innerWidth <= 560 ? 0.76 : 0.5;
+      const cardScale = phone ? 0.92 : 0.5;
       tl.fromTo(".svc__view", { scale: cardScale }, { scale: 1, duration: 1, ease: "power1.inOut" }, 0)
-        .fromTo(".svc__label p, .svc__count", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 0.7)
-        .to(".svc__track", { xPercent: (-100 * (n - 1)) / n, duration: n - 1 }, 1)
+        .fromTo(".svc__label p, .svc__count", { opacity: phone ? 1 : 0 }, { opacity: 1, duration: 0.3 }, 0.7)
+        .fromTo(".svc__track", { xPercent: 0 }, { xPercent: (-100 * (n - 1)) / n, duration: n - 1 }, 1)
         .to({}, { duration: 0.2 });
+      });
+      return () => motion.revert();
     },
     { scope: root }
   );
@@ -91,11 +106,11 @@ export default function Services() {
       </div>
       <div className="svc">
         <div className="svc__view">
-          <div className="svc__track" style={{ width: `${n * 100}%` }}>
+          <div className="svc__track" style={{ ["--track-width" as string]: `${n * 100}%` }}>
             {services.map((s) => (
               <article key={s.title} className="svc__slide">
                 <div className="svc__img">
-                  <FullImg k={s.k} />
+                  <FullImg k={s.k} sizes="(max-width: 560px) 180vh, 100vw" />
                 </div>
                 <div className="svc__shade" />
                 <div className="svc__label">

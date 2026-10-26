@@ -24,6 +24,18 @@ export default function Home() {
       <main>
         <div className="intro-sequence">
         <Hero />
+        <section className="phone-intro" aria-labelledby="phone-intro-title">
+          <p className="label">Architecture · Interiors · Construction</p>
+          <h1 id="phone-intro-title">Spaces shaped<br />around your life.</h1>
+          <p className="phone-intro__copy">
+            A home begins with how you want to live. We bring light, materials and
+            thoughtful planning together, from the first sketch to the final build.
+          </p>
+          <div className="phone-intro__links">
+            <a className="pill" href="#works">Explore projects <span aria-hidden>↗</span></a>
+            <a className="phone-intro__service" href="#services">Our services <span aria-hidden>↓</span></a>
+          </div>
+        </section>
         <div className="story-stack">
           <Split
             id="story"

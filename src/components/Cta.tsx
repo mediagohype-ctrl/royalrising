@@ -13,7 +13,7 @@ export default function Cta() {
   useGSAP(
     () => {
       const motion = gsap.matchMedia();
-      motion.add("(prefers-reduced-motion: no-preference)", () => {
+      motion.add("(min-width: 561px) and (prefers-reduced-motion: no-preference)", () => {
         const section = root.current!;
         const footer = document.querySelector("footer");
         if (!footer) return;
@@ -40,6 +40,7 @@ export default function Cta() {
           invalidateOnRefresh: true,
         });
       });
+      motion.add("(min-width: 561px)", () => {
       gsap.fromTo(
         ".cta__text",
         { y: 80 },
@@ -52,6 +53,7 @@ export default function Cta() {
         ease: "expo.out",
         stagger: 0.12,
         scrollTrigger: { trigger: root.current, start: "top 55%", once: true },
+      });
       });
       return () => motion.revert();
     },
@@ -66,7 +68,9 @@ export default function Cta() {
         <div className="cta__shade" />
       </div>
       <div className="cta__text">
+        <span className="cta__phone-label">Your next chapter</span>
         <p>Five signature worlds, designed, drawn and built by one studio.</p>
+        <span className="cta__phone-copy">Have a place in mind? Tell us about your site, your ideas and the way you want to live.</span>
         <button className="pill" onClick={openContact}>
           Let&apos;s Connect <span aria-hidden>↗</span>
         </button>

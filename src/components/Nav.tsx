@@ -8,6 +8,30 @@ import { navLeft, navRight, contact } from "@/lib/data";
 export default function Nav() {
   const header = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
+  const burger = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open || !window.matchMedia("(max-width: 560px)").matches) return;
+    const handleTab = (event: KeyboardEvent) => {
+      if (event.key !== "Tab") return;
+      const items = [
+        header.current?.querySelector<HTMLAnchorElement>(".nav__logo"),
+        burger.current,
+        ...document.querySelectorAll<HTMLElement>("#menu a, #menu button"),
+      ].filter((item): item is HTMLElement => !!item);
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (event.shiftKey && document.activeElement === first) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", handleTab);
+    return () => document.removeEventListener("keydown", handleTab);
+  }, [open]);
 
   useEffect(() => {
     const element = header.current;
@@ -51,7 +75,12 @@ export default function Nav() {
       else unlockScroll();
     }
     mounted.current = true;
-    const esc = (e: KeyboardEvent) => e.key === "Escape" && setOpen(false);
+    const esc = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && open) {
+        setOpen(false);
+        burger.current?.focus();
+      }
+    };
     window.addEventListener("keydown", esc);
     return () => window.removeEventListener("keydown", esc);
   }, [open]);
@@ -88,7 +117,7 @@ export default function Nav() {
             Let&apos;s Talk
           </button>
         </div>
-        <button className="nav__burger" aria-expanded={open} aria-controls="menu" aria-label="Menu" onClick={() => setOpen((o) => !o)}>
+        <button ref={burger} className="nav__burger" aria-expanded={open} aria-controls="menu" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((o) => !o)}>
           <i />
           <i />
         </button>

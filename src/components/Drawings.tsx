@@ -65,6 +65,7 @@ export default function Drawings() {
   return (
     <section id="drawings" ref={root} className="draw">
       <h2 className="title draw__title">From the Drawing Board</h2>
+      <p className="phone-section-note">See where each space begins. Tap a drawing to explore the plan in detail.</p>
       <div className="draw__grid">
         {list.map((d, i) => (
           <button key={d.k} className="card" onClick={() => openLightbox(keys, i)} data-cursor="View">
@@ -73,7 +74,7 @@ export default function Drawings() {
               {d.title} <span aria-hidden>↗</span>
             </span>
             <span className="card__img" style={{ aspectRatio: `${img(d.k).width} / ${img(d.k).height}` }}>
-              <Img k={d.k} className="contain" sizes="(max-width: 900px) 50vw, 25vw" />
+              <Img k={d.k} className="contain" sizes="(max-width: 560px) 100vw, (max-width: 960px) 50vw, 25vw" />
             </span>
           </button>
         ))}

@@ -91,6 +91,7 @@ export default function FeaturedWorks() {
   return (
     <section id="works" ref={root} className="works">
       <h2 className="title works__title">Featured Works</h2>
+      <p className="phone-section-note">Explore the spaces, materials and details. Tap a project to take a closer look.</p>
       <Rows rows={featured} />
       {more && <Rows rows={featuredMore} />}
       {!more && (

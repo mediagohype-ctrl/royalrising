@@ -23,7 +23,25 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
   useGSAP(
     () => {
       const motion = gsap.matchMedia();
-      motion.add("(prefers-reduced-motion: no-preference)", () => {
+      // On phones, complete each entrance when its own panel enters view,
+      // rather than leaving a wide image mid-reveal until the section reaches the top.
+      motion.add("(max-width: 960px) and (prefers-reduced-motion: no-preference)", () => {
+        gsap.fromTo(".split__media", { xPercent: reverse ? 100 : -100 }, {
+          xPercent: 0,
+          duration: 1.1,
+          ease: "power3.out",
+          scrollTrigger: { trigger: root.current, start: "top 95%", once: true },
+        });
+        gsap.from(".split__text > *", {
+          x: reverse ? -24 : 24,
+          opacity: 0,
+          duration: 0.8,
+          stagger: 0.06,
+          ease: "power2.out",
+          scrollTrigger: { trigger: root.current!.querySelector(".split__text"), start: "top 92%", once: true },
+        });
+      });
+      motion.add("(min-width: 961px) and (prefers-reduced-motion: no-preference)", () => {
       if (id === "story" || id === "approach") {
         // Measure the normal-flow wrapper so sticky positioning cannot shift
         // the reveal's scroll range when ScrollTrigger refreshes.
@@ -126,9 +144,12 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
         <p className="label">{label}</p>
         <p className="sub">{sub}</p>
         <p className="para">{text}</p>
-        <a href={cta.href} className="pill">
-          {cta.label} <span aria-hidden>↗</span>
-        </a>
+        {/* Keep the entrance transform separate from the button's hover transition. */}
+        <div className="split__action">
+          <a href={cta.href} className="pill">
+            {cta.label} <span aria-hidden>↗</span>
+          </a>
+        </div>
       </div>
     </section>
   );
