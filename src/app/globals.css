@@ -1414,6 +1414,8 @@ html.has-cursor [data-cursor] {
   opacity: 1;
 }
 .drawer__panel {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
   position: absolute;
   top: 0;
   right: 0;
@@ -1431,6 +1433,7 @@ html.has-cursor [data-cursor] {
 .drawer.is-open .drawer__panel {
   transform: none;
 }
+.drawer__panel > * { flex-shrink: 0; }
 .drawer__close {
   position: absolute;
   top: 22px;
