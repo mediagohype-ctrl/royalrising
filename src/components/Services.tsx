@@ -82,8 +82,8 @@ export default function Services() {
           },
         },
       });
-      // Scale the complete frame instead of cutting away the photograph's edges.
-      const cardScale = phone ? 0.92 : 0.5;
+      // Keep phone images edge-to-edge throughout the entrance.
+      const cardScale = phone ? 1 : 0.5;
       tl.fromTo(".svc__view", { scale: cardScale }, { scale: 1, duration: 1, ease: "power1.inOut" }, 0)
         .fromTo(".svc__label p, .svc__count", { opacity: phone ? 1 : 0 }, { opacity: 1, duration: 0.3 }, 0.7)
         .fromTo(".svc__track", { xPercent: 0 }, { xPercent: (-100 * (n - 1)) / n, duration: n - 1 }, 1)

@@ -45,7 +45,7 @@ function Tile({ t, sizes }: { t: TileT; sizes: string }) {
       ref={ref}
       className="tile"
       style={{ aspectRatio: `${width} / ${height}`, ["--r" as string]: ratio }}
-      data-cursor="View" onClick={() => openLightbox(allKeys, allKeys.indexOf(t.k))} aria-label={`Open ${t.title}`}>
+      data-cursor="View" onClick={(e) => openLightbox(allKeys, allKeys.indexOf(t.k), e.currentTarget)} aria-label={`Open ${t.title}`}>
       <div className="tile__img">
         <Img k={t.k} sizes={sizes} />
       </div>

@@ -68,7 +68,7 @@ export default function Drawings() {
       <p className="phone-section-note">See where each space begins. Tap a drawing to explore the plan in detail.</p>
       <div className="draw__grid">
         {list.map((d, i) => (
-          <button key={d.k} className="card" onClick={() => openLightbox(keys, i)} data-cursor="View">
+          <button key={d.k} className="card" onClick={(e) => openLightbox(keys, i, e.currentTarget)} data-cursor="View">
             <span className="card__label">{d.label}</span>
             <span className="card__title">
               {d.title} <span aria-hidden>↗</span>
