@@ -1,13 +1,13 @@
 /* ============================================================
-   Royal Rising: white, near-black and deep maroon
+   Royal Rising: white, near-black and warm architectural brown
    ============================================================ */
 :root {
   --bg: #ffffff;
   --text: #1c1c1c;
   --muted: #707070;
   --line: rgba(0, 0, 0, 0.1);
-  --accent: #7b2d33;
-  --accent-dark: #5e2026;
+  --accent: #6b4226;
+  --accent-dark: #4d2e17;
   --paper: #f4f1ec;
   --pad: clamp(20px, 4vw, 64px);
   --ease: cubic-bezier(0.19, 1, 0.22, 1);
