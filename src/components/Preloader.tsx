@@ -104,7 +104,7 @@ export default function Preloader() {
               },
               0
             )
-            // Logo wordmark flies to navbar position, matches size, and transitions to white
+            // Logo wordmark flies to navbar position, matches size, and transitions to ivory
             .to(
               word.current,
               {
@@ -119,7 +119,7 @@ export default function Preloader() {
             .to(
               word.current,
               {
-                color: "#ffffff",
+                color: "#fffaf1",
                 duration: 0.5,
                 ease: "power2.out",
               },
