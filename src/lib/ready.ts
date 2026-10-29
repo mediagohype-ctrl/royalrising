@@ -1,6 +1,17 @@
 "use client";
 // Fires once the preloader has lifted, so intro animations play in view.
 const EVENT = "rr:ready";
+const PRELOADER_SEEN = "rr:preloader-seen";
+
+export function hasSeenPreloader() {
+  if (typeof window === "undefined") return false;
+  if (window.__rrReady) return true;
+  try {
+    return window.sessionStorage.getItem(PRELOADER_SEEN) === "1";
+  } catch {
+    return false;
+  }
+}
 
 declare global {
   interface Window {
@@ -9,6 +20,11 @@ declare global {
 }
 
 export function markReady() {
+  try {
+    window.sessionStorage.setItem(PRELOADER_SEEN, "1");
+  } catch {
+    // The in-memory flag still handles navigation if storage is unavailable.
+  }
   if (window.__rrReady) return;
   window.__rrReady = true;
   window.dispatchEvent(new Event(EVENT));

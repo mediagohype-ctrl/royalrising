@@ -48,9 +48,9 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
         const reveal = gsap.timeline({
           scrollTrigger: {
             trigger: id === "story" ? root.current!.parentElement : root.current,
-            start: "top 45%",
+            start: "top 80%",
             end: "top top",
-            scrub: true,
+            scrub: 0.35,
             invalidateOnRefresh: true,
           },
         });

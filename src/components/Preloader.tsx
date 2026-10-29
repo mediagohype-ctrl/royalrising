@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { markReady, prefersReducedMotion } from "@/lib/ready";
+import { hasSeenPreloader, markReady, prefersReducedMotion } from "@/lib/ready";
 
 export default function Preloader() {
   const root = useRef<HTMLDivElement>(null);
@@ -12,13 +12,16 @@ export default function Preloader() {
 
   useGSAP(
     () => {
-      if (prefersReducedMotion()) {
+      // Session storage survives reloads; keep the overlay hidden while checking.
+      if (hasSeenPreloader() || prefersReducedMotion()) {
         const navLogo = document.querySelector<HTMLElement>(".nav__logo");
         if (navLogo) navLogo.style.opacity = "1";
         markReady();
         setGone(true);
         return;
       }
+
+      if (root.current) root.current.style.visibility = "visible";
 
       // Hide the navbar logo during preloader so only the preloader logo is visible
       const navLogo = document.querySelector<HTMLElement>(".nav__logo");
@@ -135,7 +138,7 @@ export default function Preloader() {
   if (gone) return null;
 
   return (
-    <div className="pre" ref={root} aria-hidden>
+    <div className="pre" ref={root} aria-hidden style={{ visibility: "hidden" }}>
       <div className="pre__panel pre__panel--top" />
       <div className="pre__panel pre__panel--bottom" />
       <div className="pre__center">
