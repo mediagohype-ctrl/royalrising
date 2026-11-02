@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
-import { drawings, drawingsMore, img } from "@/lib/data";
+import { drawings, drawingsMore } from "@/lib/data";
 import { openLightbox } from "@/lib/events";
 import Img from "./ui/Img";
 
@@ -65,15 +65,15 @@ export default function Drawings() {
   return (
     <section id="drawings" ref={root} className="draw">
       <h2 className="title draw__title">From the Drawing Board</h2>
-      <p className="phone-section-note">See where each space begins. Tap a drawing to explore the plan in detail.</p>
+      <p className="phone-section-note">Every space starts with a plan. Tap to explore the details.</p>
       <div className="draw__grid">
         {list.map((d, i) => (
-          <button key={d.k} className="card" onClick={(e) => openLightbox(keys, i, e.currentTarget)} data-cursor="View">
+          <button key={d.k} className="card" aria-label={`View ${d.label}: ${d.title}`} onClick={(e) => openLightbox(keys, i, e.currentTarget)} data-cursor="View">
             <span className="card__label">{d.label}</span>
             <span className="card__title">
               {d.title} <span aria-hidden>↗</span>
             </span>
-            <span className="card__img" style={{ aspectRatio: `${img(d.k).width} / ${img(d.k).height}` }}>
+            <span className="card__img">
               <Img k={d.k} className="contain" sizes="(max-width: 560px) 100vw, (max-width: 960px) 50vw, 25vw" />
             </span>
           </button>

@@ -47,6 +47,7 @@ export default function Home() {
             image="story-interior"
             cta={{ label: "Read More", href: "#services" }}
           />
+        <div className="approach-overlap">
         <Split
           id="approach"
           title="Our Approach"
@@ -58,6 +59,7 @@ export default function Home() {
           reverse
           cta={{ label: "View Projects", href: "#works" }}
         />
+        </div>
         </div>
         </div>
         <Services />

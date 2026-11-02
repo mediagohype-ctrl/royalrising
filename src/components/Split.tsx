@@ -1,6 +1,6 @@
 "use client";
 import { useRef } from "react";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 import { type ImgKey } from "@/lib/data";
 import Img from "./ui/Img";
 
@@ -43,23 +43,58 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
       });
       motion.add("(min-width: 961px) and (prefers-reduced-motion: no-preference)", () => {
       if (id === "story" || id === "approach") {
-        // Measure the normal-flow wrapper so sticky positioning cannot shift
-        // the reveal's scroll range when ScrollTrigger refreshes.
-        const reveal = gsap.timeline({
+        const section = root.current!;
+        const text = section.querySelector<HTMLElement>(".split__text")!;
+        const halfImage = reverse ? "inset(0% 0% 0% 50%)" : "inset(0% 50% 0% 0%)";
+        const overflow = () => Math.max(0, text.scrollHeight - section.clientHeight);
+        const revealDistance = () => window.innerHeight * 1.25 + overflow();
+        let coverHold: gsap.core.Tween | undefined;
+
+        // Slide the first half in as the section enters, then reveal the rest while pinned.
+        gsap.set(".split__media", { clipPath: halfImage });
+        gsap.fromTo(".split__media", { xPercent: reverse ? 50 : -50 }, {
+          xPercent: 0,
+          ease: "sine.inOut",
           scrollTrigger: {
-            trigger: id === "story" ? root.current!.parentElement : root.current,
-            start: "top 80%",
+            trigger: section,
+            start: "top bottom",
             end: "top top",
-            scrub: 0.35,
+            scrub: 0.6,
             invalidateOnRefresh: true,
           },
         });
-        reveal.fromTo(".split__media",
-          { xPercent: reverse ? 100 : -100, opacity: 1 },
-          { xPercent: 0, opacity: 1, duration: 1.2, ease: "sine.inOut" }, 0);
-        reveal.fromTo(".split__text > *",
-          { x: reverse ? -40 : 40, opacity: 0 },
-          { x: 0, opacity: 1, stagger: 0.06, duration: 0.9, ease: "sine.inOut" }, 0.08);
+        gsap.set(".split__text > *", { y: 24, autoAlpha: 0 });
+        const reveal = gsap.timeline({
+          defaults: { ease: "none" },
+          scrollTrigger: {
+            trigger: section,
+            start: "top top",
+            end: () => "+=" + (revealDistance() + (id === "story" ? section.clientHeight : 0)),
+            onRefreshInit: () => {
+              coverHold?.duration(1.6 * section.clientHeight / revealDistance());
+            },
+            pin: true,
+            pinSpacing: true,
+            scrub: 0.6,
+            anticipatePin: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+        reveal
+          .to(".split__media", {
+            clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: "sine.inOut",
+          }, 0)
+          .to(".split__text > *", {
+            y: 0, autoAlpha: 1, stagger: 0.07, duration: 0.4, ease: "power2.out",
+          }, 0.15)
+          // On short screens, carry the lower text and button into view before releasing.
+          .to(text, { y: () => -overflow(), duration: 0.35, ease: "sine.inOut" }, 0.95)
+          .to({}, { duration: 0.3 });
+        if (id === "story") {
+          // Keep the completed story pinned until the incoming panel covers it.
+          coverHold = gsap.to({}, { duration: 1.6 * section.clientHeight / revealDistance() });
+          reveal.add(coverHold);
+        }
         return;
       }
       // 1. Curtain wipe reveal on the image
@@ -107,23 +142,6 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
         }
       );
       });
-      if (id === "story") {
-        motion.add("(min-width: 961px) and (min-height: 700px) and (prefers-reduced-motion: no-preference)", () => {
-          ScrollTrigger.create({
-            trigger: root.current,
-            // On shorter screens, let the bottom/CTA enter before holding.
-            start: () => root.current!.offsetHeight > window.innerHeight ? "bottom bottom" : "top top",
-            // This sibling is outside useGSAP's section-scoped selectors.
-            endTrigger: document.getElementById("approach"),
-            end: "top top",
-            pin: true,
-            // Keep the story behind the next section until it fully covers it.
-            pinSpacing: false,
-            anticipatePin: 1,
-            invalidateOnRefresh: true,
-          });
-        });
-      }
       return () => motion.revert();
     },
     { scope: root }

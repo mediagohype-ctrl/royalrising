@@ -25,6 +25,9 @@ export default function FlyThrough() {
 
   useGSAP(
     () => {
+      const motion = gsap.matchMedia();
+      motion.add({ phone: "(max-width: 560px)", larger: "(min-width: 561px)" }, (context) => {
+      const phone = !!context.conditions?.phone;
       const els = gsap.utils.toArray<HTMLElement>(".fly__item");
       const state = { z: 0 };
 
@@ -35,7 +38,9 @@ export default function FlyThrough() {
           const fogIn = gsap.utils.clamp(0, 1, (depth + 2500) / 1000);
           const pass = gsap.utils.clamp(0, 1, 1 - (depth - 250) / 450);
           el.style.opacity = String(fogIn * pass);
-          el.style.transform = `translate(-50%, -50%) translate3d(${items[i].x}vw, ${items[i].y}vh, ${depth}px)`;
+          const x = items[i].x * (phone ? 0.45 : 1);
+          const y = phone ? items[i].y * root.current!.clientHeight / 100 * 0.45 : items[i].y * window.innerHeight / 100;
+          el.style.transform = `translate(-50%, -50%) translate3d(${x}vw, ${y}px, ${depth}px)`;
           el.style.visibility = fogIn * pass < 0.01 ? "hidden" : "visible";
         });
       };
@@ -44,12 +49,22 @@ export default function FlyThrough() {
       gsap
         .timeline({
           defaults: { ease: "none" },
-          scrollTrigger: { trigger: root.current, start: "top top", end: "+=360%", pin: true, scrub: 1 },
+          scrollTrigger: {
+            trigger: root.current,
+            start: phone ? "center center" : "top top",
+            end: phone ? "+=240%" : "+=360%",
+            pin: true,
+            scrub: phone ? true : 1,
+            invalidateOnRefresh: true,
+            onRefresh: render,
+          },
         })
         .to(state, { z: TRAVEL, duration: 1, onUpdate: render }, 0)
-        .fromTo(".fly__intro", { opacity: 1, scale: 1 }, { opacity: 0, scale: 1.6, duration: 0.14 }, 0.02)
-        .fromTo(".fly__outro", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.16 }, 0.8)
+        .fromTo(".fly__intro", { opacity: 1, scale: 1 }, { opacity: 0, scale: phone ? 1 : 1.6, duration: 0.14 }, phone ? 0.12 : 0.02)
+        .fromTo(".fly__outro", { opacity: 0, scale: phone ? 1 : 0.7 }, { opacity: 1, scale: 1, duration: 0.16 }, 0.8)
         .fromTo(".fly__glow", { scale: 0.4, opacity: 0 }, { scale: 1.4, opacity: 1, duration: 1 }, 0);
+      });
+      return () => motion.revert();
     },
     { scope: root }
   );

@@ -18,9 +18,8 @@ function Tile({ t, sizes }: { t: TileT; sizes: string }) {
       motion.add("(prefers-reduced-motion: no-preference)", () => {
       gsap.fromTo(
         ref.current,
-        { opacity: 0.3, scale: 0.72, transformOrigin: "center center" },
+        { scale: 0.65, transformOrigin: "center center" },
         {
-          opacity: 1,
           scale: 1,
           ease: "none",
           // Measure the unscaled row so both frames grow together and

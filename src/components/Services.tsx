@@ -1,20 +1,29 @@
 "use client";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { services } from "@/lib/data";
-import FullImg from "./ui/FullImg";
+import { services, img } from "@/lib/data";
 
-/** A centred card grows to full screen, then the services slide past horizontally. */
+const mobileArtwork: Record<string, string> = {
+  "hm-night-waterfall": "architecture",
+  "v145-night": "interior",
+  "tp-aerial-day": "planning",
+  "or-day": "construction",
+};
+
+/** A narrow central image opens to full screen before the services slide horizontally. */
 export default function Services() {
   const root = useRef<HTMLElement>(null);
-  const [current, setCurrent] = useState(0);
   const n = services.length;
 
   useGSAP(
     () => {
       const motion = gsap.matchMedia();
-      motion.add({ phone: "(max-width: 560px)", larger: "(min-width: 561px)" }, (context) => {
+      motion.add({ phone: "(max-width: 560px)", larger: "(min-width: 561px)", reduced: "(prefers-reduced-motion: reduce)" }, (context) => {
       const phone = !!context.conditions?.phone;
+      const reduced = !!context.conditions?.reduced;
+      const pinStart = () => phone
+        ? `top ${getComputedStyle(document.documentElement).getPropertyValue("--nav-height").trim() || "72px"}`
+        : "top top";
       // Title comes from the left, paragraph comes from the right
       const isMobile = window.innerWidth <= 768;
       const xDist = isMobile ? "12vw" : "18vw";
@@ -57,35 +66,44 @@ export default function Services() {
         }
       );
 
+      const view = root.current!.querySelector<HTMLElement>(".svc__view")!;
+      const opening = { entrance: 0, expansion: 0 };
+      const renderOpening = () => {
+        const inset = reduced ? 0 : Math.max(0, (phone ? 38 : 50) - opening.entrance * (phone ? 18 : 30) - opening.expansion * 20);
+        view.style.clipPath = `inset(0% ${inset}% 0% ${inset}%)`;
+      };
+      // Keep both stages on one crop so they join smoothly, including when scrolling back.
+      renderOpening();
+      if (!reduced) {
+        gsap.fromTo(opening, { entrance: 0 }, {
+          entrance: 1,
+          ease: "none",
+          onUpdate: renderOpening,
+          scrollTrigger: {
+            trigger: ".svc", start: "top 85%", end: pinStart, scrub: phone ? true : 0.6,
+            invalidateOnRefresh: true,
+          },
+        });
+      }
       const tl = gsap.timeline({
         defaults: { ease: "none" },
         scrollTrigger: {
           trigger: ".svc",
-          // Center the phone stage itself, even after viewport-height changes.
-          start: phone ? "center center" : "top top",
+          // Keep the phone image directly below the fixed navigation.
+          start: pinStart,
           end: () => `+=${window.innerHeight * (n + 0.6)}`,
           pin: true,
           // Touch scrolling must finish the last slide before the pin releases.
           // A delayed scrub can leave two partial slides visible during exit.
           scrub: phone ? true : 1,
-          snap: phone ? {
-            snapTo: [0, ...Array.from({ length: n }, (_, i) => (i + 1) / (n + 0.2)), 1],
-            duration: { min: 0.15, max: 0.35 },
-            delay: 0.12,
-            directional: false,
-            inertia: false,
-          } : undefined,
           invalidateOnRefresh: true,
-          onUpdate: (self) => {
-            const t = self.progress * (n + 0.2) - 1;
-            setCurrent(Math.max(0, Math.min(n - 1, Math.round(t))));
-          },
         },
       });
-      // Keep phone images edge-to-edge throughout the entrance.
-      const cardScale = phone ? 1 : 0.5;
-      tl.fromTo(".svc__view", { scale: cardScale }, { scale: 1, duration: 1, ease: "power1.inOut" }, 0)
-        .fromTo(".svc__label p, .svc__count", { opacity: phone ? 1 : 0 }, { opacity: 1, duration: 0.3 }, 0.7)
+      tl.fromTo(opening, { expansion: 0 }, {
+        expansion: 1, duration: 1, ease: "sine.out", onUpdate: renderOpening,
+      }, 0)
+        .fromTo(".svc__label h3, .svc__arrow", { autoAlpha: reduced ? 1 : 0 }, { autoAlpha: 1, duration: 0.35 }, 0.3)
+        .fromTo(".svc__label p", { opacity: reduced ? 1 : 0 }, { opacity: 1, duration: 0.3 }, 0.7)
         .fromTo(".svc__track", { xPercent: 0 }, { xPercent: (-100 * (n - 1)) / n, duration: n - 1 }, 1)
         .to({}, { duration: 0.2 });
       });
@@ -110,7 +128,10 @@ export default function Services() {
             {services.map((s) => (
               <article key={s.title} className="svc__slide">
                 <div className="svc__img">
-                  <FullImg k={s.k} sizes="(max-width: 560px) 180vh, 100vw" />
+                  <picture className="full__fg">
+                    <source media="(max-width: 560px)" srcSet={`/images/generated/services-${mobileArtwork[s.k]}-mobile.webp`} />
+                    <img className="svc__art" src={img(s.k).src} alt={`${s.title} — architectural concept visualization`} loading="eager" decoding="async" />
+                  </picture>
                 </div>
                 <div className="svc__shade" />
                 <div className="svc__label">
@@ -123,9 +144,7 @@ export default function Services() {
               </article>
             ))}
           </div>
-          <div className="svc__count" aria-hidden>
-            {String(current + 1).padStart(2, "0")} / {String(n).padStart(2, "0")}
-          </div>
+
         </div>
       </div>
     </section>

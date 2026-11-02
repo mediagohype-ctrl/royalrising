@@ -4,7 +4,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { img, type ImgKey } from "@/lib/data";
 import Img from "./ui/Img";
 
-/** Full-width image at its own proportions (never cropped); the line of text floats over it. */
+/** A fixed image frame with a gentle scroll-driven zoom behind the quote. */
 export default function QuoteBand({ k, text }: { k: ImgKey; text: string }) {
   const root = useRef<HTMLElement>(null);
 
@@ -12,12 +12,12 @@ export default function QuoteBand({ k, text }: { k: ImgKey; text: string }) {
     () => {
       const motion = gsap.matchMedia();
       motion.add("(prefers-reduced-motion: no-preference)", () => {
-        // Grow the complete image frame without cropping or shifting the layout.
-        gsap.fromTo(".band__img, .band__shade",
-          { scale: 0.78, transformOrigin: "center center" },
+        // Settle gently to the original image size while keeping it sharp and opaque.
+        gsap.fromTo(".band__img",
+          { scale: 1.06, transformOrigin: "center center" },
           {
             scale: 1,
-            ease: "none",
+            ease: "sine.out",
             scrollTrigger: {
               trigger: root.current,
               start: "top bottom",

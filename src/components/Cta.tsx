@@ -17,18 +17,6 @@ export default function Cta() {
         const section = root.current!;
         const footer = document.querySelector("footer");
         if (!footer) return;
-        gsap.fromTo(".cta__img", { y: 0 }, {
-          y: () => -Math.min(32, section.offsetHeight * 0.03),
-          ease: "none",
-          scrollTrigger: {
-            trigger: section,
-            start: "top bottom",
-            endTrigger: footer,
-            end: "top top",
-            scrub: 0.65,
-            invalidateOnRefresh: true,
-          },
-        });
         ScrollTrigger.create({
           trigger: section,
           start: () => section.offsetHeight > window.innerHeight ? "bottom bottom" : "top top",

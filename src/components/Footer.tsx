@@ -44,37 +44,24 @@ const Icon = {
 
 export default function Footer() {
   const root = useRef<HTMLElement>(null);
-
-  useGSAP(
-    () => {
-      const motion = gsap.matchMedia();
-      motion.add("(prefers-reduced-motion: no-preference)", () => {
-      gsap.fromTo(
-        ".ft__big span:not(.ft__space)",
-        { yPercent: 110 },
-        {
-          yPercent: 0,
-          ease: "power2.inOut",
-          duration: 1.3,
-          stagger: { each: 0.09, from: "center" },
-          scrollTrigger: {
-            trigger: ".ft__big",
-            // Wait until the entire lettering frame is visible.
-            start: "clamp(bottom 96%)",
-            end: "bottom top",
-            // Replay on entry from either direction; reset after leaving.
-            // A timed reveal stays fluid even when the user stops scrolling.
-            toggleActions: "restart reset restart reset",
-            invalidateOnRefresh: true,
-          },
-        }
-      );
+  useGSAP(() => {
+    const motion = gsap.matchMedia();
+    motion.add("(prefers-reduced-motion: no-preference)", () => {
+      gsap.fromTo(".ft__letter", { yPercent: 110 }, {
+        yPercent: 0,
+        ease: "power2.inOut",
+        duration: 1.1,
+        stagger: { each: 0.07, from: "center" },
+        scrollTrigger: {
+          trigger: ".ft__big",
+          start: "clamp(top 95%)",
+          toggleActions: "restart none restart none",
+          invalidateOnRefresh: true,
+        },
       });
-      return () => motion.revert();
-    },
-    { scope: root }
-  );
-
+    });
+    return () => motion.revert();
+  }, { scope: root });
   return (
     <footer ref={root} className="ft">
       <div className="ft__grid">
@@ -143,8 +130,10 @@ export default function Footer() {
       </div>
 
       <div className="ft__big" aria-hidden>
-        {"ROYAL RISING".split("").map((c, i) => (
-          <span key={i} className={c === " " ? "ft__space" : undefined}>{c === " " ? " " : c}</span>
+        {"ROYAL RISING".split("").map((letter, i) => (
+          <span key={i} className={letter === " " ? "ft__space" : "ft__letter"}>
+            {letter === " " ? "\u00a0" : letter}
+          </span>
         ))}
       </div>
       <div className="ft__bottom">
