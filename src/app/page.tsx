@@ -7,7 +7,7 @@ import Split from "@/components/Split";
 import Services from "@/components/Services";
 import QuoteBand from "@/components/QuoteBand";
 import FeaturedWorks from "@/components/FeaturedWorks";
-import FlyThrough from "@/components/FlyThrough";
+
 import Drawings from "@/components/Drawings";
 import Cta from "@/components/Cta";
 import Footer from "@/components/Footer";
@@ -40,22 +40,20 @@ export default function Home() {
           <Split
             id="story"
             title="Brand Story"
-            quote="Every curve we draw is designed to rise with the light"
-            label="Know us better"
-            sub="Iconic Architecture . Interior Design . Construction"
-            text="Royal Rising is an architecture, interior and construction studio. We shape flowing curves, glass and travertine into homes, palaces and sacred spaces that feel as if they grew out of their landscape, and then we build them."
-            image="story-interior"
+            quote="Spaces shaped by light and life"
+            text="Royal Rising brings architecture, interiors and construction together to create thoughtful spaces rooted in their surroundings. We work with natural light, considered materials and balanced proportions to shape homes that feel personal, welcoming and timeless."
+            image="project-bedroom-suite"
             cta={{ label: "Read More", href: "#services" }}
           />
         <div className="approach-overlap">
         <Split
           id="approach"
           title="Our Approach"
-          quote="From the first line on paper to the first evening in the home"
+          quote="From first sketch to finished home"
           label="How we work"
-          sub="Site & Story . Drawings . Visualisation . Construction"
-          text="We read the land, the light and the way you want to live. Lines become measured plans, plans become photoreal views you can walk through, and our teams take every drawing to site until the place is finished."
-          image="approach-interior"
+          sub="Plan. Design. Build."
+          text="We shape your ideas around the site, light and the way you live, guiding every detail from concept to construction."
+          image="project-dressing-suite"
           reverse
           cta={{ label: "View Projects", href: "#works" }}
         />
@@ -63,8 +61,7 @@ export default function Home() {
         </div>
         </div>
         <Services />
-        <QuoteBand k="fh-night" text="Drawn with care, built to rise" />
-        <FlyThrough />
+        <QuoteBand k="project-bedroom-detail" text="Drawn with care, built to rise" />
         <FeaturedWorks />
         <Drawings />
         <Cta />

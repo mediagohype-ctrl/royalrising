@@ -1,8 +1,9 @@
 import meta from "./image-meta.json";
 import extensions from "./image-extensions.json";
+import { projectImages } from "./project-images";
 
-export type ImgKey = keyof typeof meta;
-const displayImages = { ...meta, ...extensions };
+const displayImages = { ...meta, ...extensions, ...projectImages };
+export type ImgKey = keyof typeof displayImages;
 export const img = (key: ImgKey) => displayImages[key];
 
 export const contact = {
@@ -11,7 +12,6 @@ export const contact = {
   websiteUrl: "https://www.royalrising.in",
   instagram: "https://www.instagram.com/royal.rising",
   instagramHandle: "@royal.rising",
-  youtube: "https://youtu.be/sEHKt4KZifU",
 };
 
 export const navLeft = [
@@ -25,40 +25,32 @@ export const navRight = [
 ];
 
 export const heroSlides: { k: ImgKey; name: string }[] = [
-  { k: "fh-day", name: "Futuristic Home & Mandir" },
-  { k: "tp-front-day", name: "Twin Palace with Mandir" },
-  { k: "v145-day", name: "Villa 145" },
-  { k: "hm-aerial-day", name: "H-Shaped Mansion" },
+  { k: "project-formal-living", name: "Spaces to feel at home in" },
+  { k: "project-green-lounge", name: "A quieter kind of luxury" },
+  { k: "project-staircase-dining", name: "Every detail, considered" },
 ];
 
 export const services: { k: ImgKey; title: string; text: string }[] = [
-  { k: "hm-night-waterfall", title: "Iconic Architecture", text: "Sculpted forms, drawn to sit in their landscape and light." },
-  { k: "v145-night", title: "Interior Design", text: "Suites, lounges and courtyards that flow into the architecture." },
-  { k: "tp-aerial-day", title: "Master Planning", text: "Site layouts, gardens and water, set out to the metre." },
-  { k: "or-day", title: "Construction", text: "Working drawings taken to site and built, foundation to finish." },
+  { k: "project-timber-facade", title: "Architecture", text: "Considered proportions, natural light and a sense of place." },
+  { k: "project-home-cinema", title: "Interior Design", text: "Materials, furniture and details chosen for the way you live." },
+  { k: "project-dining-room", title: "Master Planning", text: "Thoughtful connections between buildings, gardens and everyday life." },
+  { k: "project-entry-detail", title: "Construction", text: "Careful coordination, from working drawings to the finishing details." },
 ];
 
 export type Tile = { k: ImgKey; title: string };
 export type Row = { kind: "two" | "full" | "center"; tiles: Tile[] };
 
 export const featured: Row[] = [
-  { kind: "two", tiles: [{ k: "tp-front-night", title: "Twin Palace" }, { k: "fh-night", title: "Futuristic Home" }] },
-  { kind: "full", tiles: [{ k: "hm-night-waterfall", title: "H-Shaped Mansion" }] },
-  { kind: "center", tiles: [{ k: "or-night", title: "Organic Residence" }] },
-  { kind: "full", tiles: [{ k: "v145-night", title: "Villa 145" }] },
-  { kind: "two", tiles: [{ k: "tp-sunset", title: "Twin Palace · Sunset" }, { k: "hm-garden-dusk", title: "H-Shaped Mansion · Garden" }] },
+  { kind: "two", tiles: [{ k: "project-residence-facade", title: "Residential Facade" }, { k: "project-timber-facade", title: "Timber & Stone Facade" }] },
+  { kind: "full", tiles: [{ k: "project-formal-living", title: "Formal Living" }] },
+  { kind: "two", tiles: [{ k: "project-green-lounge", title: "The Green Lounge" }, { k: "project-dining-room", title: "Dining & Living" }] },
+  { kind: "full", tiles: [{ k: "project-staircase-dining", title: "Sculptural Staircase" }] },
+  { kind: "two", tiles: [{ k: "project-bedroom-suite", title: "Bedroom Suite" }, { k: "project-bedroom-detail", title: "Bedroom Details" }] },
 ];
 
 export const featuredMore: Row[] = [
-  { kind: "two", tiles: [{ k: "tp-aerial-day", title: "Twin Palace · Masterplan" }, { k: "fh-aerial", title: "Futuristic Home · Aerial" }] },
-  { kind: "full", tiles: [{ k: "v145-day", title: "Villa 145 · Day" }] },
-  { kind: "two", tiles: [{ k: "or-day", title: "Organic Residence · Day" }, { k: "hm-aerial-dusk", title: "H-Shaped Mansion · Dusk" }] },
-  { kind: "full", tiles: [{ k: "tp-aerial-night", title: "Twin Palace · Night aerial" }] },
-  { kind: "two", tiles: [{ k: "hm-aerial-day", title: "H-Shaped Mansion · Aerial" }, { k: "fh-day", title: "Futuristic Home · Day" }] },
-  { kind: "full", tiles: [{ k: "fh-views", title: "Futuristic Home · Four views" }] },
-  { kind: "two", tiles: [{ k: "tp-concept-front", title: "Twin Palace · Concept" }, { k: "tp-concept-aerial", title: "Twin Palace · Concept aerial" }] },
-  { kind: "center", tiles: [{ k: "tp-front-day", title: "Twin Palace · Fountain avenue" }] },
-  { kind: "two", tiles: [{ k: "or-day-branded", title: "Organic Residence" }, { k: "or-night-branded", title: "Organic Residence · Night" }] },
+  { kind: "two", tiles: [{ k: "project-dressing-suite", title: "Dressing Suite" }, { k: "project-entry-detail", title: "Entrance Details" }] },
+  { kind: "two", tiles: [{ k: "project-home-cinema", title: "Home Cinema" }, { k: "project-bar-detail", title: "Bar & Lounge" }] },
 ];
 
 export const drawings: { k: ImgKey; label: string; title: string }[] = [
@@ -76,8 +68,8 @@ export const drawingsMore: { k: ImgKey; label: string; title: string }[] = [
   { k: "hm-plan-line", label: "H-Shaped Mansion", title: "Line plan" },
 ];
 
-/** Alt text for every image */
+/** Alt text for portfolio imagery */
 export const alts: Partial<Record<ImgKey, string>> = Object.fromEntries(
-  [...featured, ...featuredMore].flatMap((r) => r.tiles.map((t) => [t.k, `Royal Rising: ${t.title}`]))
+  [...featured, ...featuredMore].flatMap((r) => r.tiles.map((t) => [t.k, `Royal Rising portfolio: ${t.title}`]))
     .concat([...drawings, ...drawingsMore].map((d) => [d.k, `${d.label}: ${d.title}`]))
 );

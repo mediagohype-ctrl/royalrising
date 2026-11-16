@@ -8,8 +8,8 @@ type Props = {
   id?: string;
   title: string;
   quote: string;
-  label: string;
-  sub: string;
+  label?: string;
+  sub?: string;
   text: string;
   image: ImgKey;
   reverse?: boolean;
@@ -150,17 +150,16 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
   return (
     <section id={id} ref={root} className={`split${reverse ? " split--rev" : ""}`}>
       {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img className="split__mark" src="/images/logo-mark.png" alt="" aria-hidden />
       <div className="split__media">
         <div className="split__img">
-          <Img k={image} alt={id === "story" ? "Sunlit stone interior with an abstract bronze sculpture" : "Walnut library with architectural drawings and material samples"} sizes="(max-width: 960px) 100vw, 50vw" priority={id === "story"} />
+          <Img k={image} sizes="(max-width: 960px) 100vw, 50vw" priority={id === "story"} />
         </div>
       </div>
       <div className="split__text">
         <h2 className="title">{title}</h2>
         <p className="quote">&ldquo;{quote}&rdquo;</p>
-        <p className="label">{label}</p>
-        <p className="sub">{sub}</p>
+        {label && <p className="label">{label}</p>}
+        {sub && <p className="sub">{sub}</p>}
         <p className="para">{text}</p>
         {/* Keep the entrance transform separate from the button's hover transition. */}
         <div className="split__action">

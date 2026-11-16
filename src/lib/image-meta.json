@@ -173,5 +173,15 @@
     "src": "/images/approach-interior.webp",
     "width": 1122,
     "height": 1402
+  },
+  "editorial-living": {
+    "src": "/images/editorial/living.jpg",
+    "width": 2000,
+    "height": 1333
+  },
+  "editorial-interior": {
+    "src": "/images/editorial/interior.jpg",
+    "width": 1800,
+    "height": 1224
   }
 }

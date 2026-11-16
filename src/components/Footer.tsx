@@ -23,11 +23,6 @@ const Icon = {
       <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
     </svg>
   ),
-  youtube: (
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
-      <path d="M23 7.2a3 3 0 0 0-2.1-2.1C19 4.6 12 4.6 12 4.6s-7 0-8.9.5A3 3 0 0 0 1 7.2 31 31 0 0 0 .5 12a31 31 0 0 0 .5 4.8 3 3 0 0 0 2.1 2.1c1.9.5 8.9.5 8.9.5s7 0 8.9-.5a3 3 0 0 0 2.1-2.1 31 31 0 0 0 .5-4.8 31 31 0 0 0-.5-4.8zM9.7 15.1V8.9l5.8 3.1z" />
-    </svg>
-  ),
   web: (
     <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6">
       <circle cx="12" cy="12" r="9" />
@@ -116,9 +111,6 @@ export default function Footer() {
         <div className="ft__social">
           <a href={contact.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
             {Icon.instagram}
-          </a>
-          <a href={contact.youtube} target="_blank" rel="noreferrer" aria-label="YouTube">
-            {Icon.youtube}
           </a>
           <a href={contact.websiteUrl} target="_blank" rel="noreferrer" aria-label="Website">
             {Icon.web}

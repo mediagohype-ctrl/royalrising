@@ -28,7 +28,13 @@ export default function Preloader() {
       if (navLogo) navLogo.style.opacity = "0";
 
       const counter = { v: 0 };
-      const tl = gsap.timeline();
+      let flightTl: gsap.core.Timeline | undefined;
+      let cancelled = false;
+      // Measure the wordmark only after the display font is ready.
+      const tl = gsap.timeline({ paused: true });
+      void document.fonts.ready.then(() => {
+        if (!cancelled) tl.play();
+      });
 
       // Entrance animation of preloader elements in center
       tl.from(mark.current, { opacity: 0, y: 20, duration: 0.8, ease: "power3.out" })
@@ -83,7 +89,7 @@ export default function Preloader() {
           const dyWord = targetWordRect.top + targetWordRect.height / 2 - (wordRect.top + wordRect.height / 2);
           const scaleWord = targetWordRect.width / wordRect.width;
 
-          const flightTl = gsap.timeline({
+          flightTl = gsap.timeline({
             onComplete: () => {
               if (navLogo) navLogo.style.opacity = "1";
               markReady();
@@ -107,7 +113,7 @@ export default function Preloader() {
               },
               0
             )
-            // Logo wordmark flies to navbar position, matches size, and transitions to ivory
+            // Match the header's type and colour throughout the handoff.
             .to(
               word.current,
               {
@@ -122,15 +128,21 @@ export default function Preloader() {
             .to(
               word.current,
               {
-                color: "#fffaf1",
+                color: getComputedStyle(navWord).color,
                 duration: 0.5,
                 ease: "power2.out",
               },
               0.35
-            )
-            // Trigger navbar side links and hero intro right as logo arrives
-            .call(markReady, [], 0.75);
+            );
         });
+
+      return () => {
+        cancelled = true;
+        tl.kill();
+        flightTl?.kill();
+        root.current?.classList.remove("is-flying");
+        if (navLogo) navLogo.style.opacity = "1";
+      };
     },
     { scope: root }
   );
@@ -149,9 +161,7 @@ export default function Preloader() {
           <img src="/images/logo-mark.png" alt="" className="pre__mark-fill" />
         </div>
         <div className="pre__word" ref={word}>
-          {"ROYAL RISING".split("").map((c, i) => (
-            <span key={i}>{c === " " ? " " : c}</span>
-          ))}
+          Royal Rising
         </div>
         <div className="pre__line" />
       </div>

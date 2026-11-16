@@ -2,20 +2,21 @@
    Royal Rising: ivory linen, antique gold and warm walnut
    ============================================================ */
 :root {
-  --bg: #f5f0e7;
-  --text: #3d3021;
-  --muted: #736451;
-  --line: rgba(121, 90, 45, 0.22);
-  --accent: #876326;
-  --accent-dark: #67491e;
-  --paper: #e9dfd0;
-  --ivory: #fffaf1;
-  --gold: #c4a05b;
+  --bg: #ffffff;
+  --text: #302d29;
+  --muted: #6b655d;
+  --line: rgba(112, 96, 75, 0.18);
+  --accent: #806747;
+  --accent-dark: #594934;
+  --paper: #f4f1ec;
+  --ivory: #ffffff;
+  --gold: #c8a878;
   --ink: #2c231a;
   --text-soft: #5e4f3d;
   --pad: clamp(20px, 4vw, 64px);
   --ease: cubic-bezier(0.19, 1, 0.22, 1);
-  --sans: var(--font-sans), "Jost", "Futura", system-ui, sans-serif;
+  --display: var(--font-display), Georgia, serif;
+  --sans: var(--font-sans), Arial, sans-serif;
 }
 
 *,
@@ -256,19 +257,22 @@ html.has-cursor [data-cursor] {
 }
 .pre__mark-dim {
   opacity: 0.15;
-  filter: grayscale(1);
 }
 .pre__mark-fill {
   clip-path: inset(var(--fill) 0 0 0);
 }
 .pre__word {
-  display: flex;
+  display: block;
   overflow: visible;
-  font-size: 14px;
-  font-weight: 400;
-  letter-spacing: 0.45em;
-  padding-left: 0.45em;
-  color: var(--accent);
+  font-family: var(--display);
+  font-size: clamp(22px, 3vw, 32px);
+  font-weight: 500;
+  line-height: 1;
+  text-transform: uppercase;
+  white-space: nowrap;
+  letter-spacing: 0.23em;
+  padding-left: 0.23em;
+  color: var(--text);
   transform-origin: center center;
   will-change: transform, color;
 }
@@ -343,7 +347,7 @@ html.has-cursor [data-cursor] {
   transition: opacity 0.5s;
 }
 .nav.is-solid {
-  background: rgba(255, 250, 241, 0.96);
+  background: rgba(255, 255, 255, 0.98);
   color: var(--text);
   box-shadow: 0 1px 0 var(--line);
 }
@@ -901,7 +905,8 @@ html.has-cursor [data-cursor] {
   font-weight: 300;
   line-height: 1.02;
   text-transform: uppercase;
-  max-width: 12ch;
+  max-width: 100%;
+  white-space: nowrap;
 }
 .svc__label p {
   font-size: 15px;
@@ -1391,7 +1396,7 @@ html.has-cursor [data-cursor] {
   font-size: clamp(28px, 10.5vw, 200px);
   font-weight: 400;
   line-height: 1.15;
-  color: var(--accent);
+  color: var(--gold);
   white-space: nowrap;
 }
 .ft__letter {
@@ -1849,9 +1854,9 @@ html.has-cursor [data-cursor] {
     padding: 32px var(--pad) max(80px, calc(env(safe-area-inset-bottom) + 56px));
   }
   .svc__label h3 {
-    font-size: clamp(30px, 9vw, 44px);
+    font-size: clamp(24px, 8vw, 44px);
     line-height: 1.04;
-    max-width: 14ch;
+    max-width: 100%;
   }
   .svc__label p {
     font-size: 14px;
@@ -1895,13 +1900,13 @@ html.has-cursor [data-cursor] {
     position: relative;
     min-height: 100svh;
   }
-  #story .split__media,
-  #story .split__text {
+  #story .split__media {
     min-height: 0;
   }
   #story .split__text {
-    padding-top: calc(var(--nav-height, 120px) + 24px);
-    padding-bottom: 32px;
+    min-height: 100svh;
+    justify-content: center;
+    padding-block: clamp(40px, 7vh, 100px);
   }
 }
 
@@ -2011,7 +2016,7 @@ html.has-cursor [data-cursor] {
     background: var(--bg);
   }
   .nav.is-story:not(.is-open) {
-    background: rgba(255, 250, 241, 0.97);
+    background: rgba(255, 255, 255, 0.98);
   }
   .nav__burger {
     width: 44px;
@@ -2350,4 +2355,97 @@ html.has-cursor [data-cursor] {
     padding-top: clamp(40px, 7vh, 100px);
     padding-bottom: clamp(40px, 7vh, 100px);
   }
+}
+
+/* Refined identity: white space, warm tan and editorial typography. */
+body { font-weight: 400; }
+.title, .svc-intro .title, .svc__label h3, .band__text,
+.fly__big, .cta__text p, .phone-intro h1, .card__title,
+.menu > a:not(.menu__mail), .hero__name {
+  font-family: var(--display);
+  font-weight: 500;
+  text-transform: none;
+  letter-spacing: -0.025em;
+}
+.title, .split__text .title, .svc-intro .title { color: var(--text); }
+.quote, .story-stack .split__text .quote {
+  font-family: var(--display);
+  font-weight: 400;
+  line-height: 1.25;
+}
+.story-stack .split__text .sub { font-size: clamp(1rem, 1.2vw, 1.3rem); line-height: 1.6; }
+.story-stack .split__text .para { font-size: clamp(14px, 1vw, 17px); line-height: 1.85; }
+.pill, .split__text .pill {
+  border-radius: 2px;
+  background: var(--gold);
+  color: #ffffff;
+  font-weight: 500;
+  letter-spacing: 0.09em;
+  min-height: 44px;
+}
+.pill:hover { background: #b7986c; }
+.more__btn, .more__btn--accent, .works .more__btn,
+.ft__write i, .ft__social a, .chips label.is-on,
+.lb__nav button:hover {
+  background: var(--gold);
+  color: #ffffff;
+  border-color: var(--gold);
+}
+.more__btn:hover, .works .more__btn:hover,
+.ft__write:hover i, .ft__social a:hover {
+  background: #b7986c;
+  color: #ffffff;
+}
+.ft__social a, .ft__social a:hover {
+  color: #ffffff;
+}
+.nav {
+  background: transparent;
+  color: var(--ivory);
+  box-shadow: none;
+}
+.nav.is-solid, .nav.is-story:not(.is-open), .nav.is-open {
+  background: rgba(255,255,255,0.98);
+  color: var(--text);
+  box-shadow: 0 1px 0 var(--line);
+}
+.nav::before { display: none; }
+.nav__logo-title { font-family: var(--display); font-size: 17px; font-weight: 500; letter-spacing: 0.23em; padding-left: 0.23em; }
+.nav__logo-sub { opacity: 1; color: var(--muted); }
+.nav:not(.is-solid):not(.is-story):not(.is-open) .nav__logo-sub { color: inherit; }
+.hero {
+  margin-top: 0;
+  height: 100vh;
+  height: 100svh;
+  min-height: 0;
+  aspect-ratio: auto;
+}
+.hero .full__fg img.contain, .story-stack .split__img img { object-fit: cover; object-position: center 60%; }
+.hero__name { font-size: clamp(1.8rem, 3.5vw, 3.5rem); }
+.hero__shade { background: linear-gradient(180deg, rgba(24,22,19,.6), transparent 32%, transparent 55%, rgba(24,22,19,.65)); }
+.portfolio-note { padding: 0 var(--pad) 48px; max-width: 64ch; margin: 0 auto; color: var(--muted); text-align: center; font-size: 14px; }
+.cta, .cta.cta { background: var(--paper); }
+.cta__text {
+  max-width: calc(100% - var(--pad) * 2);
+  gap: 12px;
+}
+.cta__text p {
+  font-family: var(--display);
+  text-transform: none;
+  white-space: nowrap;
+  max-width: none;
+  font-size: clamp(14px, 3.7vw, 42px);
+}
+@media (max-width: 960px) {
+  .cta__text { max-width: 100%; }
+}
+@media (max-width: 960px) {
+  .cta .cta__text p, .cta .cta__phone-label, .cta .cta__phone-copy { color: var(--text); }
+}
+@media (max-width: 560px) {
+  .nav__logo-title { font-size: 15px; letter-spacing: 0.23em; }
+  .hero__name { font-size: 1.9rem; }
+  .hero__count { font-size: 9px; letter-spacing: .08em; }
+  .story-stack .split__text .title { font-size: clamp(2.6rem, 11vw, 3.5rem); }
+  .story-stack .split__text .quote { font-size: 1.7rem; }
 }

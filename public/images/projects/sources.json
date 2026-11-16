@@ -1,0 +1,117 @@
+{
+  "folder": "https://drive.google.com/drive/folders/1Xi9sw-NFkWtP-4FfcVRBEpOU8rXIuH1N",
+  "images": [
+    {
+      "key": "bar-detail",
+      "driveId": "1cnL1WKXePjWz-rTYsKNy2P0N-kUyk4B3",
+      "sourceName": "PHOTO-2020-03-19-18-49-55.jpeg",
+      "src": "/images/projects/bar-detail-enhanced.webp",
+      "width": 1536,
+      "height": 1024,
+      "source": "https://drive.google.com/file/d/1cnL1WKXePjWz-rTYsKNy2P0N-kUyk4B3/view",
+      "originalWebAsset": "/images/projects/bar-detail.webp",
+      "processing": "AI-assisted enhancement of the supplied photograph; fine textures may differ. Original retained."
+    },
+    {
+      "key": "home-cinema",
+      "driveId": "1lc-BRlJG9ZpufD2Wa5m6SllrUlaOUtIh",
+      "sourceName": "PHOTO-2020-03-19-19-00-49 3.jpeg",
+      "src": "/images/projects/home-cinema-enhanced.webp",
+      "width": 1536,
+      "height": 1024,
+      "source": "https://drive.google.com/file/d/1lc-BRlJG9ZpufD2Wa5m6SllrUlaOUtIh/view",
+      "originalWebAsset": "/images/projects/home-cinema.webp",
+      "processing": "AI-assisted enhancement of the supplied photograph; fine textures may differ. Original retained."
+    },
+    {
+      "key": "bedroom-suite",
+      "driveId": "1yA0gj53Nslfcpcx3Z6IdaSKehPMw0nRG",
+      "sourceName": "PHOTO-2020-06-21-21-47-34 3.jpeg",
+      "src": "/images/projects/bedroom-suite.webp",
+      "width": 1200,
+      "height": 1200,
+      "source": "https://drive.google.com/file/d/1yA0gj53Nslfcpcx3Z6IdaSKehPMw0nRG/view"
+    },
+    {
+      "key": "residence-facade",
+      "driveId": "1Y1VVFXWB_0l0aQ8GYUQmzKgUoYjcLmcb",
+      "sourceName": "PHOTO-2020-07-04-13-50-06.jpeg",
+      "src": "/images/projects/residence-facade.webp",
+      "width": 906,
+      "height": 1024,
+      "source": "https://drive.google.com/file/d/1Y1VVFXWB_0l0aQ8GYUQmzKgUoYjcLmcb/view"
+    },
+    {
+      "key": "timber-facade",
+      "driveId": "1ulmQjxZK9fGVbJV8fa5tT2iAIYePKn24",
+      "sourceName": "PHOTO-2020-07-04-14-23-23.jpeg",
+      "src": "/images/projects/timber-facade.webp",
+      "width": 1133,
+      "height": 1280,
+      "source": "https://drive.google.com/file/d/1ulmQjxZK9fGVbJV8fa5tT2iAIYePKn24/view"
+    },
+    {
+      "key": "green-lounge",
+      "driveId": "1FlJg_iBZbH0n3Hw_I6rAmLfuBupdZU2W",
+      "sourceName": "PHOTO-2020-10-07-06-30-20.jpeg",
+      "src": "/images/projects/green-lounge.webp",
+      "width": 1280,
+      "height": 731,
+      "source": "https://drive.google.com/file/d/1FlJg_iBZbH0n3Hw_I6rAmLfuBupdZU2W/view"
+    },
+    {
+      "key": "entry-detail",
+      "driveId": "1n7aZxiubZGHOkNHUrn8XJDnKjr_VhDz5",
+      "sourceName": "PHOTO-2020-10-19-14-38-55 7.jpeg",
+      "src": "/images/projects/entry-detail.webp",
+      "width": 1280,
+      "height": 853,
+      "source": "https://drive.google.com/file/d/1n7aZxiubZGHOkNHUrn8XJDnKjr_VhDz5/view"
+    },
+    {
+      "key": "staircase-dining",
+      "driveId": "19MEv3qkv3acGEgJCcPFNFI4KbsOrUMj3",
+      "sourceName": "PHOTO-2020-10-19-14-38-55.jpeg",
+      "src": "/images/projects/staircase-dining.webp",
+      "width": 1280,
+      "height": 853,
+      "source": "https://drive.google.com/file/d/19MEv3qkv3acGEgJCcPFNFI4KbsOrUMj3/view"
+    },
+    {
+      "key": "dressing-suite",
+      "driveId": "1ZOVXJyXmAt6N0iazqcdjHr9YC8gAquf7",
+      "sourceName": "PHOTO-2020-10-20-18-33-00 2.jpeg",
+      "src": "/images/projects/dressing-suite.webp",
+      "width": 1280,
+      "height": 853,
+      "source": "https://drive.google.com/file/d/1ZOVXJyXmAt6N0iazqcdjHr9YC8gAquf7/view"
+    },
+    {
+      "key": "formal-living",
+      "driveId": "12OLHgBiHA3nunPqvpF3Xi2OK4wbOWK1i",
+      "sourceName": "PHOTO-2020-12-23-23-28-35.jpeg",
+      "src": "/images/projects/formal-living.webp",
+      "width": 1280,
+      "height": 731,
+      "source": "https://drive.google.com/file/d/12OLHgBiHA3nunPqvpF3Xi2OK4wbOWK1i/view"
+    },
+    {
+      "key": "dining-room",
+      "driveId": "1uIduwgZB-tmuKTvrNsl1Px_1b13BGb8A",
+      "sourceName": "PHOTO-2020-12-25-12-49-17.jpeg",
+      "src": "/images/projects/dining-room.webp",
+      "width": 1280,
+      "height": 768,
+      "source": "https://drive.google.com/file/d/1uIduwgZB-tmuKTvrNsl1Px_1b13BGb8A/view"
+    },
+    {
+      "key": "bedroom-detail",
+      "driveId": "1vsSOtSYY0_y4noWg5kdx8pXtYd8l78Qv",
+      "sourceName": "PHOTO-2021-01-20-15-03-30.jpeg",
+      "src": "/images/projects/bedroom-detail.webp",
+      "width": 1280,
+      "height": 731,
+      "source": "https://drive.google.com/file/d/1vsSOtSYY0_y4noWg5kdx8pXtYd8l78Qv/view"
+    }
+  ]
+}

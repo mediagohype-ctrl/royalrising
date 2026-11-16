@@ -5,7 +5,7 @@ import { img } from "@/lib/data";
 import { openContact } from "@/lib/events";
 import Img from "./ui/Img";
 
-const K = "tp-front-night" as const;
+const K = "project-bar-detail" as const;
 
 export default function Cta() {
   const root = useRef<HTMLElement>(null);
@@ -34,12 +34,10 @@ export default function Cta() {
         { y: 80 },
         { y: -80, ease: "none", scrollTrigger: { trigger: root.current, start: "top bottom", end: "bottom top", scrub: true } }
       );
-      gsap.from(".cta__text > *", {
-        y: 50,
+      gsap.from(".cta__text", {
         opacity: 0,
         duration: 1.3,
         ease: "expo.out",
-        stagger: 0.12,
         scrollTrigger: { trigger: root.current, start: "top 55%", once: true },
       });
       });
@@ -57,7 +55,7 @@ export default function Cta() {
       </div>
       <div className="cta__text">
         <span className="cta__phone-label">Your next chapter</span>
-        <p>Five signature worlds, designed, drawn and built by one studio.</p>
+        <p>Considered spaces. Beautifully lived in.</p>
         <span className="cta__phone-copy">Have a place in mind? Tell us about your site, your ideas and the way you want to live.</span>
         <button className="pill" onClick={openContact}>
           Let&apos;s Connect <span aria-hidden>↗</span>

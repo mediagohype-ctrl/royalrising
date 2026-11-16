@@ -1,14 +1,7 @@
 "use client";
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { services, img } from "@/lib/data";
-
-const mobileArtwork: Record<string, string> = {
-  "hm-night-waterfall": "architecture",
-  "v145-night": "interior",
-  "tp-aerial-day": "planning",
-  "or-day": "construction",
-};
+import { services, img, alts } from "@/lib/data";
 
 /** A narrow central image opens to full screen before the services slide horizontally. */
 export default function Services() {
@@ -102,7 +95,7 @@ export default function Services() {
       tl.fromTo(opening, { expansion: 0 }, {
         expansion: 1, duration: 1, ease: "sine.out", onUpdate: renderOpening,
       }, 0)
-        .fromTo(".svc__label h3, .svc__arrow", { autoAlpha: reduced ? 1 : 0 }, { autoAlpha: 1, duration: 0.35 }, 0.3)
+        .fromTo(".svc__label h3", { autoAlpha: reduced ? 1 : 0 }, { autoAlpha: 1, duration: 0.35 }, 0.3)
         .fromTo(".svc__label p", { opacity: reduced ? 1 : 0 }, { opacity: 1, duration: 0.3 }, 0.7)
         .fromTo(".svc__track", { xPercent: 0 }, { xPercent: (-100 * (n - 1)) / n, duration: n - 1 }, 1)
         .to({}, { duration: 0.2 });
@@ -129,15 +122,11 @@ export default function Services() {
               <article key={s.title} className="svc__slide">
                 <div className="svc__img">
                   <picture className="full__fg">
-                    <source media="(max-width: 560px)" srcSet={`/images/generated/services-${mobileArtwork[s.k]}-mobile.webp`} />
-                    <img className="svc__art" src={img(s.k).src} alt={`${s.title} — architectural concept visualization`} loading="eager" decoding="async" />
+                    <img className="svc__art" src={img(s.k).src} alt={alts[s.k] ?? s.title} loading="eager" decoding="async" />
                   </picture>
                 </div>
                 <div className="svc__shade" />
                 <div className="svc__label">
-                  <span className="svc__arrow" aria-hidden>
-                    →
-                  </span>
                   <h3>{s.title}</h3>
                   <p>{s.text}</p>
                 </div>
