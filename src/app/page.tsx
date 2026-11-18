@@ -43,7 +43,7 @@ export default function Home() {
             quote="Spaces shaped by light and life"
             text="Royal Rising brings architecture, interiors and construction together to create thoughtful spaces rooted in their surroundings. We work with natural light, considered materials and balanced proportions to shape homes that feel personal, welcoming and timeless."
             image="project-bedroom-suite"
-            cta={{ label: "Read More", href: "#services" }}
+            cta={{ label: "Read More", href: "/about" }}
           />
         <div className="approach-overlap">
         <Split
@@ -55,7 +55,7 @@ export default function Home() {
           text="We shape your ideas around the site, light and the way you live, guiding every detail from concept to construction."
           image="project-dressing-suite"
           reverse
-          cta={{ label: "View Projects", href: "#works" }}
+          cta={{ label: "Our Process", href: "/approach" }}
         />
         </div>
         </div>

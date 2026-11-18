@@ -15,13 +15,13 @@ export const contact = {
 };
 
 export const navLeft = [
-  { label: "About Us", href: "#story" },
-  { label: "Services", href: "#services" },
-  { label: "Projects", href: "#works" },
+  { label: "About Us", href: "/about" },
+  { label: "Services", href: "/services" },
+  { label: "Projects", href: "/projects" },
 ];
 export const navRight = [
-  { label: "Our Approach", href: "#approach" },
-  { label: "Drawings", href: "#drawings" },
+  { label: "Our Approach", href: "/approach" },
+  { label: "Drawings", href: "/drawings" },
 ];
 
 export const heroSlides: { k: ImgKey; name: string }[] = [

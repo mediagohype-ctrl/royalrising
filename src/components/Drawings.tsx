@@ -8,10 +8,11 @@ import Img from "./ui/Img";
 const all = [...drawings, ...drawingsMore];
 const keys = all.map((d) => d.k);
 
-export default function Drawings() {
+export default function Drawings({ showAll = false }: { showAll?: boolean }) {
   const root = useRef<HTMLElement>(null);
   const [more, setMore] = useState(false);
-  const list = more ? all : drawings;
+  const expanded = showAll || more;
+  const list = expanded ? all : drawings;
 
   useGSAP(
     () => {
@@ -53,7 +54,7 @@ export default function Drawings() {
         });
       });
     },
-    { scope: root, dependencies: [more] }
+    { scope: root, dependencies: [expanded] }
   );
 
   useEffect(() => {
@@ -79,7 +80,7 @@ export default function Drawings() {
           </button>
         ))}
       </div>
-      {!more && (
+      {!expanded && (
         <div className="more">
           <button className="more__btn more__btn--accent" onClick={() => setMore(true)} aria-label="View more drawings">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden="true" focusable="false">

@@ -4,8 +4,11 @@ import { ScrollTrigger, useGSAP } from "@/lib/gsap";
 import { lockScroll, unlockScroll } from "@/lib/scroll";
 import { openContact } from "@/lib/events";
 import { navLeft, navRight, contact } from "@/lib/data";
+import { usePathname } from "next/navigation";
 
 export default function Nav() {
+  const pathname = usePathname();
+  const innerPage = pathname !== "/";
   const header = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
   const burger = useRef<HTMLButtonElement>(null);
@@ -55,7 +58,7 @@ export default function Nav() {
         const h = header.current!;
         // transparent over the hero, white once past it
         const hero = document.getElementById("top");
-        h.classList.toggle("is-solid", y > (hero?.offsetHeight ?? window.innerHeight) - h.offsetHeight);
+        h.classList.toggle("is-solid", innerPage || y > (hero?.offsetHeight ?? window.innerHeight) - h.offsetHeight);
         const story = document.getElementById("story");
         const storyBounds = story?.getBoundingClientRect();
         const approach = document.getElementById("approach");
@@ -93,15 +96,15 @@ export default function Nav() {
 
   return (
     <>
-      <header ref={header} className={`nav${open ? " is-open" : ""}`}>
+      <header ref={header} className={`nav${innerPage ? " is-solid" : ""}${open ? " is-open" : ""}`}>
         <nav className="nav__side" aria-label="Primary">
           {navLeft.map((n) => (
-            <a key={n.href} href={n.href}>
+            <a key={n.href} href={n.href} aria-current={pathname === n.href ? "page" : undefined}>
               {n.label}
             </a>
           ))}
         </nav>
-        <a href="#top" className="nav__logo" aria-label="Royal Rising, back to top" onClick={close}>
+        <a href={innerPage ? "/" : "#top"} className="nav__logo" aria-label="Royal Rising, home" onClick={close}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/images/logo-mark.png" alt="Royal Rising" width={44} height={56} />
           <span className="nav__logo-title">Royal Rising</span>
@@ -109,7 +112,7 @@ export default function Nav() {
         </a>
         <div className="nav__side nav__side--r">
           {navRight.map((n) => (
-            <a key={n.href} href={n.href}>
+            <a key={n.href} href={n.href} aria-current={pathname === n.href ? "page" : undefined}>
               {n.label}
             </a>
           ))}
@@ -125,7 +128,7 @@ export default function Nav() {
 
       <div id="menu" className={`menu${open ? " is-open" : ""}`} aria-hidden={!open}>
         {[...navLeft, ...navRight].map((n, i) => (
-          <a key={n.href} href={n.href} onClick={close} tabIndex={open ? 0 : -1} style={{ ["--i" as string]: i }}>
+          <a key={n.href} href={n.href} aria-current={pathname === n.href ? "page" : undefined} onClick={close} tabIndex={open ? 0 : -1} style={{ ["--i" as string]: i }}>
             {n.label}
           </a>
         ))}

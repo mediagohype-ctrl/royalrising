@@ -5,13 +5,13 @@ import { contact } from "@/lib/data";
 import { openContact } from "@/lib/events";
 
 const company = [
-  { label: "Brand Story", href: "#story" },
-  { label: "Our Approach", href: "#approach" },
-  { label: "Services", href: "#services" },
+  { label: "About Us", href: "/about" },
+  { label: "Our Approach", href: "/approach" },
+  { label: "Services", href: "/services" },
 ];
 const explore = [
-  { label: "Projects", href: "#works" },
-  { label: "Drawings", href: "#drawings" },
+  { label: "Projects", href: "/projects" },
+  { label: "Drawings", href: "/drawings" },
   { label: "Back to top", href: "#top" },
 ];
 
@@ -130,6 +130,10 @@ export default function Footer() {
       </div>
       <div className="ft__bottom">
         <span>© {new Date().getFullYear()} Royal Rising. All rights reserved.</span>
+        <nav className="ft__legal" aria-label="Legal">
+          <a href="/privacy-policy">Privacy Policy</a>
+          <a href="/terms-and-conditions">Terms &amp; Conditions</a>
+        </nav>
       </div>
     </footer>
   );
