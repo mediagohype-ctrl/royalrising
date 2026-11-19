@@ -75,7 +75,7 @@ export default function Drawings({ showAll = false }: { showAll?: boolean }) {
               {d.title} <span aria-hidden>↗</span>
             </span>
             <span className="card__img">
-              <Img k={d.k} className="contain" sizes="(max-width: 560px) 100vw, (max-width: 960px) 50vw, 25vw" />
+              <Img k={d.k} className="contain" sizes="(max-width: 560px) 100vw, (max-width: 960px) 50vw, 25vw" watermark={false} />
             </span>
           </button>
         ))}

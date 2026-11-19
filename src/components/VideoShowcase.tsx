@@ -14,7 +14,7 @@ export default function VideoShowcase() {
   const [failed, setFailed] = useState<number[]>([]);
   useGSAP(() => {
     const motion = gsap.matchMedia();
-    motion.add("(prefers-reduced-motion: no-preference)", () => {
+    motion.add("(min-width: 761px) and (prefers-reduced-motion: no-preference)", () => {
       const section = root.current!;
       const cards = gsap.utils.toArray<HTMLElement>(".video-showcase__film", section);
       gsap.from(".video-showcase__title span", {
@@ -54,20 +54,23 @@ export default function VideoShowcase() {
   useEffect(() => {
     const videos = Array.from(root.current!.querySelectorAll("video"));
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
-    let visible = false;
+    const visible = new Set<HTMLVideoElement>();
     const sync = () => videos.forEach((video) => {
       video.controls = reduced.matches;
-      if (!visible || document.hidden || reduced.matches) video.pause();
+      if (!visible.has(video) || document.hidden || reduced.matches) video.pause();
       else void video.play().catch(() => { video.controls = true; });
     });
-    const observer = new IntersectionObserver(([entry]) => {
-      visible = entry.isIntersecting;
-      if (visible) videos.forEach((video) => {
-        if (!video.hasAttribute("src")) video.src = video.dataset.src!;
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        const video = entry.target as HTMLVideoElement;
+        if (entry.isIntersecting) {
+          visible.add(video);
+          if (!video.hasAttribute("src")) video.src = video.dataset.src!;
+        } else visible.delete(video);
       });
       sync();
     });
-    observer.observe(root.current!);
+    videos.forEach((video) => observer.observe(video));
     document.addEventListener("visibilitychange", sync);
     reduced.addEventListener("change", sync);
     return () => {

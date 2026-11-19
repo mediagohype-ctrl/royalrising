@@ -2,6 +2,7 @@
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { services, img, alts } from "@/lib/data";
+import ImageWatermark from "./ui/ImageWatermark";
 
 /** A narrow central image opens to full screen before the services slide horizontally. */
 export default function Services() {
@@ -124,6 +125,7 @@ export default function Services() {
                   <picture className="full__fg">
                     <img className="svc__art" src={img(s.k).src} alt={alts[s.k] ?? s.title} loading="eager" decoding="async" />
                   </picture>
+                  <ImageWatermark />
                 </div>
                 <div className="svc__shade" />
                 <div className="svc__label">

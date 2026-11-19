@@ -96,7 +96,7 @@ export default function Lightbox() {
   return (
     <div className={`lb${closing ? " is-closing" : ""}`} role="dialog" aria-modal="true" aria-label={alts[k] ?? "Image"} onClick={close}>
       <div ref={picture} key={k} className="lb__img" onClick={(e) => e.stopPropagation()}>
-        <Img k={k} key={k} className="contain" sizes="92vw" />
+        <Img k={k} key={k} className="contain" sizes="92vw" watermark={!state.source?.closest(".draw")} />
       </div>
       <div className="lb__bar" onClick={(e) => e.stopPropagation()}>
         <span>
