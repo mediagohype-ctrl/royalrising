@@ -2201,6 +2201,10 @@ html.has-cursor [data-cursor] {
     text-align: left;
   }
   .works__title { padding-inline: var(--pad); text-align: center; }
+  .works .more { padding: 36px 0 24px; gap: 10px; }
+  .works .more__btn { width: 56px; height: 56px; }
+  .works .more__btn svg { width: 28px; height: 28px; }
+  .works .more__label { font-size: 12px; letter-spacing: .1em; }
   .phone-section-note {
     display: block;
     margin-bottom: 28px;
@@ -2275,7 +2279,10 @@ html.has-cursor [data-cursor] {
     border: 1px solid var(--line);
     border-radius: 50%;
   }
-  .draw .more { padding: 32px 0 16px; }
+  .draw .more { padding: 32px 0 16px; gap: 10px; }
+  .draw .more__btn { width: 56px; height: 56px; }
+  .draw .more__btn svg { width: 28px; height: 28px; }
+  .draw .more__label { font-size: 12px; letter-spacing: .1em; }
   .cta { background: var(--ink); }
   .cta__img { flex: none; }
   .cta__shade { background: linear-gradient(0deg, rgba(44, 35, 26, 0.18), transparent 45%); }
@@ -2308,11 +2315,13 @@ html.has-cursor [data-cursor] {
     line-height: 1.65;
   }
   .cta__text .pill {
-    width: 100%;
-    min-height: 48px;
-    justify-content: space-between;
+    width: fit-content;
+    align-self: flex-start;
+    min-height: 44px;
+    justify-content: center;
+    gap: 20px;
     margin-top: 8px;
-    padding: 14px 22px;
+    padding: 10px 20px;
     font-size: 12px;
   }
   .cta__text .pill:focus-visible { outline-color: var(--ivory); }
