@@ -2197,7 +2197,7 @@ html.has-cursor [data-cursor] {
     line-height: 1.12;
     text-align: left;
   }
-  .works__title { padding-inline: var(--pad); }
+  .works__title { padding-inline: var(--pad); text-align: center; }
   .phone-section-note {
     display: block;
     margin-bottom: 28px;
