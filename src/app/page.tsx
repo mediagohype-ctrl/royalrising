@@ -7,6 +7,7 @@ import Split from "@/components/Split";
 import Services from "@/components/Services";
 import QuoteBand from "@/components/QuoteBand";
 import FeaturedWorks from "@/components/FeaturedWorks";
+import VideoShowcase from "@/components/VideoShowcase";
 
 import Drawings from "@/components/Drawings";
 import Cta from "@/components/Cta";
@@ -60,6 +61,7 @@ export default function Home() {
         </div>
         </div>
         </div>
+        <VideoShowcase />
         <Services />
         <QuoteBand k="project-bedroom-detail" text="Drawn with care, built to rise" />
         <FeaturedWorks />

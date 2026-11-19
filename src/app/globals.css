@@ -554,6 +554,32 @@ html.has-cursor [data-cursor] {
   object-fit: contain;
   pointer-events: none;
 }
+.video-showcase { position: relative; padding: clamp(24px, 4vw, 64px) 0; background: var(--bg); }
+.video-showcase__title { padding-inline: var(--pad); margin-bottom: clamp(24px, 3vw, 48px); text-align: center; font-family: var(--display); font-size: clamp(38px, 4.5vw, 68px); font-weight: 500; line-height: 1.1; letter-spacing: -.025em; }
+.video-showcase__grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(4px, .6vw, 12px); align-items: start; width: 100%; }
+.video-showcase__film { min-width: 0; }
+.video-showcase__title { overflow: hidden; padding-bottom: .12em; }
+.video-showcase__title span { display: inline-block; }
+.video-showcase__film:nth-child(2) { z-index: 2; }
+.video-showcase__film video { display: block; width: 100%; height: auto; background: var(--ink); }
+.video-showcase__film video:focus-visible { outline: 3px solid var(--gold); outline-offset: 5px; }
+.video-showcase__error { padding-top: 12px; font-size: 14px; line-height: 1.6; }
+.video-showcase__error a { text-decoration: underline; }
+@media (prefers-reduced-motion: no-preference) {
+  .video-showcase { height: 100svh; padding: calc(var(--nav-height, 130px) + 16px) 0 24px; display: flex; flex-direction: column; overflow: hidden; }
+  .video-showcase__title { flex: 0 0 auto; font-size: clamp(30px, 4vw, 60px); margin-bottom: 20px; }
+  .video-showcase__grid { flex: 1; min-height: 0; align-items: stretch; isolation: isolate; }
+  .video-showcase__film { min-height: 0; position: relative; display: flex; justify-content: center; align-items: center; will-change: transform; }
+  .video-showcase__film video { width: 100%; height: 100%; object-fit: contain; background: transparent; }
+  .video-showcase__error { position: absolute; inset: auto 12px 0; background: var(--bg); }
+}
+.hero__phone-video { display: none; }
+@media (max-width: 560px) {
+  .hero__phone-video { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .6s ease; pointer-events: none; }
+  .hero__phone-video { z-index: 1; }
+  .hero__phone-video.is-playing { opacity: 1; }
+  .hero:has(.hero__phone-video) .hero__ui { display: none; }
+}
 .hero__slide .full__bg img {
   transform: scale(1.15);
 }

@@ -5,6 +5,7 @@ import { gsap, useGSAP } from "@/lib/gsap";
 import { onReady } from "@/lib/ready";
 import { heroSlides, alts } from "@/lib/data";
 import FullImg from "./ui/FullImg";
+import PhoneHeroVideo from "./PhoneHeroVideo";
 
 const DURATION = 6500;
 
@@ -68,6 +69,7 @@ export default function Hero() {
         ))}
       </div>
       <div className="hero__shade" aria-hidden />
+      <PhoneHeroVideo started={started} />
 
       <div className="hero__ui">
         <div className="hero__caption">
