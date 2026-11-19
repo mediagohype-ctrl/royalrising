@@ -23,10 +23,9 @@ const Icon = {
       <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
     </svg>
   ),
-  web: (
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6">
-      <circle cx="12" cy="12" r="9" />
-      <path d="M3 12h18M12 3c2.5 3 2.5 15 0 18M12 3c-2.5 3-2.5 15 0 18" />
+  facebook: (
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
+      <path d="M14 22v-9h3l.5-4H14V6.5c0-1.1.3-1.5 1.6-1.5H18V1.4C17.2 1.2 16.1 1 14.7 1 11.4 1 9.5 3 9.5 6.5V9H6v4h3.5v9H14Z" />
     </svg>
   ),
   mail: (
@@ -112,8 +111,8 @@ export default function Footer() {
           <a href={contact.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
             {Icon.instagram}
           </a>
-          <a href={contact.websiteUrl} target="_blank" rel="noreferrer" aria-label="Website">
-            {Icon.web}
+          <a role="link" aria-disabled="true" aria-label="Facebook (page link coming soon)" title="Facebook page link coming soon">
+            {Icon.facebook}
           </a>
           <a href={`mailto:${contact.email}`} aria-label="Email">
             {Icon.mail}

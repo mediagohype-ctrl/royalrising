@@ -7,6 +7,7 @@ const films = [
   { src: "https://pub-867733225994464abcdc817244b3315e.r2.dev/ROYAL%20RISING.mp4" },
   { src: "https://pub-867733225994464abcdc817244b3315e.r2.dev/ROYAL.mp4" },
   { src: "https://pub-867733225994464abcdc817244b3315e.r2.dev/ROYAL%20(1).mp4" },
+  { src: "https://pub-867733225994464abcdc817244b3315e.r2.dev/ROYAL%20RISING%20(1).mp4" },
 ];
 
 export default function VideoShowcase() {
@@ -21,19 +22,18 @@ export default function VideoShowcase() {
         yPercent: 115, rotate: 2, duration: 1.2, ease: "expo.out",
         scrollTrigger: { trigger: section, start: "top 80%", once: true },
       });
-      // Begin as a compact fan, then unfold into the full-width film strip.
+      // Lift each portrait from below, then settle at its full display size.
       gsap.set(cards, {
-        scale: 0.56,
-        xPercent: (index) => (1 - index) * 62,
-        yPercent: (index) => index === 1 ? 0 : 9,
-        rotation: (index) => (index - 1) * 7,
-        transformOrigin: "50% 65%",
+        scale: 0.88,
+        y: () => window.innerHeight * 0.65,
+        autoAlpha: 0,
+        transformOrigin: "50% 100%",
       });
       const timeline = gsap.timeline({
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: () => `+=${window.innerHeight * (window.innerWidth > 760 ? 1.8 : 1.2)}`,
+          end: () => `+=${window.innerHeight * 1.5}`,
           pin: true,
           pinSpacing: true,
           scrub: 0.9,
@@ -43,11 +43,18 @@ export default function VideoShowcase() {
       });
       timeline
         .to(cards, {
-          xPercent: 0, yPercent: 0, rotation: 0, scale: 0.78,
-          duration: 0.75, stagger: { each: 0.06, from: "center" }, ease: "power2.inOut",
+          y: 0, autoAlpha: 1, scale: 1,
+          duration: 1.1, stagger: 0.14, ease: "power2.out",
         })
-        .to(cards, { scale: 1, duration: 0.85, ease: "sine.inOut" }, "-=0.12")
-        .to({}, { duration: 0.35 });
+        .to({}, { duration: 0.4 });
+    });
+    motion.add("(max-width: 760px) and (prefers-reduced-motion: no-preference)", () => {
+      gsap.utils.toArray<HTMLElement>(".video-showcase__film", root.current!).forEach((card) => {
+        gsap.from(card, {
+          y: 48, opacity: 0, duration: 0.9, ease: "power3.out",
+          scrollTrigger: { trigger: card, start: "top 92%", once: true },
+        });
+      });
     });
     return () => motion.revert();
   }, { scope: root });

@@ -14,7 +14,7 @@ export default function PhoneHeroVideo({ started }: { started: boolean }) {
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
-    const media = window.matchMedia("(max-width: 560px) and (prefers-reduced-motion: no-preference)");
+    const media = window.matchMedia("(max-width: 560px)");
     const update = () => setEnabled(media.matches);
     update();
     media.addEventListener("change", update);
@@ -25,9 +25,11 @@ export default function PhoneHeroVideo({ started }: { started: boolean }) {
     const element = video.current;
     if (!element || !enabled || !started) return;
     let visible = true;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => {
-      if (document.hidden || !visible) element.pause();
-      else void element.play().catch(() => setPlaying(false));
+      element.controls = reduced.matches;
+      if (document.hidden || !visible || reduced.matches) element.pause();
+      else void element.play().catch(() => { element.controls = true; });
     };
     const observer = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting;
@@ -35,10 +37,12 @@ export default function PhoneHeroVideo({ started }: { started: boolean }) {
     });
     observer.observe(element);
     document.addEventListener("visibilitychange", sync);
+    reduced.addEventListener("change", sync);
     sync();
     return () => {
       observer.disconnect();
       document.removeEventListener("visibilitychange", sync);
+      reduced.removeEventListener("change", sync);
       element.pause();
     };
   }, [enabled, started, active]);
@@ -49,7 +53,8 @@ export default function PhoneHeroVideo({ started }: { started: boolean }) {
       ref={video}
       className={`hero__phone-video${playing ? " is-playing" : ""}`}
       src={videos[active]}
-      muted playsInline preload="metadata" aria-hidden="true"
+      muted playsInline preload="auto" aria-label="Royal Rising banner video"
+      onLoadedData={() => setPlaying(true)}
       onPlaying={() => setPlaying(true)}
       onError={() => setPlaying(false)}
       onEnded={() => { setPlaying(false); setActive((index) => (index + 1) % videos.length); }}
