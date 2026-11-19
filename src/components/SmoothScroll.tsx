@@ -5,10 +5,10 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { prefersReducedMotion, onReady } from "@/lib/ready";
 import { setLenis, scrollToTarget, lockScroll, unlockScroll } from "@/lib/scroll";
 
-export default function SmoothScroll() {
+export default function SmoothScroll({ waitForPreloader = true }: { waitForPreloader?: boolean }) {
   useEffect(() => {
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-    if (!window.__rrReady) window.scrollTo(0, 0);
+    if (waitForPreloader && !window.__rrReady) window.scrollTo(0, 0);
 
     let lenis: Lenis | null = null;
     const raf = (time: number) => lenis?.raf(time * 1000);
@@ -22,11 +22,16 @@ export default function SmoothScroll() {
     }
 
     // Hold the page still until the preloader lifts
-    lockScroll();
-    const offReady = onReady(() => {
-      unlockScroll();
+    let offReady = () => {};
+    if (waitForPreloader) {
+      lockScroll();
+      offReady = onReady(() => {
+        unlockScroll();
+        ScrollTrigger.refresh();
+      });
+    } else {
       ScrollTrigger.refresh();
-    });
+    }
 
     // Route every in-page anchor through the smooth scroller
     const onClick = (e: MouseEvent) => {
@@ -50,7 +55,7 @@ export default function SmoothScroll() {
       lenis?.destroy();
       setLenis(null);
     };
-  }, []);
+  }, [waitForPreloader]);
 
   return null;
 }

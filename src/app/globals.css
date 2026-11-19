@@ -2526,13 +2526,18 @@ body { font-weight: 400; }
 }
 
 /* Studio pages: the homepage's image-led identity, with readable editorial content. */
-.studio-hero { position: relative; isolation: isolate; min-height: min(740px, 78svh); display: flex; align-items: flex-end; padding: clamp(36px, 6vw, 88px) var(--pad); background: var(--ink); color: white; }
+.studio-hero, .page-editorial__image, .page-contact__image { overflow: hidden; }
+.inner-page.studio-page { padding-top: 0; }
+.studio-hero { position: relative; isolation: isolate; min-height: 100svh; display: flex; align-items: flex-end; padding: calc(var(--nav-height, 130px) + 36px) var(--pad) clamp(36px, 6vw, 88px); background: var(--ink); color: white; }
 .studio-hero__image { position: absolute; inset: 0; z-index: -2; }
 .studio-hero__image img[data-nimg="fill"] { object-fit: cover; object-position: center 55%; }
 .studio-hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(26,23,20,.78), rgba(26,23,20,.32) 65%, rgba(26,23,20,.12)); }
-.studio-hero .page-intro__copy { max-width: 740px; }
+.studio-hero .page-intro__copy { width: 100%; max-width: none; }
 .studio-hero .label { color: #fff; letter-spacing: .14em; font-size: 11px; margin: 0 0 24px; }
 .studio-hero h1 { font-family: var(--display); font-weight: 500; font-size: clamp(44px, 5.4vw, 82px); line-height: 1.04; letter-spacing: -.025em; text-wrap: balance; }
+@media (min-width: 961px) {
+  .studio-hero h1 { font-size: clamp(40px, 4.4vw, 82px); white-space: nowrap; text-wrap: nowrap; }
+}
 .studio-hero .page-intro__copy > p:not(.label) { color: #fff; max-width: 54ch; font-size: clamp(14px, 1.05vw, 17px); line-height: 1.8; margin-top: 24px; }
 .studio-hero .pill { margin-top: 28px; }
 .studio-page #page-content { scroll-margin-top: calc(var(--nav-height, 130px) + 20px); }
@@ -2559,7 +2564,7 @@ body { font-weight: 400; }
 .page-contact__copy { padding: clamp(36px, 5vw, 80px); align-self: center; }
 .page-contact__copy > p:not(.label) { color: var(--muted); line-height: 1.8; margin-bottom: 28px; max-width: 42ch; }
 @media (max-width: 760px) {
-  .studio-hero { min-height: 620px; min-height: min(720px, 85svh); padding: 40px var(--pad); }
+  .studio-hero { min-height: 100svh; padding: calc(var(--nav-height, 72px) + 32px) var(--pad) 40px; }
   .studio-hero::after { background: linear-gradient(0deg, rgba(26,23,20,.85), rgba(26,23,20,.35)); }
   .studio-hero h1 { font-size: clamp(40px, 10vw, 64px); }
   .page-note, .studio-page .page-contact { grid-template-columns: 1fr; }

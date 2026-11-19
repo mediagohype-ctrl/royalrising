@@ -6,9 +6,10 @@ import { openContact } from "@/lib/events";
 import { navLeft, navRight, contact } from "@/lib/data";
 import { usePathname } from "next/navigation";
 
-export default function Nav() {
+export default function Nav({ overBanner = false }: { overBanner?: boolean }) {
   const pathname = usePathname();
   const innerPage = pathname !== "/";
+  const solidByDefault = innerPage && !overBanner;
   const header = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
   const burger = useRef<HTMLButtonElement>(null);
@@ -50,15 +51,23 @@ export default function Nav() {
   }, []);
 
   useGSAP(() => {
+    const updateSurface = () => {
+      const h = header.current!;
+      const hero = overBanner
+        ? document.querySelector(".studio-hero")
+        : document.getElementById("top");
+      h.classList.toggle("is-solid", solidByDefault || !hero || hero.getBoundingClientRect().bottom <= h.offsetHeight);
+    };
+    updateSurface();
     ScrollTrigger.create({
       start: 0,
       end: "max",
+      onRefresh: updateSurface,
       onUpdate: (self) => {
         const y = self.scroll();
         const h = header.current!;
         // transparent over the hero, white once past it
-        const hero = document.getElementById("top");
-        h.classList.toggle("is-solid", innerPage || y > (hero?.offsetHeight ?? window.innerHeight) - h.offsetHeight);
+        updateSurface();
         const story = document.getElementById("story");
         const storyBounds = story?.getBoundingClientRect();
         const approach = document.getElementById("approach");
@@ -69,7 +78,7 @@ export default function Nav() {
         h.classList.toggle("is-hidden", self.direction === 1 && y > 24);
       },
     });
-  });
+  }, { dependencies: [overBanner, solidByDefault, pathname], revertOnUpdate: true });
 
   const mounted = useRef(false);
   useEffect(() => {
@@ -96,7 +105,7 @@ export default function Nav() {
 
   return (
     <>
-      <header ref={header} className={`nav${innerPage ? " is-solid" : ""}${open ? " is-open" : ""}`}>
+      <header ref={header} className={`nav${solidByDefault ? " is-solid" : ""}${open ? " is-open" : ""}`}>
         <nav className="nav__side" aria-label="Primary">
           {navLeft.map((n) => (
             <a key={n.href} href={n.href} aria-current={pathname === n.href ? "page" : undefined}>

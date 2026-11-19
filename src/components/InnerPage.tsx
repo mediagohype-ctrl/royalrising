@@ -6,20 +6,21 @@ import Lightbox from "./Lightbox";
 import Img from "./ui/Img";
 import type { ImgKey } from "@/lib/data";
 import ProjectEnquiry from "./ProjectEnquiry";
+import InnerPageMotion from "./InnerPageMotion";
+import SmoothScroll from "./SmoothScroll";
 
-export default function InnerPage({ label, title, intro, image, children, showExplore = true }: {
-  label: string; title: string; intro: string; image?: ImgKey; children: ReactNode; showExplore?: boolean;
+export default function InnerPage({ title, intro, image, children }: {
+  label: string; title: string; intro: string; image?: ImgKey; children: ReactNode;
 }) {
   return <>
-    <Nav />
-    <main id="top" className="inner-page studio-page">
+    <SmoothScroll waitForPreloader={false} />
+    <Nav overBanner />
+    <InnerPageMotion>
       <header className={`studio-hero${image ? " studio-hero--image" : ""}`}>
         {image && <div className="studio-hero__image"><Img k={image} priority sizes="100vw" /></div>}
         <div className="page-intro__copy">
-          <p className="label">Royal Rising / {label}</p>
           <h1>{title}</h1>
           <p>{intro}</p>
-          {showExplore && <a className="pill" href="#page-content">{label === "About Us" ? "Meet the studio" : label === "Our Approach" ? "Our process" : `Explore ${label.toLowerCase()}`} <span aria-hidden>↓</span></a>}
         </div>
       </header>
       <div id="page-content">{children}</div>
@@ -32,7 +33,7 @@ export default function InnerPage({ label, title, intro, image, children, showEx
         <ProjectEnquiry />
         </div>
       </section>
-    </main>
+    </InnerPageMotion>
     <Footer /><ContactDrawer /><Lightbox />
   </>;
 }
