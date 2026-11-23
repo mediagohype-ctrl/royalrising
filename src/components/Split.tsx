@@ -1,12 +1,12 @@
 "use client";
-import { useRef } from "react";
+import { useRef, type ReactNode } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { type ImgKey } from "@/lib/data";
 import Img from "./ui/Img";
 
 type Props = {
   id?: string;
-  title: string;
+  title: ReactNode;
   quote: string;
   label?: string;
   sub?: string;
@@ -22,7 +22,8 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
 
   useGSAP(
     () => {
-      const motion = gsap.matchMedia();
+      const motion = gsap.matchMedia(root);
+      const copyTarget = id === "approach" ? ".split__copy" : ".split__copy > *";
       // On phones, complete each entrance when its own panel enters view,
       // rather than leaving a wide image mid-reveal until the section reaches the top.
       motion.add("(max-width: 960px) and (prefers-reduced-motion: no-preference)", () => {
@@ -32,7 +33,7 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
           ease: "power3.out",
           scrollTrigger: { trigger: root.current, start: "top 95%", once: true },
         });
-        gsap.from(".split__text > *", {
+        gsap.from(copyTarget, {
           x: reverse ? -24 : 24,
           opacity: 0,
           duration: 0.8,
@@ -63,7 +64,7 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
             invalidateOnRefresh: true,
           },
         });
-        gsap.set(".split__text > *", { y: 24, autoAlpha: 0 });
+        gsap.set(copyTarget, { y: 24, autoAlpha: 0 });
         const reveal = gsap.timeline({
           defaults: { ease: "none" },
           scrollTrigger: {
@@ -84,7 +85,7 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
           .to(".split__media", {
             clipPath: "inset(0% 0% 0% 0%)", duration: 0.6, ease: "sine.inOut",
           }, 0)
-          .to(".split__text > *", {
+          .to(copyTarget, {
             y: 0, autoAlpha: 1, stagger: 0.07, duration: 0.4, ease: "power2.out",
           }, 0.15)
           // On short screens, carry the lower text and button into view before releasing.
@@ -121,7 +122,7 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
       );
 
       // 3. Staggered text cascade animation
-      gsap.from(".split__text > *", {
+      gsap.from(copyTarget, {
         y: 40,
         opacity: 0,
         duration: 1.2,
@@ -156,16 +157,27 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
         </div>
       </div>
       <div className="split__text">
-        <h2 className="title">{title}</h2>
-        <p className="quote">&ldquo;{quote}&rdquo;</p>
+        <div className="split__copy">
+        {id === "approach" ? (
+          <div className="approach-heading">
+            <h2 className="title">{title}</h2>
+            <p className="quote">&ldquo;{quote}&rdquo;</p>
+          </div>
+        ) : (
+          <>
+            <h2 className="title">{title}</h2>
+            <p className="quote">&ldquo;{quote}&rdquo;</p>
+          </>
+        )}
         {label && <p className="label">{label}</p>}
         {sub && <p className="sub">{sub}</p>}
         <p className="para">{text}</p>
         {/* Keep the entrance transform separate from the button's hover transition. */}
         <div className="split__action">
           <a href={cta.href} className="pill">
-            {cta.label} <span aria-hidden>↗</span>
+            {cta.label} <span aria-hidden>{id === "approach" ? "⟶" : "↗"}</span>
           </a>
+        </div>
         </div>
       </div>
     </section>

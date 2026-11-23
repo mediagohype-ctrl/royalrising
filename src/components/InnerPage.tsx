@@ -10,7 +10,7 @@ import InnerPageMotion from "./InnerPageMotion";
 import SmoothScroll from "./SmoothScroll";
 
 export default function InnerPage({ title, intro, image, children }: {
-  label: string; title: string; intro: string; image?: ImgKey; children: ReactNode;
+  label: string; title: ReactNode; intro: string; image?: ImgKey; children: ReactNode;
 }) {
   return <>
     <SmoothScroll waitForPreloader={false} />

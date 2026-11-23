@@ -5,7 +5,7 @@ import { img, type ImgKey } from "@/lib/data";
 import Img from "./ui/Img";
 
 /** A fixed image frame with a gentle scroll-driven zoom behind the quote. */
-export default function QuoteBand({ k, text }: { k: ImgKey; text: string }) {
+export default function QuoteBand({ k, text, accentWords = [] }: { k: ImgKey; text: string; accentWords?: string[] }) {
   const root = useRef<HTMLElement>(null);
 
   useGSAP(
@@ -54,7 +54,7 @@ export default function QuoteBand({ k, text }: { k: ImgKey; text: string }) {
       <div className="band__shade" />
       <p className="band__text" aria-label={text}>
         {text.split(" ").map((w, i) => (
-          <span key={i} aria-hidden>
+          <span key={i} aria-hidden style={accentWords.includes(w.replace(/[.,!?;:]/g, "")) ? { color: "var(--gold)", fontStyle: "italic" } : undefined}>
             {w}{" "}
           </span>
         ))}

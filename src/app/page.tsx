@@ -40,7 +40,7 @@ export default function Home() {
         <div className="story-stack">
           <Split
             id="story"
-            title="Brand Story"
+            title={<>Brand <em style={{ color: "var(--gold)", fontStyle: "italic" }}>Story</em></>}
             quote="Spaces shaped by light and life"
             text="Royal Rising brings architecture, interiors and construction together to create thoughtful spaces rooted in their surroundings. We work with natural light, considered materials and balanced proportions to shape homes that feel personal, welcoming and timeless."
             image="project-bedroom-suite"
@@ -49,8 +49,8 @@ export default function Home() {
         <div className="approach-overlap">
         <Split
           id="approach"
-          title="Our Approach"
-          quote="From first sketch to finished home"
+          title={<><em>Our</em> Approach</>}
+          quote="From First Sketch to Finished Home"
           label="How we work"
           sub="Plan. Design. Build."
           text="We shape your ideas around the site, light and the way you live, guiding every detail from concept to construction."
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
         <VideoShowcase />
         <Services />
-        <QuoteBand k="project-bedroom-detail" text="Drawn with care, built to rise" />
+        <QuoteBand k="project-bedroom-detail" text="Drawn with care, built to rise" accentWords={["care", "rise"]} />
         <FeaturedWorks />
         <Drawings />
         <Cta />
