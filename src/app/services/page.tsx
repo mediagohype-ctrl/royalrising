@@ -15,6 +15,6 @@ export default function ServicesPage() {
     {services.map((service, index) => <EditorialSection key={service.title} title={service.title} text={details[index].text} image={service.k} reverse={index % 2 === 1}>
       <ul className="page-service-list">{details[index].items.map(item => <li key={item}>{item}</li>)}</ul>
     </EditorialSection>)}
-    <PageNote title="A clear brief makes a strong beginning."><p>Share the site location, approximate area, the spaces you need and any plans or references you already have. An outline of your budget and preferred timing helps frame the initial conversation.</p><p>We discuss the proposed scope, deliverables and responsibilities before work begins. Each engagement is shaped around the project, with services and stages set out in the agreed proposal.</p><a className="page-text-link" href="/approach">Explore our process <span aria-hidden>↗</span></a></PageNote>
+    <PageNote title="A clear brief makes a strong beginning."><p>Share the site location, approximate area, the spaces you need and any plans or references you already have. An outline of your budget and preferred timing helps frame the initial conversation.</p><p>We discuss the proposed scope, deliverables and responsibilities before work begins. Each engagement is shaped around the project, with services and stages set out in the agreed proposal.</p><a className="pill page-text-link" href="/approach">Explore our process <span aria-hidden>↗</span></a></PageNote>
   </InnerPage>;
 }
