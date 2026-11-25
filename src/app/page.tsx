@@ -49,7 +49,7 @@ export default function Home() {
         <div className="approach-overlap">
         <Split
           id="approach"
-          title={<><em>Our</em> Approach</>}
+          title={<>Our <em>Approach</em></>}
           quote="From First Sketch to Finished Home"
           label="How we work"
           sub="Plan. Design. Build."

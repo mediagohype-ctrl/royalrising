@@ -54,7 +54,6 @@ export default function Cta() {
         <div className="cta__shade" />
       </div>
       <div className="cta__text">
-        <span className="cta__phone-label">Your next chapter</span>
         <p>Considered spaces. Beautifully lived in.</p>
         <span className="cta__phone-copy">Have a place in mind? Tell us about your site, your ideas and the way you want to live.</span>
         <button className="pill" onClick={openContact}>

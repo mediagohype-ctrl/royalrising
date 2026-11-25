@@ -130,7 +130,6 @@ export default function Services() {
                 <div className="svc__shade" />
                 <div className="svc__label">
                   <h3>{s.title}</h3>
-                  <p>{s.text}</p>
                 </div>
               </article>
             ))}

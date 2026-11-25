@@ -75,7 +75,10 @@ export default function Nav({ overBanner = false }: { overBanner?: boolean }) {
           storyBounds.bottom > h.offsetHeight &&
           (!approach || approach.getBoundingClientRect().top > h.offsetHeight);
         h.classList.toggle("is-story", overStory);
-        h.classList.toggle("is-hidden", self.direction === 1 && y > 24);
+        // keep the nav (and its dark scrim) out of the way while the film showcase is pinned
+        const showcase = document.querySelector(".video-showcase")?.getBoundingClientRect();
+        const overShowcase = !!showcase && showcase.top <= 1 && showcase.bottom > window.innerHeight * 0.5;
+        h.classList.toggle("is-hidden", overShowcase || (self.direction === 1 && y > 24));
       },
     });
   }, { dependencies: [overBanner, solidByDefault, pathname], revertOnUpdate: true });

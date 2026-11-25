@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { gsap, ScrollTrigger, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
 
 const films = [
   { src: "https://pub-867733225994464abcdc817244b3315e.r2.dev/ROYAL%20RISING.mp4" },
@@ -67,13 +67,22 @@ export default function VideoShowcase() {
       if (!visible.has(video) || document.hidden || reduced.matches) video.pause();
       else void video.play().catch(() => { video.controls = true; });
     });
+    // Start fetching the films a screen before the section arrives, so the cards
+    // are not empty while they animate in. The section is observed (not each
+    // video) because the cards start off-screen and invisible during the pin.
+    const loader = new IntersectionObserver((entries) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+      videos.forEach((video) => {
+        if (!video.hasAttribute("src")) { video.preload = "auto"; video.src = video.dataset.src!; }
+      });
+      loader.disconnect();
+    }, { rootMargin: "100% 0px" });
+    loader.observe(root.current!);
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const video = entry.target as HTMLVideoElement;
-        if (entry.isIntersecting) {
-          visible.add(video);
-          if (!video.hasAttribute("src")) video.src = video.dataset.src!;
-        } else visible.delete(video);
+        if (entry.isIntersecting) visible.add(video);
+        else visible.delete(video);
       });
       sync();
     });
@@ -82,6 +91,7 @@ export default function VideoShowcase() {
     reduced.addEventListener("change", sync);
     return () => {
       observer.disconnect();
+      loader.disconnect();
       document.removeEventListener("visibilitychange", sync);
       reduced.removeEventListener("change", sync);
       videos.forEach((video) => video.pause());
@@ -93,7 +103,6 @@ export default function VideoShowcase() {
     <div className="video-showcase__grid">
       {films.map((film, index) => <div className="video-showcase__film" key={film.src}>
         <video muted loop playsInline preload="none" data-src={film.src}
-          onLoadedMetadata={() => ScrollTrigger.refresh()}
           aria-label={`Royal Rising film ${index + 1}`}
           onError={() => setFailed((previous) => previous.includes(index) ? previous : [...previous, index])}>
           <a href={film.src}>Watch Royal Rising film {index + 1}</a>

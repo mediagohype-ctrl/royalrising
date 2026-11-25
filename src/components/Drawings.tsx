@@ -87,7 +87,7 @@ export default function Drawings({ showAll = false }: { showAll?: boolean }) {
               <path d="M12 3v18M3 12h18" />
             </svg>
           </button>
-          <span className="more__label">View more</span>
+          <span className="more__label">View more projects</span>
         </div>
       )}
     </section>
