@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { contact } from "@/lib/data";
 import { lockScroll, unlockScroll } from "@/lib/scroll";
+import SocialLinks from "./SocialLinks";
 
 const types = ["Private villa", "Mansion / estate", "Residential building", "Temple / mandir", "Interior", "Other"];
 
@@ -62,7 +63,7 @@ export default function ContactDrawer() {
           ✕
         </button>
         <h2 className="title">Let&apos;s Talk</h2>
-        <p className="para">Tell us about your site and what you imagine. We reply to every enquiry personally.</p>
+        <p className="para">Share the location, the scope and when you hope to start. Every enquiry is read and answered by the studio.</p>
         <form onSubmit={submit}>
           <fieldset className="chips">
             <legend className="label">I&apos;m planning a</legend>
@@ -99,6 +100,7 @@ export default function ContactDrawer() {
         <a className="drawer__mail" href={`mailto:${contact.email}`} tabIndex={open ? 0 : -1}>
           {contact.email}
         </a>
+        <SocialLinks className="social social--drawer" tabIndex={open ? 0 : -1} mail={false} />
       </aside>
     </div>
   );

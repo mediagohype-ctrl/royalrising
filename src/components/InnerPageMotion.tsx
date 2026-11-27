@@ -27,7 +27,7 @@ export default function InnerPageMotion({ children }: { children: ReactNode }) {
       });
 
       page.querySelectorAll<HTMLElement>(
-        ".page-note > div, .page-editorial__copy, .page-values > div, .page-values > article, .page-process__heading, .page-process li, .page-drawing-note, .page-contact__copy"
+        ".page-note > div, .page-editorial__copy, .page-values > div, .page-values > article, .page-process__heading, .page-process li, .page-drawing-note, .page-contact__copy, .detail-facts, .detail-head, .related-grid, .detail-next__list"
       ).forEach((group) => {
         gsap.from(group.children, {
           y: desktop ? 26 : 16, opacity: 0, duration: 0.95,
@@ -36,7 +36,7 @@ export default function InnerPageMotion({ children }: { children: ReactNode }) {
         });
       });
 
-      page.querySelectorAll<HTMLElement>(".page-editorial__image, .page-contact__image").forEach((frame) => {
+      page.querySelectorAll<HTMLElement>(".page-editorial__image, .page-contact__image, .detail-next__image").forEach((frame) => {
         const reverse = frame.closest(".page-editorial--reverse");
         gsap.fromTo(frame,
           { clipPath: reverse ? "inset(0% 0% 0% 100%)" : "inset(0% 100% 0% 0%)" },

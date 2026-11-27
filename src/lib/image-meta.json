@@ -60,14 +60,14 @@
     "height": 1630
   },
   "logo-full": {
-    "src": "/images/logo-full.png",
-    "width": 260,
-    "height": 276
+    "src": "/images/logo-full.webp",
+    "width": 520,
+    "height": 573
   },
   "logo-mark": {
-    "src": "/images/logo-mark.png",
-    "width": 190,
-    "height": 240
+    "src": "/images/logo-mark.webp",
+    "width": 440,
+    "height": 582
   },
   "or-day-branded": {
     "src": "/images/or-day-branded.jpg",

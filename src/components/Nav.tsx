@@ -5,6 +5,7 @@ import { lockScroll, unlockScroll } from "@/lib/scroll";
 import { openContact } from "@/lib/events";
 import { navLeft, navRight, contact } from "@/lib/data";
 import { usePathname } from "next/navigation";
+import SocialLinks from "./SocialLinks";
 
 export default function Nav({ overBanner = false }: { overBanner?: boolean }) {
   const pathname = usePathname();
@@ -118,7 +119,7 @@ export default function Nav({ overBanner = false }: { overBanner?: boolean }) {
         </nav>
         <a href={innerPage ? "/" : "#top"} className="nav__logo" aria-label="Royal Rising, home" onClick={close}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/logo-mark.png" alt="Royal Rising" width={44} height={56} />
+          <img src="/images/logo-mark.webp" alt="Royal Rising" width={44} height={58} />
           <span className="nav__logo-title">Royal Rising</span>
           <span className="nav__logo-sub">Architecture &bull; Interior &bull; Construction</span>
         </a>
@@ -150,6 +151,7 @@ export default function Nav({ overBanner = false }: { overBanner?: boolean }) {
         <a className="menu__mail" href={`mailto:${contact.email}`} tabIndex={open ? 0 : -1}>
           {contact.email}
         </a>
+        <SocialLinks className="social social--menu" tabIndex={open ? 0 : -1} mail={false} />
       </div>
     </>
   );

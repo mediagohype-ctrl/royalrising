@@ -10,7 +10,8 @@ export const contact = {
   email: "info@royalrising.in",
   website: "www.royalrising.in",
   websiteUrl: "https://www.royalrising.in",
-  instagram: "https://www.instagram.com/royal.rising",
+  instagram: "https://www.instagram.com/royal.rising/",
+  facebook: "https://www.facebook.com/RoyalRising",
   instagramHandle: "@royal.rising",
 };
 
@@ -25,16 +26,16 @@ export const navRight = [
 ];
 
 export const heroSlides: { k: ImgKey; name: string }[] = [
-  { k: "project-formal-living", name: "Spaces to feel at home in" },
-  { k: "project-green-lounge", name: "A quieter kind of luxury" },
-  { k: "project-staircase-dining", name: "Every detail, considered" },
+  { k: "project-formal-living", name: "Designed for the life inside" },
+  { k: "project-green-lounge", name: "Luxury without the noise" },
+  { k: "project-staircase-dining", name: "Every detail, drawn" },
 ];
 
 export const services: { k: ImgKey; title: string; text: string }[] = [
-  { k: "project-timber-facade", title: "Architecture", text: "Considered proportions, natural light and a sense of place." },
-  { k: "project-home-cinema", title: "Interior Design", text: "Materials, furniture and details chosen for the way you live." },
-  { k: "project-dining-room", title: "Master Planning", text: "Thoughtful connections between buildings, gardens and everyday life." },
-  { k: "project-entry-detail", title: "Construction", text: "Careful coordination, from working drawings to the finishing details." },
+  { k: "project-residence-facade", title: "Architecture", text: "Residences planned around the site, its light and its views." },
+  { k: "project-home-cinema", title: "Interior Design", text: "Layouts, materials and lighting resolved room by room." },
+  { k: "tp-aerial-day", title: "Master Planning", text: "Buildings, gardens and arrival arranged as one estate." },
+  { k: "v145-cutaway", title: "Construction", text: "Delivery coordinated from working drawings to the last fitting." },
 ];
 
 export type Tile = { k: ImgKey; title: string };
@@ -45,12 +46,16 @@ export const featured: Row[] = [
   { kind: "full", tiles: [{ k: "project-formal-living", title: "Formal Living" }] },
   { kind: "two", tiles: [{ k: "project-green-lounge", title: "The Green Lounge" }, { k: "project-dining-room", title: "Dining & Living" }] },
   { kind: "full", tiles: [{ k: "project-staircase-dining", title: "Sculptural Staircase" }] },
-  { kind: "two", tiles: [{ k: "project-bedroom-suite", title: "Bedroom Suite" }, { k: "project-bedroom-detail", title: "Bedroom Details" }] },
+  { kind: "two", tiles: [{ k: "project-bedroom-suite", title: "Bedroom Suite" }, { k: "project-bedroom-detail", title: "Master Bedroom" }] },
 ];
 
 export const featuredMore: Row[] = [
-  { kind: "two", tiles: [{ k: "project-dressing-suite", title: "Dressing Suite" }, { k: "project-entry-detail", title: "Entrance Details" }] },
+  { kind: "two", tiles: [{ k: "project-dressing-suite", title: "Bath & Dressing Suite" }, { k: "project-entry-detail", title: "Entrance Foyer" }] },
   { kind: "two", tiles: [{ k: "project-home-cinema", title: "Home Cinema" }, { k: "project-bar-detail", title: "Bar & Lounge" }] },
+  { kind: "two", tiles: [{ k: "project-tufted-living", title: "Tufted Living Room" }, { k: "project-fireplace-lounge", title: "Fireplace Lounge" }] },
+  { kind: "two", tiles: [{ k: "project-copper-bedroom", title: "Copper Panelled Bedroom" }, { k: "project-geometric-bedroom", title: "Geometric Bedroom" }] },
+  { kind: "two", tiles: [{ k: "project-walkin-wardrobe", title: "Walk-in Wardrobe" }, { k: "project-display-partition", title: "Display Partition" }] },
+  { kind: "two", tiles: [{ k: "project-marble-living-dining", title: "Marble Living & Dining" }, { k: "project-teal-bedroom", title: "Teal Statement Bedroom" }] },
 ];
 
 export const drawings: { k: ImgKey; label: string; title: string }[] = [
@@ -72,4 +77,5 @@ export const drawingsMore: { k: ImgKey; label: string; title: string }[] = [
 export const alts: Partial<Record<ImgKey, string>> = Object.fromEntries(
   [...featured, ...featuredMore].flatMap((r) => r.tiles.map((t) => [t.k, `Royal Rising portfolio: ${t.title}`]))
     .concat([...drawings, ...drawingsMore].map((d) => [d.k, `${d.label}: ${d.title}`]))
+    .concat([["tp-aerial-day", "Twin Palace: master plan aerial"], ["hm-night-waterfall", "H-Shaped Mansion: infinity waterfall at night"]])
 );

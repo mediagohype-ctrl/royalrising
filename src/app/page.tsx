@@ -27,10 +27,10 @@ export default function Home() {
         <Hero />
         <section className="phone-intro" aria-labelledby="phone-intro-title">
           <p className="label">Architecture · Interiors · Construction</p>
-          <h1 id="phone-intro-title">Spaces shaped<br />around your life.</h1>
+          <h1 id="phone-intro-title">Homes designed<br />from the ground up.</h1>
           <p className="phone-intro__copy">
-            A home begins with how you want to live. We bring light, materials and
-            thoughtful planning together, from the first sketch to the final build.
+            Architecture, interiors and construction under one roof. We take a home
+            from the first site visit to the day you move in.
           </p>
           <div className="phone-intro__links">
             <a className="pill" href="#works">Explore projects <span aria-hidden>↗</span></a>
@@ -41,9 +41,9 @@ export default function Home() {
           <Split
             id="story"
             title={<>Brand <em style={{ color: "var(--gold)", fontStyle: "italic" }}>Story</em></>}
-            quote="Spaces shaped by light and life"
-            text="Royal Rising brings architecture, interiors and construction together to create thoughtful spaces rooted in their surroundings. We work with natural light, considered materials and balanced proportions to shape homes that feel personal, welcoming and timeless."
-            image="project-bedroom-suite"
+            quote="Designed for the plot. Built for the family."
+            text="Royal Rising is an architecture, interiors and construction studio. We design private residences, estates and interiors, then stay with them through the build, so the house you move into is the house you approved. Natural materials, generous daylight and plans that make daily life easier run through all of our work."
+            image="project-timber-facade"
             cta={{ label: "Read More", href: "/about" }}
           />
         <div className="approach-overlap">
@@ -53,8 +53,8 @@ export default function Home() {
           quote="From First Sketch to Finished Home"
           label="How we work"
           sub="Plan. Design. Build."
-          text="We shape your ideas around the site, light and the way you live, guiding every detail from concept to construction."
-          image="project-dressing-suite"
+          text="We study the site, learn how your household runs and develop the design in stages you can review. Then we carry it through construction ourselves."
+          image="project-staircase-dining"
           reverse
           cta={{ label: "Our Process", href: "/approach" }}
         />
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
         <VideoShowcase />
         <Services />
-        <QuoteBand k="project-bedroom-detail" text="Drawn with care, built to rise" accentWords={["care", "rise"]} />
+        <QuoteBand k="hm-night-waterfall" text="Drawn with care, built to rise" accentWords={["care", "rise"]} />
         <FeaturedWorks />
         <Drawings />
         <Cta />

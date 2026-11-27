@@ -1,23 +1,23 @@
 import type { Metadata } from "next";
 import InnerPage, { EditorialSection, PageNote } from "@/components/InnerPage";
 
-export const metadata: Metadata = { title: "About Us | Royal Rising", description: "Discover Royal Rising’s considered approach to architecture, interiors and construction." };
+export const metadata: Metadata = { title: "About Us | Royal Rising", description: "Royal Rising is one studio for architecture, interiors and construction, taking private homes from site study to handover." };
 
 export default function AboutPage() {
-  return <InnerPage label="About Us" title="Spaces shaped by light and life." intro="Royal Rising brings architecture, interiors and construction together. We create thoughtful spaces rooted in their surroundings and in the lives of the people who call them home." image="project-bedroom-suite" clean>
-    <PageNote title="A home is personal. So is the process."><p>A place to gather, a quiet room to unwind, a view you return to every morning. The spaces that matter most are shaped by the life within them. At Royal Rising, those everyday moments give the design its direction.</p><p>We connect architecture, interiors and construction so that the larger vision and the individual details develop together. The result we work towards is a home that feels coherent, comfortable and distinctly yours.</p></PageNote>
-    <EditorialSection title="A home begins with you." text="The way you gather, the quiet moments you value, the light you wake up to. These are the starting points for our work. We bring natural light, considered materials and balanced proportions together to shape homes that feel personal, welcoming and timeless." image="project-formal-living">
+  return <InnerPage label="About Us" title="One studio, from site to keys." intro="Royal Rising designs and builds private residences, estates and interiors, with one team responsible from the first site visit to handover." image="project-bedroom-suite" clean>
+    <PageNote title="Why one studio for the whole job."><p>When the architect, the interior designer and the contractor are three separate firms, a home gets designed three times and coordinated by whoever is left holding the problem. Details are lost at every hand-off, and the client ends up acting as referee.</p><p>We work differently. Architecture, interiors and construction sit with one team, so the facade, the floor plan and the cabinet handles are all designed with the same intent, and the people who drew them are on site when they are built.</p></PageNote>
+    <EditorialSection title="We start with how you live." text="Before we discuss style, we ask practical questions. Who lives in the house, and who visits? Where does the family eat on an ordinary weekday? Which rooms need to be quiet? The answers decide the plan. Materials, light and proportion then give that plan its character." image="project-formal-living">
       <a className="pill page-text-link" href="/approach">Discover our approach <span aria-hidden>↗</span></a>
     </EditorialSection>
     <section className="page-values">
-      <div><h2>Considered in every detail.</h2></div>
-      <article><h3>A sense of place</h3><p>Architecture that responds to the site, its light and its surroundings.</p></article>
-      <article><h3>Everyday beauty</h3><p>Materials and proportions that make daily routines feel more comfortable and natural.</p></article>
-      <article><h3>A connected vision</h3><p>Planning, interiors and construction considered together from the beginning.</p></article>
+      <div><h2>What we hold to.</h2></div>
+      <article><h3>Design for the site</h3><p>Orientation, climate and views shape the plan. A house should look as if it could only stand where it does.</p></article>
+      <article><h3>Materials that age well</h3><p>Stone, timber and metal chosen for how they wear over decades, not how they photograph on day one.</p></article>
+      <article><h3>One team, start to finish</h3><p>The people who design your home stay with it through construction and handover.</p></article>
     </section>
-    <EditorialSection title="From the outside in." text="A facade, a staircase, a room and its smallest details all belong to the same story. Working across disciplines helps us carry the original idea through each layer of a home." image="project-staircase-dining" reverse>
+    <EditorialSection title="From the outside in." text="A facade, a staircase and a bedroom wardrobe should look as if they came from the same hand, because in our projects they do. Working across all three disciplines lets us carry one idea from the street to the smallest fitting." image="project-staircase-dining" reverse>
       <a className="pill page-text-link" href="/projects">Explore our work <span aria-hidden>↗</span></a>
     </EditorialSection>
-    <PageNote title="Your priorities guide the design."><p>Bring your ideas, your questions and the things you know you need. We use those conversations to understand how you live, what the site offers and where the design should focus.</p><p>From room layouts to materials, each decision has a purpose. We make space for discussion as the proposal develops, keeping everyday use at the centre of the work.</p><a className="pill page-text-link" href="/approach">See how we work <span aria-hidden>↗</span></a></PageNote>
+    <PageNote title="You stay in the decisions."><p>Bring reference images, a list of must-haves and the things you are unsure about. Early conversations are where the important choices are made, and we would rather hear a concern in the first meeting than on site.</p><p>At every stage you review drawings and samples before we move on, so nothing is built that you have not seen and approved.</p><a className="pill page-text-link" href="/approach">See how we work <span aria-hidden>↗</span></a></PageNote>
   </InnerPage>;
 }

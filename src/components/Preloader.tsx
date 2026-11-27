@@ -156,9 +156,9 @@ export default function Preloader() {
       <div className="pre__center">
         <div className="pre__mark" ref={mark}>
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/logo-mark.png" alt="" className="pre__mark-dim" />
+          <img src="/images/logo-mark.webp" alt="" className="pre__mark-dim" />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/logo-mark.png" alt="" className="pre__mark-fill" />
+          <img src="/images/logo-mark.webp" alt="" className="pre__mark-fill" />
         </div>
         <div className="pre__word" ref={word}>
           Royal Rising

@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { contact } from "@/lib/data";
 import { openContact } from "@/lib/events";
+import SocialLinks from "./SocialLinks";
 
 const company = [
   { label: "About Us", href: "/about" },
@@ -15,26 +16,6 @@ const explore = [
   { label: "Back to top", href: "#top" },
 ];
 
-const Icon = {
-  instagram: (
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6">
-      <rect x="3" y="3" width="18" height="18" rx="5" />
-      <circle cx="12" cy="12" r="4" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  ),
-  facebook: (
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor" aria-hidden="true">
-      <path d="M14 22v-9h3l.5-4H14V6.5c0-1.1.3-1.5 1.6-1.5H18V1.4C17.2 1.2 16.1 1 14.7 1 11.4 1 9.5 3 9.5 6.5V9H6v4h3.5v9H14Z" />
-    </svg>
-  ),
-  mail: (
-    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="1.6">
-      <rect x="3" y="5" width="18" height="14" rx="2" />
-      <path d="M3 7l9 6 9-6" />
-    </svg>
-  ),
-};
 
 export default function Footer() {
   const root = useRef<HTMLElement>(null);
@@ -68,7 +49,7 @@ export default function Footer() {
         </div>
         <div className="ft__brand">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/images/logo-mark.png" alt="" width={120} height={127} />
+          <img src="/images/logo-mark.webp" alt="" width={120} height={159} decoding="async" />
           <span className="ft__brand-name">Royal Rising</span>
           <p>Architecture | Interior | Construction</p>
         </div>
@@ -107,17 +88,7 @@ export default function Footer() {
             {contact.website}
           </a>
         </div>
-        <div className="ft__social">
-          <a href={contact.instagram} target="_blank" rel="noreferrer" aria-label="Instagram">
-            {Icon.instagram}
-          </a>
-          <a role="link" aria-disabled="true" aria-label="Facebook (page link coming soon)" title="Facebook page link coming soon">
-            {Icon.facebook}
-          </a>
-          <a href={`mailto:${contact.email}`} aria-label="Email">
-            {Icon.mail}
-          </a>
-        </div>
+        <SocialLinks className="ft__social" />
       </div>
 
       <div className="ft__big" aria-hidden>

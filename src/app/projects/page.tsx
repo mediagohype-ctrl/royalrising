@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import InnerPage, { PageNote } from "@/components/InnerPage";
-import FeaturedWorks from "@/components/FeaturedWorks";
+import ProjectsBrowser from "@/components/catalog/ProjectsBrowser";
 
-export const metadata: Metadata = { title: "Projects | Royal Rising", description: "Explore Royal Rising’s portfolio of residential architecture and considered interiors." };
+export const metadata: Metadata = { title: "Projects | Royal Rising", description: "Explore Royal Rising’s portfolio of residential, hospitality and interior projects." };
 export default function ProjectsPage() {
-  return <InnerPage label="Projects" title="Spaces to feel at home in." intro="Architecture and interiors, seen through the spaces we gather in, retreat to and move through every day." image="project-formal-living" clean>
-    <PageNote title="From the first impression to the smallest detail."><p>A facade sets the tone. A staircase connects more than floors. A well-placed window changes the way a room feels throughout the day. Our portfolio explores these relationships across residential architecture and interiors.</p><p>Browse living spaces, private suites and architectural details. Select an image for a closer look at the materials, proportions and composition.</p></PageNote>
-    <FeaturedWorks />
-    <PageNote title="Different rooms. One considered whole."><p>Timber, stone, soft finishes and carefully placed light carry an idea from one space to the next. The aim is a home with its own character, where shared rooms feel welcoming and private spaces offer a quieter rhythm.</p><a className="pill page-text-link" href="/services">Discover our services <span aria-hidden>↗</span></a></PageNote>
+  return <InnerPage label="Projects" title="Selected work." intro="Private residences, estates and interiors, from site plan to finished room." image="project-formal-living" clean>
+    <PageNote title="From the street to the smallest fitting."><p>The portfolio spans whole estates and single rooms. Some projects show a building from concept to night render; others focus on one bedroom, one wardrobe or one stone wall.</p><p>Filter by category, then open any project for its full description, images and, where available, drawings.</p></PageNote>
+    <ProjectsBrowser />
+    <PageNote title="Different rooms, one hand."><p>Across these projects, a small set of materials does most of the work: stone, timber, metal and light. Used with discipline, they give each home a character of its own, with shared rooms that welcome guests and private rooms that stay calm.</p><a className="pill page-text-link" href="/services">Discover our services <span aria-hidden>↗</span></a></PageNote>
   </InnerPage>;
 }

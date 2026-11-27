@@ -5,7 +5,7 @@ import { img } from "@/lib/data";
 import { openContact } from "@/lib/events";
 import Img from "./ui/Img";
 
-const K = "project-bar-detail" as const;
+const K = "project-formal-living" as const;
 
 export default function Cta() {
   const root = useRef<HTMLElement>(null);
@@ -54,8 +54,8 @@ export default function Cta() {
         <div className="cta__shade" />
       </div>
       <div className="cta__text">
-        <p>Considered spaces. Beautifully lived in.</p>
-        <span className="cta__phone-copy">Have a place in mind? Tell us about your site, your ideas and the way you want to live.</span>
+        <p>Designed with intent. Built to last.</p>
+        <span className="cta__phone-copy">Planning a home or an interior? Send us the location, the plot size and what you have in mind.</span>
         <button className="pill" onClick={openContact}>
           Let&apos;s Connect <span aria-hidden>↗</span>
         </button>

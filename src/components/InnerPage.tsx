@@ -9,8 +9,10 @@ import ProjectEnquiry from "./ProjectEnquiry";
 import InnerPageMotion from "./InnerPageMotion";
 import SmoothScroll from "./SmoothScroll";
 
-export default function InnerPage({ title, intro, image, clean = false, children }: {
-  label: string; title: ReactNode; intro: string; image?: ImgKey; clean?: boolean; children: ReactNode;
+export type Crumb = { label: string; href?: string };
+
+export default function InnerPage({ label, title, intro, image, clean = false, crumbs, children }: {
+  label: string; title: ReactNode; intro: string; image?: ImgKey; clean?: boolean; crumbs?: Crumb[]; children: ReactNode;
 }) {
   return <>
     <SmoothScroll waitForPreloader={false} />
@@ -19,6 +21,10 @@ export default function InnerPage({ title, intro, image, clean = false, children
       <header className={`studio-hero${image ? " studio-hero--image" : ""}${clean ? " studio-hero--clean" : ""}`}>
         {image && <div className="studio-hero__image"><Img k={image} priority sizes="100vw" /></div>}
         <div className="page-intro__copy">
+          {crumbs && <nav className="page-crumb" aria-label="Breadcrumb">
+            {crumbs.map((c, i) => <span key={c.label}>{i > 0 && <span className="page-crumb__sep" aria-hidden>/</span>}{c.href ? <a href={c.href}>{c.label}</a> : <span aria-current="page">{c.label}</span>}</span>)}
+          </nav>}
+          {!clean && !crumbs && <p className="label">{label}</p>}
           <h1>{title}</h1>
           <p className={clean ? "sr-only" : undefined}>{intro}</p>
         </div>
@@ -27,8 +33,8 @@ export default function InnerPage({ title, intro, image, clean = false, children
       <section className="page-contact">
         <div className="page-contact__image"><Img k="project-bar-detail" sizes="(max-width: 760px) 100vw, 50vw" /></div>
         <div className="page-contact__copy">
-        <h2>Let’s make room for your ideas.</h2>
-        <p>Tell us about your site, your plans and the way you want to live.</p>
+        <h2>Have a project in mind?</h2>
+        <p>Send us the site location, an approximate area and a few lines on what you need. We will take it from there.</p>
         <ProjectEnquiry />
         </div>
       </section>

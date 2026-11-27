@@ -66,7 +66,7 @@ export default function Drawings({ showAll = false }: { showAll?: boolean }) {
   return (
     <section id="drawings" ref={root} className="draw">
       <h2 className="title draw__title">From the Drawing Board</h2>
-      <p className="phone-section-note">Every space starts with a plan. Tap to explore the details.</p>
+      <p className="phone-section-note">Plans, site layouts and cutaways. Tap any drawing to enlarge it.</p>
       <div className="draw__grid">
         {list.map((d, i) => (
           <button key={d.k} className="card" aria-label={`View ${d.label}: ${d.title}`} onClick={(e) => openLightbox(keys, i, e.currentTarget)} data-cursor="View">

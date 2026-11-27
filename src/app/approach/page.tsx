@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import InnerPage, { EditorialSection, PageNote } from "@/components/InnerPage";
+import ProcessTimeline, { type Stage } from "@/components/ProcessTimeline";
 
-export const metadata: Metadata = { title: "Our Approach | Royal Rising", description: "From first sketch to finished home: discover how Royal Rising plans, designs and builds." };
-const steps = [
-  ["Listen & understand", "We begin with your ideas, daily routines and priorities. Together, we establish what the space needs to do and how you want it to feel."],
-  ["Read the site", "Light, orientation, access and the surrounding landscape help us understand the opportunities of the place before the design takes shape."],
-  ["Shape the design", "Plans, proportions and material ideas evolve together. We explore how rooms connect and refine the direction through conversation with you."],
-  ["Resolve the details", "Working drawings, finishes and interior details turn the concept into a coordinated design, ready to guide its execution."],
-  ["Bring it to life", "Construction and finishing carry the design into the real world, with attention to the relationships between materials, spaces and everyday use."],
+export const metadata: Metadata = { title: "Our Approach | Royal Rising", description: "The five stages Royal Rising follows to take a home from the first brief to handover." };
+const stages: Stage[] = [
+  { title: "Brief", k: "hm-plan-line", sheet: true, output: "A written brief and proposal", text: "We meet, visit the site and agree what the project must deliver: the rooms, the budget range, the timeline and the non-negotiables." },
+  { title: "Site study", k: "tp-siteplan", sheet: true, output: "Site analysis and constraints", text: "Orientation, levels, access and views are recorded, along with the local rules that set what can be built and where." },
+  { title: "Concept design", k: "tp-concept-aerial", output: "Concept plans and 3D views", text: "Plans, massing and an initial material direction, presented in drawings and 3D views and revised with you until the layout is right." },
+  { title: "Detailed design", k: "or-plans-blueprint", sheet: true, output: "Working drawings and specifications", text: "Working drawings, specifications and interior details, coordinated across structure and services so the design can be priced and built." },
+  { title: "Construction & handover", k: "project-staircase-view", output: "A finished home, ready to live in", text: "Site supervision, material approvals and final finishing, ending with a home that is checked, cleaned and ready to move into." },
 ];
 export default function ApproachPage() {
-  return <InnerPage label="Our Approach" title="From first sketch to finished home." intro="Plan. Design. Build. A considered process that connects your ideas with the site, the light and the way you live." image="project-dressing-suite" clean>
-    <PageNote title="Listen closely. Design with purpose."><p>Good design starts with useful questions. How does your day begin? Where do people come together? What should feel open, and what should feel private? Your answers help us look beyond a list of rooms.</p><p>We bring those priorities into conversation with the site and develop the design in stages. Each stage makes the next decision clearer, from the overall plan to the finishes you encounter every day.</p></PageNote>
-    <section className="page-process"><div className="page-process__heading"><h2>A conversation that becomes a place.</h2><p>Each stage builds on the last, keeping the original idea in view as the details develop.</p></div><ol>{steps.map(([title, text], i) => <li key={title}><span className="page-process__number" aria-hidden>{String(i + 1).padStart(2, "0")}</span><div><h3>{title}</h3><p>{text}</p></div></li>)}</ol></section>
-    <EditorialSection title="Clarity before construction." text="Drawings help us test relationships, communicate decisions and connect the wider vision with the smallest details. Explore a selection of plans and studies from the drawing board." image="fh-plan-color"><a className="pill page-text-link" href="/drawings">Explore drawings <span aria-hidden>↗</span></a></EditorialSection>
-    <PageNote title="A shared direction, at every stage."><p>Reference images, practical needs and honest feedback help us understand what matters to you. Reviewing layouts and material ideas together allows questions to be resolved as the design develops.</p><p>The exact sequence depends on the site and agreed scope. We discuss the stages, decisions and information needed for your project at the outset, so there is a clear basis for moving forward.</p></PageNote>
+  return <InnerPage label="Our Approach" title="Five stages. One team." intro="How a Royal Rising project moves from the first conversation to the day you receive the keys." image="project-dressing-suite" clean>
+    <PageNote title="The brief comes first."><p>A list of rooms is not a brief. We want to know how the household runs: who is up first, where guests are received, which rooms need privacy and which should open to the garden. That is the information that makes a plan work.</p><p>From there the design develops in clear stages. Each one ends with a review, and we only move on once you have signed off what came before.</p></PageNote>
+    <ProcessTimeline stages={stages} />
+    <EditorialSection title="Clarity before construction." text="Problems are cheapest to solve on paper. Our plans, sections and cutaways test every relationship between rooms before a contractor is appointed. Browse a selection from our drawing board." image="fh-plan-color"><a className="pill page-text-link" href="/drawings">Explore drawings <span aria-hidden>↗</span></a></EditorialSection>
+    <PageNote title="No surprises on site."><p>Honest feedback early saves time and money later. Tell us what you dislike as readily as what you like. Layouts and material samples are reviewed together, so questions are settled while they are still easy to change.</p><p>Every project is different, and the exact sequence depends on the site and the agreed scope. We set out the stages, deliverables and information we need from you in the proposal, before any work begins.</p></PageNote>
   </InnerPage>;
 }

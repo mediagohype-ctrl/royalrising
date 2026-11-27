@@ -90,7 +90,7 @@ export default function FeaturedWorks() {
   return (
     <section id="works" ref={root} className="works">
       <h2 className="title works__title">Selected Work</h2>
-      <p className="portfolio-note">A selection of architecture and interiors. Select an image to explore the details.</p>
+      <p className="portfolio-note">Recent residences and interiors. Select any image to view it full screen.</p>
       <Rows rows={featured} />
       {more && <Rows rows={featuredMore} />}
       {!more && (
