@@ -153,7 +153,8 @@ export default function Split({ id, title, quote, label, sub, text, image, rever
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <div className="split__media">
         <div className="split__img">
-          <Img k={image} sizes="(max-width: 960px) 100vw, 50vw" priority={id === "story"} />
+          {/* Story and approach panels open to the full screen width on desktop, so request a full-width image. */}
+          <Img k={image} sizes={id === "story" || id === "approach" ? "100vw" : "(max-width: 960px) 100vw, 50vw"} priority={id === "story"} />
         </div>
       </div>
       <div className="split__text">

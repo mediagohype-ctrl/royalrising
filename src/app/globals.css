@@ -2973,3 +2973,7 @@ body { font-weight: 400; }
 .social svg { width: 18px; height: 18px; }
 .social--menu { justify-content: center; margin-top: 16px; }
 .social--drawer { margin-top: 14px; }
+
+/* Home services slider: link from each slide to its service page */
+.svc__label p { text-shadow: 0 1px 12px rgba(0, 0, 0, .35); }
+.svc__link { margin-top: 10px; }

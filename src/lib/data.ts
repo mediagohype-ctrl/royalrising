@@ -2,12 +2,22 @@ import meta from "./image-meta.json";
 import extensions from "./image-extensions.json";
 import { projectImages } from "./project-images";
 
-/** Full-resolution originals for full-screen home page slots (the "-extended" versions are 1672px). */
+/**
+ * Full-resolution, lightly sharpened copies for the large home page slots
+ * (public/images/hd, made from the originals; the "-extended" versions are only 1672px).
+ */
+const hd = (name: keyof typeof meta) => ({ ...meta[name], src: `/images/hd/${name}.jpg` });
 const hdImages = {
-  "hd-tp-front-day": meta["tp-front-day"],
-  "hd-v145-night": meta["v145-night"],
-  "hd-v145-day": meta["v145-day"],
-  "hd-hm-night-waterfall": meta["hm-night-waterfall"],
+  "hd-tp-front-day": hd("tp-front-day"),
+  "hd-v145-night": hd("v145-night"),
+  "hd-v145-day": hd("v145-day"),
+  "hd-hm-night-waterfall": hd("hm-night-waterfall"),
+  "hd-hm-garden-dusk": hd("hm-garden-dusk"),
+  "hd-fh-aerial": hd("fh-aerial"),
+  "hd-tp-front-night": hd("tp-front-night"),
+  "hd-hm-aerial-dusk": hd("hm-aerial-dusk"),
+  "hd-v145-cutaway": hd("v145-cutaway"),
+  "hd-or-day": hd("or-day"),
 };
 
 const displayImages = { ...meta, ...extensions, ...projectImages, ...hdImages };
@@ -39,11 +49,12 @@ export const heroSlides: { k: ImgKey; name: string }[] = [
   { k: "project-staircase-dining", name: "Every detail, drawn" },
 ];
 
-export const services: { k: ImgKey; title: string; text: string }[] = [
-  { k: "hm-garden-dusk", title: "Architecture", text: "Residences planned around the site, its light and its views." },
-  { k: "project-home-cinema", title: "Interior Design", text: "Layouts, materials and lighting resolved room by room." },
-  { k: "fh-aerial", title: "Master Planning", text: "Buildings, gardens and arrival arranged as one estate." },
-  { k: "v145-cutaway", title: "Construction", text: "Delivery coordinated from working drawings to the last fitting." },
+/** Home page services slider. `slug` links each slide to its /services/{slug} page. */
+export const services: { k: ImgKey; slug: string; title: string; text: string }[] = [
+  { k: "hd-hm-garden-dusk", slug: "architecture", title: "Architecture", text: "Residences planned around the site, its light and its views." },
+  { k: "project-home-cinema", slug: "interior-design", title: "Interior Design", text: "Layouts, materials and lighting resolved room by room." },
+  { k: "hd-v145-cutaway", slug: "master-planning", title: "Master Planning", text: "Buildings, gardens and arrival arranged as one estate." },
+  { k: "hd-or-day", slug: "construction", title: "Construction", text: "Delivery coordinated from working drawings to the last fitting." },
 ];
 
 export type Tile = { k: ImgKey; title: string };
@@ -51,10 +62,10 @@ export type Row = { kind: "two" | "full" | "center"; tiles: Tile[] };
 
 export const featured: Row[] = [
   { kind: "two", tiles: [{ k: "project-residence-facade", title: "Residential Facade" }, { k: "project-timber-facade", title: "Timber & Stone Facade" }] },
-  { kind: "full", tiles: [{ k: "tp-front-night", title: "Twin Palace" }] },
+  { kind: "full", tiles: [{ k: "hd-tp-front-night", title: "Twin Palace" }] },
   { kind: "two", tiles: [{ k: "project-formal-living", title: "Formal Living" }, { k: "project-staircase-dining", title: "Sculptural Staircase" }] },
   { kind: "two", tiles: [{ k: "project-green-lounge", title: "The Green Lounge" }, { k: "project-dining-room", title: "Dining & Living" }] },
-  { kind: "full", tiles: [{ k: "hm-aerial-dusk", title: "H-Shaped Mansion" }] },
+  { kind: "full", tiles: [{ k: "hd-hm-aerial-dusk", title: "H-Shaped Mansion" }] },
   { kind: "two", tiles: [{ k: "project-bedroom-suite", title: "Bedroom Suite" }, { k: "project-bedroom-detail", title: "Master Bedroom" }] },
 ];
 
@@ -93,7 +104,8 @@ export const alts: Partial<Record<ImgKey, string>> = Object.fromEntries(
       ["hd-tp-front-day", "Twin Palace estate with mandir and fountain garden"],
       ["hd-v145-night", "Villa 145: curved travertine villa at night"],
       ["hd-v145-day", "Villa 145: curved travertine villa by day"],
-      ["hm-garden-dusk", "H-Shaped Mansion: garden facade at dusk"],
-      ["fh-aerial", "Futuristic Home: master plan aerial"],
+      ["hd-hm-garden-dusk", "H-Shaped Mansion: garden facade at dusk"],
+      ["hd-v145-cutaway", "Villa 145: 3D layout cutaway"],
+      ["hd-or-day", "Organic Residence: completed building by day"],
     ])
 );

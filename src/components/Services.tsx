@@ -98,7 +98,7 @@ export default function Services() {
         expansion: 1, duration: 1, ease: "sine.out", onUpdate: renderOpening,
       }, 0)
         .fromTo(".svc__label h3", { autoAlpha: reduced ? 1 : 0 }, { autoAlpha: 1, duration: 0.35 }, 0.3)
-        .fromTo(".svc__label p", { opacity: reduced ? 1 : 0 }, { opacity: 1, duration: 0.3 }, 0.7)
+        .fromTo(".svc__label p, .svc__link", { opacity: reduced ? 1 : 0 }, { opacity: 1, duration: 0.3 }, 0.7)
         .fromTo(".svc__track", { xPercent: 0 }, { xPercent: (-100 * (n - 1)) / n, duration: n - 1 }, 1)
         .to({}, { duration: 0.2 });
       });
@@ -130,6 +130,10 @@ export default function Services() {
                 <div className="svc__shade" />
                 <div className="svc__label">
                   <h3>{s.title}</h3>
+                  <p>{s.text}</p>
+                  <a className="pill svc__link" href={`/services/${s.slug}`}>
+                    Explore {s.title} <span aria-hidden>↗</span>
+                  </a>
                 </div>
               </article>
             ))}
