@@ -42,7 +42,7 @@ export default function HeroBannerVideo({ started }: { started: boolean }) {
   }, [enabled, started]);
 
   if (!enabled) return null;
-  return <video ref={video} src="/royal%20(2).mp4"
+  return <video ref={video} src="/rr20.mp4" poster="/images/rr20-poster.webp"
     className={`hero__banner-video${playing ? " is-playing" : ""}`}
     muted loop playsInline preload="auto" aria-label="Royal Rising banner video"
     onLoadedData={() => setPlaying(true)}

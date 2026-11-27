@@ -3,6 +3,7 @@ import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { services, img, alts } from "@/lib/data";
 import ImageWatermark from "./ui/ImageWatermark";
+import { getImageProps } from "next/image";
 
 /** A narrow central image opens to full screen before the services slide horizontally. */
 export default function Services() {
@@ -111,9 +112,8 @@ export default function Services() {
       <div className="svc-intro">
         <h2 className="title">Services</h2>
         <p className="para">
-          Working across disciplines of architecture, interiors, furniture, lighting, landscape, and construction, the
-          dedicated team at Royal Rising conceives, draws and executes synergistic, forward-thinking, and visually striking
-          projects under one roof.
+          Architecture, interiors, furniture, lighting, landscape and construction, handled by one team under one
+          roof. The people who draw your home are the people who see it built.
         </p>
       </div>
       <div className="svc">
@@ -123,7 +123,7 @@ export default function Services() {
               <article key={s.title} className="svc__slide">
                 <div className="svc__img">
                   <picture className="full__fg">
-                    <img className="svc__art" src={img(s.k).src} alt={alts[s.k] ?? s.title} loading="eager" decoding="async" />
+                    <img className="svc__art" {...getImageProps({ src: img(s.k).src, width: img(s.k).width, height: img(s.k).height, sizes: "100vw", quality: 90, alt: alts[s.k] ?? s.title }).props} loading="eager" decoding="async" />
                   </picture>
                   <ImageWatermark />
                 </div>

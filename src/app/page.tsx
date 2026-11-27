@@ -43,7 +43,7 @@ export default function Home() {
             title={<>Brand <em style={{ color: "var(--gold)", fontStyle: "italic" }}>Story</em></>}
             quote="Designed for the plot. Built for the family."
             text="Royal Rising is an architecture, interiors and construction studio. We design private residences, estates and interiors, then stay with them through the build, so the house you move into is the house you approved. Natural materials, generous daylight and plans that make daily life easier run through all of our work."
-            image="project-timber-facade"
+            image="hd-tp-front-day"
             cta={{ label: "Read More", href: "/about" }}
           />
         <div className="approach-overlap">
@@ -54,7 +54,7 @@ export default function Home() {
           label="How we work"
           sub="Plan. Design. Build."
           text="We study the site, learn how your household runs and develop the design in stages you can review. Then we carry it through construction ourselves."
-          image="project-staircase-dining"
+          image="hd-v145-night"
           reverse
           cta={{ label: "Our Process", href: "/approach" }}
         />
@@ -63,7 +63,7 @@ export default function Home() {
         </div>
         <VideoShowcase />
         <Services />
-        <QuoteBand k="hm-night-waterfall" text="Drawn with care, built to rise" accentWords={["care", "rise"]} />
+        <QuoteBand k="hd-hm-night-waterfall" text="Drawn with care, built to rise" accentWords={["care", "rise"]} />
         <FeaturedWorks />
         <Drawings />
         <Cta />
