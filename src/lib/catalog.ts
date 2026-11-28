@@ -1,4 +1,5 @@
 import type { ImgKey } from "./data";
+import { originalPortfolio } from "./original-portfolio";
 
 /* ============================================================
    Services and projects: the content behind the listing pages
@@ -463,6 +464,9 @@ export const projects: Project[] = [
     gallery: ["project-bronze-living", "project-console-foyer", "project-pooja-room"],
   },
 ];
+
+// Append imported work without replacing or reordering the existing portfolio.
+projects.push(...originalPortfolio);
 
 export const categoryLabel = (slug: CategorySlug) => projectCategories.find((c) => c.slug === slug)!.label;
 /** Categories that currently have projects, in display order. */

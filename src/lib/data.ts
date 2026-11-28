@@ -1,6 +1,7 @@
 import meta from "./image-meta.json";
 import extensions from "./image-extensions.json";
 import { projectImages } from "./project-images";
+import { originalPortfolioImages } from "./original-portfolio-images";
 
 /**
  * Full-resolution, lightly sharpened copies for the large home page slots
@@ -20,7 +21,7 @@ const hdImages = {
   "hd-or-day": hd("or-day"),
 };
 
-const displayImages = { ...meta, ...extensions, ...projectImages, ...hdImages };
+const displayImages = { ...meta, ...extensions, ...projectImages, ...hdImages, ...originalPortfolioImages };
 export type ImgKey = keyof typeof displayImages;
 export const img = (key: ImgKey) => displayImages[key];
 
